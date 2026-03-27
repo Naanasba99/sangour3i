@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>SENTINEL ADVISORY — Conseil en Cybersécurité</title>
+<meta name="description" content="Conseil stratégique en cybersécurité pour organisations exigeantes.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=Space+Mono:wght@400;700&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
@@ -19,7 +20,6 @@
   }
 
   *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-
   html { scroll-behavior: smooth; }
 
   body {
@@ -30,7 +30,6 @@
     overflow-x: hidden;
   }
 
-  /* GRID TEXTURE */
   body::before {
     content: '';
     position: fixed;
@@ -83,6 +82,31 @@
 
   .nav-links a:hover { color: var(--gold); }
 
+  .nav-right {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  /* LANG TOGGLE */
+  #lang-toggle {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    background: transparent;
+    border: 1px solid var(--border);
+    padding: 0.4rem 0.8rem;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+
+  #lang-toggle:hover {
+    color: var(--gold);
+    border-color: rgba(201,168,76,0.5);
+  }
+
   .nav-cta {
     font-family: 'Space Mono', monospace;
     font-size: 0.65rem;
@@ -111,8 +135,7 @@
 
   .hero-bg-circle {
     position: absolute;
-    width: 700px;
-    height: 700px;
+    width: 700px; height: 700px;
     border-radius: 50%;
     border: 1px solid rgba(201,168,76,0.08);
     top: 50%; right: -200px;
@@ -138,8 +161,7 @@
   .hero-scan {
     position: absolute;
     top: 0; right: 0;
-    width: 600px;
-    height: 100%;
+    width: 600px; height: 100%;
     background: radial-gradient(ellipse at 80% 50%, rgba(201,168,76,0.04) 0%, transparent 65%);
     pointer-events: none;
   }
@@ -167,8 +189,7 @@
   .hero-label::before {
     content: '';
     display: block;
-    width: 40px;
-    height: 1px;
+    width: 40px; height: 1px;
     background: var(--gold);
   }
 
@@ -183,10 +204,7 @@
     animation: fadeUp 0.8s 0.4s forwards;
   }
 
-  h1 em {
-    font-style: italic;
-    color: var(--gold);
-  }
+  h1 em { font-style: italic; color: var(--gold); }
 
   .hero-desc {
     font-size: 1rem;
@@ -220,9 +238,7 @@
     transition: all 0.3s;
   }
 
-  .btn-primary:hover {
-    background: var(--off-white);
-  }
+  .btn-primary:hover { background: var(--off-white); }
 
   .btn-ghost {
     color: var(--muted);
@@ -237,18 +253,13 @@
     transition: color 0.3s;
   }
 
-  .btn-ghost::after {
-    content: '→';
-    transition: transform 0.3s;
-  }
-
+  .btn-ghost::after { content: '→'; transition: transform 0.3s; }
   .btn-ghost:hover { color: var(--off-white); }
   .btn-ghost:hover::after { transform: translateX(4px); }
 
   .hero-stats {
     position: absolute;
-    bottom: 4rem;
-    right: 4rem;
+    bottom: 4rem; right: 4rem;
     display: flex;
     gap: 3rem;
     opacity: 0;
@@ -274,7 +285,7 @@
     text-transform: uppercase;
   }
 
-  /* SECTION COMMON */
+  /* SECTIONS */
   section {
     position: relative;
     z-index: 1;
@@ -296,8 +307,7 @@
   .section-label::before {
     content: '';
     display: block;
-    width: 30px;
-    height: 1px;
+    width: 30px; height: 1px;
     background: var(--gold);
   }
 
@@ -353,8 +363,7 @@
     content: '';
     position: absolute;
     top: 0; left: 0;
-    width: 2px;
-    height: 0;
+    width: 2px; height: 0;
     background: var(--gold);
     transition: height 0.4s;
   }
@@ -374,8 +383,7 @@
   }
 
   .service-icon-dot {
-    width: 6px;
-    height: 6px;
+    width: 6px; height: 6px;
     border-radius: 50%;
     background: var(--gold);
     display: inline-block;
@@ -412,10 +420,7 @@
   }
 
   /* APPROACH */
-  #approach {
-    max-width: 1200px;
-    margin: 0 auto;
-  }
+  #approach { max-width: 1200px; margin: 0 auto; }
 
   .approach-grid {
     display: grid;
@@ -518,8 +523,7 @@
   }
 
   .about-placeholder-img {
-    width: 80px;
-    height: 80px;
+    width: 80px; height: 80px;
     border-radius: 50%;
     border: 1px solid var(--border);
     background: var(--bg3);
@@ -567,7 +571,6 @@
   }
 
   .about-text .section-label { margin-bottom: 1.5rem; }
-
   .about-text h2 { margin-bottom: 1.5rem; }
 
   .about-text p {
@@ -594,8 +597,7 @@
 
   .highlight::before {
     content: '';
-    width: 20px;
-    height: 1px;
+    width: 20px; height: 1px;
     background: var(--gold);
     flex-shrink: 0;
   }
@@ -670,7 +672,6 @@
   }
 
   .form-field textarea { height: 120px; }
-
   .form-field select option { background: var(--bg2); }
 
   .form-submit {
@@ -773,12 +774,17 @@
 <nav>
   <a href="#hero" class="nav-logo">SENTINEL ADVISORY</a>
   <ul class="nav-links">
-    <li><a href="#services">Services</a></li>
-    <li><a href="#approach">Approche</a></li>
-    <li><a href="#about">À propos</a></li>
-    <li><a href="#contact">Contact</a></li>
+    <li><a href="#services"  data-en="Services"  data-fr="Services">Services</a></li>
+    <li><a href="#approach"  data-en="Approach"  data-fr="Approche">Approche</a></li>
+    <li><a href="#about"     data-en="About"     data-fr="À propos">À propos</a></li>
+    <li><a href="#contact"   data-en="Contact"   data-fr="Contact">Contact</a></li>
   </ul>
-  <a href="#contact" class="nav-cta">Engager</a>
+  <div class="nav-right">
+    <button id="lang-toggle" onclick="toggleLang()">EN</button>
+    <a href="#contact" class="nav-cta"
+       data-en="Engage"
+       data-fr="Engager">Engager</a>
+  </div>
 </nav>
 
 <!-- HERO -->
@@ -786,28 +792,45 @@
   <div class="hero-bg-circle"></div>
   <div class="hero-scan"></div>
   <div class="hero-content">
-    <div class="hero-label">Conseil &amp; Expertise en Cybersécurité</div>
-    <h1>Protégez ce qui<br>compte <em>vraiment.</em></h1>
-    <p class="hero-desc">
+    <div class="hero-label"
+         data-en="Cybersecurity Advisory &amp; Expertise"
+         data-fr="Conseil &amp; Expertise en Cybersécurité">Conseil &amp; Expertise en Cybersécurité</div>
+    <h1 data-en-html="Protect what<br>matters <em>most.</em>"
+        data-fr-html="Protégez ce qui<br>compte <em>vraiment.</em>">
+      Protégez ce qui<br>compte <em>vraiment.</em>
+    </h1>
+    <p class="hero-desc"
+       data-en="Strategic cybersecurity advisory for demanding organisations. Audit, compliance, incident response, training — rigorous expertise in service of your digital resilience."
+       data-fr="Conseil stratégique en cybersécurité pour organisations exigeantes. Audit, conformité, réponse aux incidents, formation — une expertise rigoureuse au service de votre résilience numérique.">
       Conseil stratégique en cybersécurité pour organisations exigeantes. Audit, conformité, réponse aux incidents, formation — une expertise rigoureuse au service de votre résilience numérique.
     </p>
     <div class="hero-actions">
-      <a href="#contact" class="btn-primary">Prendre contact</a>
-      <a href="#services" class="btn-ghost">Nos services</a>
+      <a href="#contact" class="btn-primary"
+         data-en="Get in touch"
+         data-fr="Prendre contact">Prendre contact</a>
+      <a href="#services" class="btn-ghost"
+         data-en="Our services"
+         data-fr="Nos services">Nos services</a>
     </div>
   </div>
   <div class="hero-stats">
     <div class="stat-item">
       <span class="stat-num">ISO</span>
-      <span class="stat-label">27001 · RGPD</span>
+      <span class="stat-label"
+            data-en="27001 · GDPR"
+            data-fr="27001 · RGPD">27001 · RGPD</span>
     </div>
     <div class="stat-item">
       <span class="stat-num">DFIR</span>
-      <span class="stat-label">Réponse aux incidents</span>
+      <span class="stat-label"
+            data-en="Incident Response"
+            data-fr="Réponse aux incidents">Réponse aux incidents</span>
     </div>
     <div class="stat-item">
       <span class="stat-num">FR/EN</span>
-      <span class="stat-label">Bilingue</span>
+      <span class="stat-label"
+            data-en="Bilingual"
+            data-fr="Bilingue">Bilingue</span>
     </div>
   </div>
 </section>
@@ -816,10 +839,16 @@
 <section id="services">
   <div class="services-header">
     <div>
-      <div class="section-label reveal">Domaines d'intervention</div>
-      <h2 class="reveal">Nos <em>services</em></h2>
+      <div class="section-label reveal"
+           data-en="Areas of expertise"
+           data-fr="Domaines d'intervention">Domaines d'intervention</div>
+      <h2 class="reveal"
+          data-en-html="Our <em>services</em>"
+          data-fr-html="Nos <em>services</em>">Nos <em>services</em></h2>
     </div>
-    <p class="services-intro reveal">
+    <p class="services-intro reveal"
+       data-en="Every engagement is conducted with methodological rigour and absolute discretion. We tailor our approach to your sector, size and regulatory environment."
+       data-fr="Chaque mission est conduite avec rigueur méthodologique et discrétion absolue. Nous adaptons notre approche à votre secteur, votre taille et votre environnement réglementaire.">
       Chaque mission est conduite avec rigueur méthodologique et discrétion absolue. Nous adaptons notre approche à votre secteur, votre taille et votre environnement réglementaire.
     </p>
   </div>
@@ -827,10 +856,14 @@
 
     <div class="service-card reveal">
       <div class="service-icon"><span class="service-icon-dot"></span> 01 · DFIR</div>
-      <h3>Réponse aux Incidents</h3>
-      <p>Détection, confinement et remédiation d'incidents de sécurité. Investigation numérique forensique pour établir la chronologie, l'étendue et les vecteurs d'une intrusion.</p>
+      <h3 data-en="Incident Response"
+          data-fr="Réponse aux Incidents">Réponse aux Incidents</h3>
+      <p data-en="Detection, containment and remediation of security incidents. Digital forensic investigation to establish the timeline, scope and vectors of an intrusion."
+         data-fr="Détection, confinement et remédiation d'incidents de sécurité. Investigation numérique forensique pour établir la chronologie, l'étendue et les vecteurs d'une intrusion.">
+        Détection, confinement et remédiation d'incidents de sécurité. Investigation numérique forensique pour établir la chronologie, l'étendue et les vecteurs d'une intrusion.
+      </p>
       <div class="service-tags">
-        <span class="tag">Forensique</span>
+        <span class="tag">Forensics</span>
         <span class="tag">DFIR</span>
         <span class="tag">Threat Hunting</span>
         <span class="tag">Timeline</span>
@@ -839,22 +872,30 @@
 
     <div class="service-card reveal">
       <div class="service-icon"><span class="service-icon-dot"></span> 02 · GRC</div>
-      <h3>Analyse des Risques</h3>
-      <p>Identification, évaluation et traitement des risques cyber selon les référentiels internationaux. Plans de traitement priorisés et cartographie de votre exposition.</p>
+      <h3 data-en="Risk Analysis"
+          data-fr="Analyse des Risques">Analyse des Risques</h3>
+      <p data-en="Identification, assessment and treatment of cyber risks according to international frameworks. Prioritised treatment plans and mapping of your exposure."
+         data-fr="Identification, évaluation et traitement des risques cyber selon les référentiels internationaux. Plans de traitement priorisés et cartographie de votre exposition.">
+        Identification, évaluation et traitement des risques cyber selon les référentiels internationaux. Plans de traitement priorisés et cartographie de votre exposition.
+      </p>
       <div class="service-tags">
         <span class="tag">EBIOS RM</span>
         <span class="tag">ISO 27005</span>
-        <span class="tag">Cartographie</span>
-        <span class="tag">PCA/PRA</span>
+        <span class="tag" data-en="Mapping" data-fr="Cartographie">Cartographie</span>
+        <span class="tag">BCP/DRP</span>
       </div>
     </div>
 
     <div class="service-card reveal">
       <div class="service-icon"><span class="service-icon-dot"></span> 03 · CONFORM</div>
-      <h3>Mise en Conformité</h3>
-      <p>Accompagnement structuré vers la conformité RGPD, ISO 27001 ou exigences sectorielles. Analyse d'écarts, roadmap de remédiation et suivi de mise en œuvre.</p>
+      <h3 data-en="Compliance"
+          data-fr="Mise en Conformité">Mise en Conformité</h3>
+      <p data-en="Structured support towards GDPR, ISO 27001 or sector-specific compliance. Gap analysis, remediation roadmap and implementation follow-up."
+         data-fr="Accompagnement structuré vers la conformité RGPD, ISO 27001 ou exigences sectorielles. Analyse d'écarts, roadmap de remédiation et suivi de mise en œuvre.">
+        Accompagnement structuré vers la conformité RGPD, ISO 27001 ou exigences sectorielles. Analyse d'écarts, roadmap de remédiation et suivi de mise en œuvre.
+      </p>
       <div class="service-tags">
-        <span class="tag">RGPD</span>
+        <span class="tag">GDPR</span>
         <span class="tag">ISO 27001</span>
         <span class="tag">Gap Analysis</span>
         <span class="tag">NIS2</span>
@@ -863,12 +904,16 @@
 
     <div class="service-card reveal">
       <div class="service-icon"><span class="service-icon-dot"></span> 04 · TRAINING</div>
-      <h3>Sensibilisation &amp; Formation</h3>
-      <p>Programmes de formation sur-mesure pour dirigeants, équipes IT et utilisateurs. De la sensibilisation au phishing à la formation SOC avancée, en français et en anglais.</p>
+      <h3 data-en="Awareness &amp; Training"
+          data-fr="Sensibilisation &amp; Formation">Sensibilisation &amp; Formation</h3>
+      <p data-en="Tailored training programmes for executives, IT teams and end users. From phishing awareness to advanced SOC training, in French and English."
+         data-fr="Programmes de formation sur-mesure pour dirigeants, équipes IT et utilisateurs. De la sensibilisation au phishing à la formation SOC avancée, en français et en anglais.">
+        Programmes de formation sur-mesure pour dirigeants, équipes IT et utilisateurs. De la sensibilisation au phishing à la formation SOC avancée, en français et en anglais.
+      </p>
       <div class="service-tags">
         <span class="tag">Phishing</span>
         <span class="tag">OSINT</span>
-        <span class="tag">Ateliers</span>
+        <span class="tag" data-en="Workshops" data-fr="Ateliers">Ateliers</span>
         <span class="tag">E-learning</span>
       </div>
     </div>
@@ -880,9 +925,15 @@
 <section id="approach">
   <div class="approach-grid">
     <div class="approach-left">
-      <div class="section-label reveal">Méthode de travail</div>
-      <h2 class="reveal">Une approche <em>structurée</em></h2>
-      <p class="reveal" style="margin-top:1.5rem;">
+      <div class="section-label reveal"
+           data-en="Working method"
+           data-fr="Méthode de travail">Méthode de travail</div>
+      <h2 class="reveal"
+          data-en-html="A <em>structured</em> approach"
+          data-fr-html="Une approche <em>structurée</em>">Une approche <em>structurée</em></h2>
+      <p class="reveal" style="margin-top:1.5rem;"
+         data-en="Every engagement follows a rigorous process, from understanding your environment to delivering actionable results. No generic report — concrete recommendations tailored to your reality."
+         data-fr="Chaque engagement suit un processus rigoureux, de la compréhension de votre environnement à la livraison de résultats actionnables. Pas de rapport générique — des recommandations concrètes adaptées à votre réalité.">
         Chaque engagement suit un processus rigoureux, de la compréhension de votre environnement à la livraison de résultats actionnables. Pas de rapport générique — des recommandations concrètes adaptées à votre réalité.
       </p>
     </div>
@@ -890,29 +941,45 @@
       <div class="step reveal">
         <div class="step-num">01</div>
         <div class="step-content">
-          <h4>Cadrage &amp; Découverte</h4>
-          <p>Compréhension de votre organisation, périmètre, enjeux métiers et contraintes réglementaires. Définition claire des objectifs de la mission.</p>
+          <h4 data-en="Scoping &amp; Discovery"
+              data-fr="Cadrage &amp; Découverte">Cadrage &amp; Découverte</h4>
+          <p data-en="Understanding your organisation, perimeter, business stakes and regulatory constraints. Clear definition of the mission objectives."
+             data-fr="Compréhension de votre organisation, périmètre, enjeux métiers et contraintes réglementaires. Définition claire des objectifs de la mission.">
+            Compréhension de votre organisation, périmètre, enjeux métiers et contraintes réglementaires. Définition claire des objectifs de la mission.
+          </p>
         </div>
       </div>
       <div class="step reveal">
         <div class="step-num">02</div>
         <div class="step-content">
-          <h4>Analyse &amp; Évaluation</h4>
-          <p>Collecte de données, entretiens, tests techniques ou analyse documentaire selon la nature de la mission. Application de référentiels reconnus.</p>
+          <h4 data-en="Analysis &amp; Assessment"
+              data-fr="Analyse &amp; Évaluation">Analyse &amp; Évaluation</h4>
+          <p data-en="Data collection, interviews, technical testing or documentary review depending on the nature of the mission. Application of recognised frameworks."
+             data-fr="Collecte de données, entretiens, tests techniques ou analyse documentaire selon la nature de la mission. Application de référentiels reconnus.">
+            Collecte de données, entretiens, tests techniques ou analyse documentaire selon la nature de la mission. Application de référentiels reconnus.
+          </p>
         </div>
       </div>
       <div class="step reveal">
         <div class="step-num">03</div>
         <div class="step-content">
-          <h4>Recommandations &amp; Livrables</h4>
-          <p>Rapport détaillé avec constats priorisés, plan d'action opérationnel et présentation exécutive. Livrables clairs pour décideurs et équipes techniques.</p>
+          <h4 data-en="Recommendations &amp; Deliverables"
+              data-fr="Recommandations &amp; Livrables">Recommandations &amp; Livrables</h4>
+          <p data-en="Detailed report with prioritised findings, operational action plan and executive presentation. Clear deliverables for both decision-makers and technical teams."
+             data-fr="Rapport détaillé avec constats priorisés, plan d'action opérationnel et présentation exécutive. Livrables clairs pour décideurs et équipes techniques.">
+            Rapport détaillé avec constats priorisés, plan d'action opérationnel et présentation exécutive. Livrables clairs pour décideurs et équipes techniques.
+          </p>
         </div>
       </div>
       <div class="step reveal">
         <div class="step-num">04</div>
         <div class="step-content">
-          <h4>Suivi &amp; Accompagnement</h4>
-          <p>Soutien dans la mise en œuvre des recommandations, suivi des indicateurs et accompagnement dans la durée si nécessaire.</p>
+          <h4 data-en="Follow-up &amp; Support"
+              data-fr="Suivi &amp; Accompagnement">Suivi &amp; Accompagnement</h4>
+          <p data-en="Support in implementing recommendations, tracking indicators and ongoing guidance as needed."
+             data-fr="Soutien dans la mise en œuvre des recommandations, suivi des indicateurs et accompagnement dans la durée si nécessaire.">
+            Soutien dans la mise en œuvre des recommandations, suivi des indicateurs et accompagnement dans la durée si nécessaire.
+          </p>
         </div>
       </div>
     </div>
@@ -927,7 +994,9 @@
         <div class="about-frame-inner">
           <div class="about-placeholder-img">PHOTO</div>
           <div class="about-name-placeholder">Prénom NOM</div>
-          <div class="about-role-placeholder">Consultant Senior en Cybersécurité</div>
+          <div class="about-role-placeholder"
+               data-en="Senior Cybersecurity Consultant"
+               data-fr="Consultant Senior en Cybersécurité">Consultant Senior en Cybersécurité</div>
           <div class="about-certs">
             <span class="cert-badge">CompTIA Security+</span>
             <span class="cert-badge">BTL1</span>
@@ -938,19 +1007,37 @@
       </div>
     </div>
     <div class="about-text">
-      <div class="section-label reveal">À propos</div>
-      <h2 class="reveal">Expertise <em>terrain,</em><br>vision stratégique</h2>
-      <p class="reveal">
+      <div class="section-label reveal"
+           data-en="About"
+           data-fr="À propos">À propos</div>
+      <h2 class="reveal"
+          data-en-html="Field expertise,<br><em>strategic</em> vision"
+          data-fr-html="Expertise <em>terrain,</em><br>vision stratégique">
+        Expertise <em>terrain,</em><br>vision stratégique
+      </h2>
+      <p class="reveal"
+         data-en="Cybersecurity consultant with dual competency: deep technical expertise in detection, investigation and incident response, combined with solid experience in project management and organisational advisory."
+         data-fr="Consultant en cybersécurité avec une double compétence : expertise technique approfondie en détection, investigation et réponse aux incidents, combinée à une solide expérience en gestion de projets et accompagnement organisationnel.">
         Consultant en cybersécurité avec une double compétence : expertise technique approfondie en détection, investigation et réponse aux incidents, combinée à une solide expérience en gestion de projets et accompagnement organisationnel.
       </p>
-      <p class="reveal">
+      <p class="reveal"
+         data-en="Operating internationally, with a deep understanding of African, European and Latin American regulatory and cultural contexts. Professional practice in French, English and Spanish."
+         data-fr="Opérant à l'international, avec une compréhension des contextes réglementaires et culturels africains, européens et latino-américains. Pratique professionnelle en français, anglais et espagnol.">
         Opérant à l'international, avec une compréhension des contextes réglementaires et culturels africains, européens et latino-américains. Pratique professionnelle en français, anglais et espagnol.
       </p>
       <div class="about-highlights reveal">
-        <div class="highlight">Praticien SOC / DFIR — lab actif & certifications en cours</div>
-        <div class="highlight">Expérience en gestion de projets complexes (12 ans)</div>
-        <div class="highlight">Réseaux francophones Afrique & Amérique Latine</div>
-        <div class="highlight">Trilingue : français, anglais, espagnol</div>
+        <div class="highlight"
+             data-en="SOC / DFIR practitioner — active lab &amp; ongoing certifications"
+             data-fr="Praticien SOC / DFIR — lab actif &amp; certifications en cours">Praticien SOC / DFIR — lab actif &amp; certifications en cours</div>
+        <div class="highlight"
+             data-en="Complex project management experience (12 years)"
+             data-fr="Expérience en gestion de projets complexes (12 ans)">Expérience en gestion de projets complexes (12 ans)</div>
+        <div class="highlight"
+             data-en="Francophone Africa &amp; Latin America networks"
+             data-fr="Réseaux francophones Afrique &amp; Amérique Latine">Réseaux francophones Afrique &amp; Amérique Latine</div>
+        <div class="highlight"
+             data-en="Trilingual: French, English, Spanish"
+             data-fr="Trilingue : français, anglais, espagnol">Trilingue : français, anglais, espagnol</div>
       </div>
     </div>
   </div>
@@ -958,36 +1045,61 @@
 
 <!-- CONTACT -->
 <section id="contact">
-  <div class="section-label reveal" style="justify-content:center">Travaillons ensemble</div>
-  <h2 class="reveal">Prenons <em>contact</em></h2>
-  <p class="reveal">Vous avez un projet, un besoin urgent ou une question ? Décrivez votre situation — nous vous répondons sous 48 heures.</p>
+  <div class="section-label reveal" style="justify-content:center"
+       data-en="Let's work together"
+       data-fr="Travaillons ensemble">Travaillons ensemble</div>
+  <h2 class="reveal"
+      data-en-html="Get in <em>touch</em>"
+      data-fr-html="Prenons <em>contact</em>">Prenons <em>contact</em></h2>
+  <p class="reveal"
+     data-en="Do you have a project, an urgent need or a question? Describe your situation — we respond within 48 hours."
+     data-fr="Vous avez un projet, un besoin urgent ou une question ? Décrivez votre situation — nous vous répondons sous 48 heures.">
+    Vous avez un projet, un besoin urgent ou une question ? Décrivez votre situation — nous vous répondons sous 48 heures.
+  </p>
   <form class="contact-form reveal" onsubmit="handleSubmit(event)">
     <div class="form-row">
       <div class="form-field">
-        <label>Nom / Organisation</label>
-        <input type="text" placeholder="Acme Corp">
+        <label data-en="Name / Organisation" data-fr="Nom / Organisation">Nom / Organisation</label>
+        <input type="text"
+               data-en-placeholder="Acme Corp"
+               data-fr-placeholder="Acme Corp"
+               placeholder="Acme Corp">
       </div>
       <div class="form-field">
-        <label>Email</label>
-        <input type="email" placeholder="contact@organisation.com">
+        <label data-en="Email" data-fr="Email">Email</label>
+        <input type="email"
+               data-en-placeholder="contact@organisation.com"
+               data-fr-placeholder="contact@organisation.com"
+               placeholder="contact@organisation.com">
       </div>
     </div>
     <div class="form-field">
-      <label>Besoin</label>
+      <label data-en="Need" data-fr="Besoin">Besoin</label>
       <select>
-        <option value="" disabled selected>Sélectionner un service</option>
-        <option>Réponse aux incidents (DFIR)</option>
-        <option>Analyse des risques</option>
-        <option>Mise en conformité (RGPD / ISO 27001)</option>
-        <option>Sensibilisation & Formation</option>
-        <option>Autre / Non défini</option>
+        <option value="" disabled selected
+                data-en="Select a service"
+                data-fr="Sélectionner un service">Sélectionner un service</option>
+        <option data-en="Incident Response (DFIR)"
+                data-fr="Réponse aux incidents (DFIR)">Réponse aux incidents (DFIR)</option>
+        <option data-en="Risk Analysis"
+                data-fr="Analyse des risques">Analyse des risques</option>
+        <option data-en="Compliance (GDPR / ISO 27001)"
+                data-fr="Mise en conformité (RGPD / ISO 27001)">Mise en conformité (RGPD / ISO 27001)</option>
+        <option data-en="Awareness &amp; Training"
+                data-fr="Sensibilisation &amp; Formation">Sensibilisation &amp; Formation</option>
+        <option data-en="Other / Undefined"
+                data-fr="Autre / Non défini">Autre / Non défini</option>
       </select>
     </div>
     <div class="form-field">
-      <label>Message</label>
-      <textarea placeholder="Décrivez brièvement votre contexte et votre besoin..."></textarea>
+      <label data-en="Message" data-fr="Message">Message</label>
+      <textarea data-en-placeholder="Briefly describe your context and need..."
+                data-fr-placeholder="Décrivez brièvement votre contexte et votre besoin..."
+                placeholder="Décrivez brièvement votre contexte et votre besoin..."></textarea>
     </div>
-    <button type="submit" class="form-submit">Envoyer la demande →</button>
+    <button type="submit" class="form-submit"
+            data-en="Send request →"
+            data-fr="Envoyer la demande →">Envoyer la demande →</button>
   </form>
 </section>
 
@@ -995,48 +1107,94 @@
 <footer>
   <div class="footer-logo">SENTINEL ADVISORY</div>
   <ul class="footer-links">
-    <li><a href="#services">Services</a></li>
-    <li><a href="#about">À propos</a></li>
-    <li><a href="#contact">Contact</a></li>
+    <li><a href="#services" data-en="Services"  data-fr="Services">Services</a></li>
+    <li><a href="#about"    data-en="About"     data-fr="À propos">À propos</a></li>
+    <li><a href="#contact"  data-en="Contact"   data-fr="Contact">Contact</a></li>
   </ul>
-  <div class="footer-copy">© 2025 Sentinel Advisory. Tous droits réservés.</div>
+  <div class="footer-copy"
+       data-en="© 2025 Sentinel Advisory. All rights reserved."
+       data-fr="© 2025 Sentinel Advisory. Tous droits réservés.">© 2025 Sentinel Advisory. Tous droits réservés.</div>
 </footer>
 
 <script>
-  // Reveal on scroll
+  /* ─── REVEAL ON SCROLL ─── */
   const reveals = document.querySelectorAll('.reveal');
   const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry, i) => {
+    entries.forEach((entry) => {
       if (entry.isIntersecting) {
-        setTimeout(() => {
-          entry.target.classList.add('visible');
-        }, 80);
+        setTimeout(() => entry.target.classList.add('visible'), 80);
         observer.unobserve(entry.target);
       }
     });
   }, { threshold: 0.12 });
-
   reveals.forEach(el => observer.observe(el));
 
-  // Stagger cards
+  /* stagger cards */
   document.querySelectorAll('.service-card').forEach((card, i) => {
     card.style.transitionDelay = `${i * 0.1}s`;
   });
 
-  // Form submit
+  /* ─── CONTACT FORM ─── */
   function handleSubmit(e) {
     e.preventDefault();
     const btn = e.target.querySelector('.form-submit');
-    btn.textContent = 'Message envoyé ✓';
+    const lang = localStorage.getItem('lang') || 'fr';
+    btn.textContent = lang === 'en' ? 'Request sent ✓' : 'Message envoyé ✓';
     btn.style.background = '#2a6b3a';
     btn.style.color = '#EAE5D8';
     setTimeout(() => {
-      btn.textContent = 'Envoyer la demande →';
+      btn.textContent = lang === 'en' ? 'Send request →' : 'Envoyer la demande →';
       btn.style.background = '';
       btn.style.color = '';
       e.target.reset();
     }, 3000);
   }
+
+  /* ─── I18N SYSTEM ─── */
+  function setLang(lang) {
+    /* plain text */
+    document.querySelectorAll('[data-en]').forEach(el => {
+      el.textContent = el.dataset[lang];
+    });
+
+    /* HTML nodes (em, br...) */
+    document.querySelectorAll('[data-en-html]').forEach(el => {
+      el.innerHTML = lang === 'en' ? el.dataset.enHtml : el.dataset.frHtml;
+    });
+
+    /* placeholders */
+    document.querySelectorAll('[data-en-placeholder]').forEach(el => {
+      el.placeholder = lang === 'en' ? el.dataset.enPlaceholder : el.dataset.frPlaceholder;
+    });
+
+    /* select options */
+    document.querySelectorAll('select option[data-en]').forEach(opt => {
+      opt.textContent = opt.dataset[lang];
+    });
+
+    /* page meta */
+    document.title = lang === 'en'
+      ? 'SENTINEL ADVISORY — Cybersecurity Consulting'
+      : 'SENTINEL ADVISORY — Conseil en Cybersécurité';
+    document.documentElement.lang = lang;
+
+    /* toggle label shows the OTHER language */
+    document.getElementById('lang-toggle').textContent = lang === 'en' ? 'FR' : 'EN';
+
+    localStorage.setItem('lang', lang);
+  }
+
+  function toggleLang() {
+    const current = localStorage.getItem('lang') || 'fr';
+    setLang(current === 'fr' ? 'en' : 'fr');
+  }
+
+  /* ─── INIT ─── */
+  (function init() {
+    const saved   = localStorage.getItem('lang');
+    const browser = navigator.language.startsWith('en') ? 'en' : 'fr';
+    setLang(saved || browser);
+  })();
 </script>
 </body>
 </html>
