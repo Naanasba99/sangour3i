@@ -1,0 +1,1042 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SENTINEL ADVISORY — Conseil en Cybersécurité</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=Space+Mono:wght@400;700&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #08090D;
+    --bg2: #0F1118;
+    --bg3: #141720;
+    --gold: #C9A84C;
+    --gold-dim: #8A6E2F;
+    --off-white: #EAE5D8;
+    --muted: #7A7870;
+    --border: rgba(201,168,76,0.15);
+  }
+
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--off-white);
+    font-family: 'Jost', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+  }
+
+  /* GRID TEXTURE */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(201,168,76,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(201,168,76,0.03) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 4rem;
+    background: rgba(8,9,13,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-logo {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.8rem;
+    letter-spacing: 0.25em;
+    color: var(--gold);
+    text-decoration: none;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 3rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+
+  .nav-links a:hover { color: var(--gold); }
+
+  .nav-cta {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    color: var(--gold);
+    border: 1px solid var(--gold);
+    padding: 0.5rem 1.2rem;
+    text-decoration: none;
+    transition: all 0.3s;
+  }
+
+  .nav-cta:hover {
+    background: var(--gold);
+    color: var(--bg);
+  }
+
+  /* HERO */
+  #hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 0 4rem;
+    overflow: hidden;
+  }
+
+  .hero-bg-circle {
+    position: absolute;
+    width: 700px;
+    height: 700px;
+    border-radius: 50%;
+    border: 1px solid rgba(201,168,76,0.08);
+    top: 50%; right: -200px;
+    transform: translateY(-50%);
+  }
+
+  .hero-bg-circle::before {
+    content: '';
+    position: absolute;
+    inset: 60px;
+    border-radius: 50%;
+    border: 1px solid rgba(201,168,76,0.06);
+  }
+
+  .hero-bg-circle::after {
+    content: '';
+    position: absolute;
+    inset: 120px;
+    border-radius: 50%;
+    border: 1px solid rgba(201,168,76,0.04);
+  }
+
+  .hero-scan {
+    position: absolute;
+    top: 0; right: 0;
+    width: 600px;
+    height: 100%;
+    background: radial-gradient(ellipse at 80% 50%, rgba(201,168,76,0.04) 0%, transparent 65%);
+    pointer-events: none;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 1;
+    max-width: 750px;
+  }
+
+  .hero-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 2.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.2s forwards;
+  }
+
+  .hero-label::before {
+    content: '';
+    display: block;
+    width: 40px;
+    height: 1px;
+    background: var(--gold);
+  }
+
+  h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3.5rem, 7vw, 6.5rem);
+    font-weight: 300;
+    line-height: 1.0;
+    letter-spacing: -0.01em;
+    margin-bottom: 2rem;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.4s forwards;
+  }
+
+  h1 em {
+    font-style: italic;
+    color: var(--gold);
+  }
+
+  .hero-desc {
+    font-size: 1rem;
+    font-weight: 300;
+    color: var(--muted);
+    line-height: 1.8;
+    max-width: 520px;
+    margin-bottom: 3rem;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.6s forwards;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.8s forwards;
+  }
+
+  .btn-primary {
+    background: var(--gold);
+    color: var(--bg);
+    font-family: 'Space Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 1rem 2.5rem;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.3s;
+  }
+
+  .btn-primary:hover {
+    background: var(--off-white);
+  }
+
+  .btn-ghost {
+    color: var(--muted);
+    font-family: 'Space Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    transition: color 0.3s;
+  }
+
+  .btn-ghost::after {
+    content: '→';
+    transition: transform 0.3s;
+  }
+
+  .btn-ghost:hover { color: var(--off-white); }
+  .btn-ghost:hover::after { transform: translateX(4px); }
+
+  .hero-stats {
+    position: absolute;
+    bottom: 4rem;
+    right: 4rem;
+    display: flex;
+    gap: 3rem;
+    opacity: 0;
+    animation: fadeUp 0.8s 1s forwards;
+  }
+
+  .stat-item { text-align: right; }
+
+  .stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.5rem;
+    font-weight: 300;
+    color: var(--gold);
+    display: block;
+    line-height: 1;
+  }
+
+  .stat-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.55rem;
+    letter-spacing: 0.2em;
+    color: var(--muted);
+    text-transform: uppercase;
+  }
+
+  /* SECTION COMMON */
+  section {
+    position: relative;
+    z-index: 1;
+    padding: 7rem 4rem;
+  }
+
+  .section-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.35em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .section-label::before {
+    content: '';
+    display: block;
+    width: 30px;
+    height: 1px;
+    background: var(--gold);
+  }
+
+  h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.5rem, 4vw, 4rem);
+    font-weight: 300;
+    line-height: 1.1;
+    margin-bottom: 1rem;
+  }
+
+  h2 em { font-style: italic; color: var(--gold); }
+
+  /* SERVICES */
+  #services {
+    background: var(--bg2);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .services-header {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: end;
+    margin-bottom: 5rem;
+  }
+
+  .services-intro {
+    color: var(--muted);
+    font-size: 0.95rem;
+    line-height: 1.9;
+    max-width: 480px;
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1px;
+    background: var(--border);
+  }
+
+  .service-card {
+    background: var(--bg2);
+    padding: 3rem;
+    position: relative;
+    overflow: hidden;
+    transition: background 0.4s;
+    cursor: default;
+  }
+
+  .service-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 2px;
+    height: 0;
+    background: var(--gold);
+    transition: height 0.4s;
+  }
+
+  .service-card:hover::before { height: 100%; }
+  .service-card:hover { background: var(--bg3); }
+
+  .service-icon {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    color: var(--gold-dim);
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+
+  .service-icon-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--gold);
+    display: inline-block;
+  }
+
+  .service-card h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem;
+    font-weight: 400;
+    margin-bottom: 1rem;
+    line-height: 1.2;
+  }
+
+  .service-card p {
+    font-size: 0.88rem;
+    color: var(--muted);
+    line-height: 1.8;
+    margin-bottom: 2rem;
+  }
+
+  .service-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .tag {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.55rem;
+    letter-spacing: 0.1em;
+    color: var(--gold-dim);
+    border: 1px solid rgba(201,168,76,0.2);
+    padding: 0.25rem 0.6rem;
+  }
+
+  /* APPROACH */
+  #approach {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .approach-grid {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 6rem;
+    margin-top: 5rem;
+    align-items: start;
+  }
+
+  .approach-left h2 { margin-bottom: 2rem; }
+
+  .approach-left p {
+    color: var(--muted);
+    font-size: 0.9rem;
+    line-height: 1.9;
+  }
+
+  .approach-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .step {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: 2rem;
+    padding: 2.5rem 0;
+    border-bottom: 1px solid var(--border);
+    align-items: start;
+  }
+
+  .step:first-child { border-top: 1px solid var(--border); }
+
+  .step-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3rem;
+    font-weight: 300;
+    color: rgba(201,168,76,0.2);
+    line-height: 1;
+  }
+
+  .step-content h4 {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.5rem;
+  }
+
+  .step-content p {
+    font-size: 0.85rem;
+    color: var(--muted);
+    line-height: 1.8;
+  }
+
+  /* ABOUT */
+  #about {
+    background: var(--bg2);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .about-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .about-visual {
+    position: relative;
+    height: 420px;
+  }
+
+  .about-frame {
+    position: absolute;
+    inset: 0;
+    border: 1px solid var(--border);
+  }
+
+  .about-frame::before {
+    content: '';
+    position: absolute;
+    top: 20px; left: 20px;
+    right: -20px; bottom: -20px;
+    border: 1px solid rgba(201,168,76,0.06);
+  }
+
+  .about-frame-inner {
+    position: absolute;
+    inset: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  .about-placeholder-img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 1px solid var(--border);
+    background: var(--bg3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.55rem;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+  }
+
+  .about-name-placeholder {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    font-weight: 300;
+    color: var(--off-white);
+    text-align: center;
+  }
+
+  .about-role-placeholder {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    color: var(--gold);
+    text-transform: uppercase;
+    text-align: center;
+  }
+
+  .about-certs {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 0.5rem;
+  }
+
+  .cert-badge {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.5rem;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    border: 1px solid var(--border);
+    padding: 0.2rem 0.5rem;
+  }
+
+  .about-text .section-label { margin-bottom: 1.5rem; }
+
+  .about-text h2 { margin-bottom: 1.5rem; }
+
+  .about-text p {
+    color: var(--muted);
+    font-size: 0.9rem;
+    line-height: 1.9;
+    margin-bottom: 1.5rem;
+  }
+
+  .about-highlights {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-top: 2rem;
+  }
+
+  .highlight {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-size: 0.85rem;
+    color: var(--muted);
+  }
+
+  .highlight::before {
+    content: '';
+    width: 20px;
+    height: 1px;
+    background: var(--gold);
+    flex-shrink: 0;
+  }
+
+  /* CONTACT */
+  #contact {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  #contact h2 { margin-bottom: 1.5rem; }
+
+  #contact p {
+    color: var(--muted);
+    font-size: 0.95rem;
+    line-height: 1.8;
+    margin-bottom: 3rem;
+    max-width: 550px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .contact-form {
+    display: grid;
+    gap: 1rem;
+    text-align: left;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+
+  .form-field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .form-field label {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.55rem;
+    letter-spacing: 0.2em;
+    color: var(--gold-dim);
+    text-transform: uppercase;
+  }
+
+  .form-field input,
+  .form-field textarea,
+  .form-field select {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    color: var(--off-white);
+    font-family: 'Jost', sans-serif;
+    font-size: 0.88rem;
+    font-weight: 300;
+    padding: 0.9rem 1rem;
+    outline: none;
+    transition: border-color 0.3s;
+    -webkit-appearance: none;
+    resize: none;
+  }
+
+  .form-field input:focus,
+  .form-field textarea:focus,
+  .form-field select:focus {
+    border-color: rgba(201,168,76,0.5);
+  }
+
+  .form-field textarea { height: 120px; }
+
+  .form-field select option { background: var(--bg2); }
+
+  .form-submit {
+    background: var(--gold);
+    color: var(--bg);
+    font-family: 'Space Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 1.1rem;
+    border: none;
+    cursor: pointer;
+    transition: background 0.3s;
+    width: 100%;
+    margin-top: 0.5rem;
+  }
+
+  .form-submit:hover { background: var(--off-white); }
+
+  /* FOOTER */
+  footer {
+    position: relative;
+    z-index: 1;
+    padding: 2.5rem 4rem;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-logo {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.25em;
+    color: var(--gold);
+  }
+
+  .footer-copy {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.55rem;
+    letter-spacing: 0.15em;
+    color: var(--muted);
+  }
+
+  .footer-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+
+  .footer-links a {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.55rem;
+    letter-spacing: 0.15em;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.3s;
+    text-transform: uppercase;
+  }
+
+  .footer-links a:hover { color: var(--gold); }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* MOBILE */
+  @media (max-width: 768px) {
+    nav { padding: 1.2rem 1.5rem; }
+    .nav-links { display: none; }
+    section { padding: 5rem 1.5rem; }
+    #hero { padding: 0 1.5rem; }
+    .services-header { grid-template-columns: 1fr; gap: 2rem; }
+    .services-grid { grid-template-columns: 1fr; }
+    .approach-grid { grid-template-columns: 1fr; gap: 3rem; }
+    .about-inner { grid-template-columns: 1fr; gap: 3rem; }
+    .form-row { grid-template-columns: 1fr; }
+    .hero-stats { position: static; margin-top: 3rem; justify-content: flex-start; }
+    footer { flex-direction: column; gap: 1rem; text-align: center; padding: 2rem 1.5rem; }
+    h1 { font-size: 3rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#hero" class="nav-logo">SENTINEL ADVISORY</a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#approach">Approche</a></li>
+    <li><a href="#about">À propos</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Engager</a>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg-circle"></div>
+  <div class="hero-scan"></div>
+  <div class="hero-content">
+    <div class="hero-label">Conseil &amp; Expertise en Cybersécurité</div>
+    <h1>Protégez ce qui<br>compte <em>vraiment.</em></h1>
+    <p class="hero-desc">
+      Conseil stratégique en cybersécurité pour organisations exigeantes. Audit, conformité, réponse aux incidents, formation — une expertise rigoureuse au service de votre résilience numérique.
+    </p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn-primary">Prendre contact</a>
+      <a href="#services" class="btn-ghost">Nos services</a>
+    </div>
+  </div>
+  <div class="hero-stats">
+    <div class="stat-item">
+      <span class="stat-num">ISO</span>
+      <span class="stat-label">27001 · RGPD</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num">DFIR</span>
+      <span class="stat-label">Réponse aux incidents</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num">FR/EN</span>
+      <span class="stat-label">Bilingue</span>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="services-header">
+    <div>
+      <div class="section-label reveal">Domaines d'intervention</div>
+      <h2 class="reveal">Nos <em>services</em></h2>
+    </div>
+    <p class="services-intro reveal">
+      Chaque mission est conduite avec rigueur méthodologique et discrétion absolue. Nous adaptons notre approche à votre secteur, votre taille et votre environnement réglementaire.
+    </p>
+  </div>
+  <div class="services-grid">
+
+    <div class="service-card reveal">
+      <div class="service-icon"><span class="service-icon-dot"></span> 01 · DFIR</div>
+      <h3>Réponse aux Incidents</h3>
+      <p>Détection, confinement et remédiation d'incidents de sécurité. Investigation numérique forensique pour établir la chronologie, l'étendue et les vecteurs d'une intrusion.</p>
+      <div class="service-tags">
+        <span class="tag">Forensique</span>
+        <span class="tag">DFIR</span>
+        <span class="tag">Threat Hunting</span>
+        <span class="tag">Timeline</span>
+      </div>
+    </div>
+
+    <div class="service-card reveal">
+      <div class="service-icon"><span class="service-icon-dot"></span> 02 · GRC</div>
+      <h3>Analyse des Risques</h3>
+      <p>Identification, évaluation et traitement des risques cyber selon les référentiels internationaux. Plans de traitement priorisés et cartographie de votre exposition.</p>
+      <div class="service-tags">
+        <span class="tag">EBIOS RM</span>
+        <span class="tag">ISO 27005</span>
+        <span class="tag">Cartographie</span>
+        <span class="tag">PCA/PRA</span>
+      </div>
+    </div>
+
+    <div class="service-card reveal">
+      <div class="service-icon"><span class="service-icon-dot"></span> 03 · CONFORM</div>
+      <h3>Mise en Conformité</h3>
+      <p>Accompagnement structuré vers la conformité RGPD, ISO 27001 ou exigences sectorielles. Analyse d'écarts, roadmap de remédiation et suivi de mise en œuvre.</p>
+      <div class="service-tags">
+        <span class="tag">RGPD</span>
+        <span class="tag">ISO 27001</span>
+        <span class="tag">Gap Analysis</span>
+        <span class="tag">NIS2</span>
+      </div>
+    </div>
+
+    <div class="service-card reveal">
+      <div class="service-icon"><span class="service-icon-dot"></span> 04 · TRAINING</div>
+      <h3>Sensibilisation &amp; Formation</h3>
+      <p>Programmes de formation sur-mesure pour dirigeants, équipes IT et utilisateurs. De la sensibilisation au phishing à la formation SOC avancée, en français et en anglais.</p>
+      <div class="service-tags">
+        <span class="tag">Phishing</span>
+        <span class="tag">OSINT</span>
+        <span class="tag">Ateliers</span>
+        <span class="tag">E-learning</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- APPROACH -->
+<section id="approach">
+  <div class="approach-grid">
+    <div class="approach-left">
+      <div class="section-label reveal">Méthode de travail</div>
+      <h2 class="reveal">Une approche <em>structurée</em></h2>
+      <p class="reveal" style="margin-top:1.5rem;">
+        Chaque engagement suit un processus rigoureux, de la compréhension de votre environnement à la livraison de résultats actionnables. Pas de rapport générique — des recommandations concrètes adaptées à votre réalité.
+      </p>
+    </div>
+    <div class="approach-steps">
+      <div class="step reveal">
+        <div class="step-num">01</div>
+        <div class="step-content">
+          <h4>Cadrage &amp; Découverte</h4>
+          <p>Compréhension de votre organisation, périmètre, enjeux métiers et contraintes réglementaires. Définition claire des objectifs de la mission.</p>
+        </div>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">02</div>
+        <div class="step-content">
+          <h4>Analyse &amp; Évaluation</h4>
+          <p>Collecte de données, entretiens, tests techniques ou analyse documentaire selon la nature de la mission. Application de référentiels reconnus.</p>
+        </div>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">03</div>
+        <div class="step-content">
+          <h4>Recommandations &amp; Livrables</h4>
+          <p>Rapport détaillé avec constats priorisés, plan d'action opérationnel et présentation exécutive. Livrables clairs pour décideurs et équipes techniques.</p>
+        </div>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">04</div>
+        <div class="step-content">
+          <h4>Suivi &amp; Accompagnement</h4>
+          <p>Soutien dans la mise en œuvre des recommandations, suivi des indicateurs et accompagnement dans la durée si nécessaire.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-inner">
+    <div class="about-visual reveal">
+      <div class="about-frame">
+        <div class="about-frame-inner">
+          <div class="about-placeholder-img">PHOTO</div>
+          <div class="about-name-placeholder">Prénom NOM</div>
+          <div class="about-role-placeholder">Consultant Senior en Cybersécurité</div>
+          <div class="about-certs">
+            <span class="cert-badge">CompTIA Security+</span>
+            <span class="cert-badge">BTL1</span>
+            <span class="cert-badge">Google Cybersecurity</span>
+            <span class="cert-badge">RHCSA</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="about-text">
+      <div class="section-label reveal">À propos</div>
+      <h2 class="reveal">Expertise <em>terrain,</em><br>vision stratégique</h2>
+      <p class="reveal">
+        Consultant en cybersécurité avec une double compétence : expertise technique approfondie en détection, investigation et réponse aux incidents, combinée à une solide expérience en gestion de projets et accompagnement organisationnel.
+      </p>
+      <p class="reveal">
+        Opérant à l'international, avec une compréhension des contextes réglementaires et culturels africains, européens et latino-américains. Pratique professionnelle en français, anglais et espagnol.
+      </p>
+      <div class="about-highlights reveal">
+        <div class="highlight">Praticien SOC / DFIR — lab actif & certifications en cours</div>
+        <div class="highlight">Expérience en gestion de projets complexes (12 ans)</div>
+        <div class="highlight">Réseaux francophones Afrique & Amérique Latine</div>
+        <div class="highlight">Trilingue : français, anglais, espagnol</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-label reveal" style="justify-content:center">Travaillons ensemble</div>
+  <h2 class="reveal">Prenons <em>contact</em></h2>
+  <p class="reveal">Vous avez un projet, un besoin urgent ou une question ? Décrivez votre situation — nous vous répondons sous 48 heures.</p>
+  <form class="contact-form reveal" onsubmit="handleSubmit(event)">
+    <div class="form-row">
+      <div class="form-field">
+        <label>Nom / Organisation</label>
+        <input type="text" placeholder="Acme Corp">
+      </div>
+      <div class="form-field">
+        <label>Email</label>
+        <input type="email" placeholder="contact@organisation.com">
+      </div>
+    </div>
+    <div class="form-field">
+      <label>Besoin</label>
+      <select>
+        <option value="" disabled selected>Sélectionner un service</option>
+        <option>Réponse aux incidents (DFIR)</option>
+        <option>Analyse des risques</option>
+        <option>Mise en conformité (RGPD / ISO 27001)</option>
+        <option>Sensibilisation & Formation</option>
+        <option>Autre / Non défini</option>
+      </select>
+    </div>
+    <div class="form-field">
+      <label>Message</label>
+      <textarea placeholder="Décrivez brièvement votre contexte et votre besoin..."></textarea>
+    </div>
+    <button type="submit" class="form-submit">Envoyer la demande →</button>
+  </form>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">SENTINEL ADVISORY</div>
+  <ul class="footer-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#about">À propos</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="footer-copy">© 2025 Sentinel Advisory. Tous droits réservés.</div>
+</footer>
+
+<script>
+  // Reveal on scroll
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => {
+          entry.target.classList.add('visible');
+        }, 80);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  reveals.forEach(el => observer.observe(el));
+
+  // Stagger cards
+  document.querySelectorAll('.service-card').forEach((card, i) => {
+    card.style.transitionDelay = `${i * 0.1}s`;
+  });
+
+  // Form submit
+  function handleSubmit(e) {
+    e.preventDefault();
+    const btn = e.target.querySelector('.form-submit');
+    btn.textContent = 'Message envoyé ✓';
+    btn.style.background = '#2a6b3a';
+    btn.style.color = '#EAE5D8';
+    setTimeout(() => {
+      btn.textContent = 'Envoyer la demande →';
+      btn.style.background = '';
+      btn.style.color = '';
+      e.target.reset();
+    }, 3000);
+  }
+</script>
+</body>
+</html>
