@@ -1790,15 +1790,28 @@ footer {
 
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 /* ── REVEAL ── */
-const obs = new IntersectionObserver(entries => {
-  entries.forEach(e => {
-    if (e.isIntersecting) {
-      setTimeout(() => e.target.classList.add('visible'), 80);
-      obs.unobserve(e.target);
-    }
-  });
-}, { threshold:0.1 });
-document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+const revealEls = document.querySelectorAll('.reveal');
+
+/* Fallback absolu : tout devient visible après 600ms quoi qu'il arrive */
+setTimeout(() => {
+  revealEls.forEach(el => el.classList.add('visible'));
+}, 600);
+
+/* IntersectionObserver pour l'animation au scroll */
+try {
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0, rootMargin: '0px 0px -30px 0px' });
+  revealEls.forEach(el => obs.observe(el));
+} catch(err) {
+  /* Si IntersectionObserver non supporté, tout est déjà visible via le fallback */
+  revealEls.forEach(el => el.classList.add('visible'));
+}
 
 /* stagger service cards */
 document.querySelectorAll('.service-card').forEach((c,i) => {
@@ -1824,16 +1837,20 @@ function handleSubmit(e) {
 /* ── I18N ── */
 function setLang(lang) {
   document.querySelectorAll('[data-en]').forEach(el => {
-    el.textContent = el.dataset[lang];
+    const val = el.dataset[lang];
+    if (val !== undefined) el.textContent = val;
   });
   document.querySelectorAll('[data-en-html]').forEach(el => {
-    el.innerHTML = lang === 'en' ? el.dataset.enHtml : el.dataset.frHtml;
+    const val = lang === 'en' ? el.dataset.enHtml : el.dataset.frHtml;
+    if (val !== undefined) el.innerHTML = val;
   });
   document.querySelectorAll('[data-en-placeholder]').forEach(el => {
-    el.placeholder = lang === 'en' ? el.dataset.enPlaceholder : el.dataset.frPlaceholder;
+    const val = lang === 'en' ? el.dataset.enPlaceholder : el.dataset.frPlaceholder;
+    if (val !== undefined) el.placeholder = val;
   });
   document.querySelectorAll('select option[data-en]').forEach(opt => {
-    opt.textContent = opt.dataset[lang];
+    const val = opt.dataset[lang];
+    if (val !== undefined) opt.textContent = val;
   });
   document.title = lang === 'en'
     ? 'SENTINEL ADVISORY — Strategic Digital Intelligence'
