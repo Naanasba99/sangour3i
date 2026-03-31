@@ -51,11 +51,18 @@ body::before {
 
 /* ── REVEAL ── */
 .reveal {
-  opacity:0;
-  transform:translateY(28px);
+  opacity:1;
+  transform:translateY(0);
   transition:opacity 0.75s ease, transform 0.75s ease;
 }
-.reveal.visible { opacity:1; transform:translateY(0); }
+.js-animate .reveal {
+  opacity:0;
+  transform:translateY(28px);
+}
+.js-animate .reveal.visible {
+  opacity:1;
+  transform:translateY(0);
+}
 
 /* ── NAV ── */
 nav {
@@ -1792,10 +1799,13 @@ footer {
 /* ── REVEAL ── */
 const revealEls = document.querySelectorAll('.reveal');
 
-/* Fallback absolu : tout devient visible après 600ms quoi qu'il arrive */
+/* Active l'animation seulement si JS tourne correctement */
+document.body.classList.add('js-animate');
+
+/* Fallback absolu : tout redevient visible après 400ms */
 setTimeout(() => {
   revealEls.forEach(el => el.classList.add('visible'));
-}, 600);
+}, 400);
 
 /* IntersectionObserver pour l'animation au scroll */
 try {
@@ -1806,10 +1816,9 @@ try {
         obs.unobserve(e.target);
       }
     });
-  }, { threshold: 0, rootMargin: '0px 0px -30px 0px' });
+  }, { threshold: 0, rootMargin: '0px 0px 0px 0px' });
   revealEls.forEach(el => obs.observe(el));
 } catch(err) {
-  /* Si IntersectionObserver non supporté, tout est déjà visible via le fallback */
   revealEls.forEach(el => el.classList.add('visible'));
 }
 
