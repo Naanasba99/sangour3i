@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SANGOUR3i — Exemple de Rapport OSINT</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Space+Mono:wght@400;700&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#07080C;--bg2:#0D0F16;--bg3:#12151E;--gold:#C4A44A;--gold2:#DFC070;--gold-dim:#7A6530;--off:#E8E2D4;--muted:#6E6C66;--muted2:#9A9690;--border:rgba(196,164,74,0.14);--border2:rgba(196,164,74,0.28);--red:#8B2020;--green:#2a6b3a;--green2:#3a8b4e}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--off);font-family:'Jost',sans-serif;font-weight:300;line-height:1.6;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(196,164,74,0.02) 1px,transparent 1px),linear-gradient(90deg,rgba(196,164,74,0.02) 1px,transparent 1px);background-size:80px 80px;pointer-events:none;z-index:0}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;justify-content:space-between;align-items:center;padding:1.2rem 4rem;background:rgba(7,8,12,0.95);backdrop-filter:blur(16px);border-bottom:1px solid var(--border)}
+.nav-logo{font-family:'Space Mono',monospace;font-size:0.78rem;letter-spacing:0.28em;color:var(--gold);text-decoration:none}
+.nav-back{font-family:'Space Mono',monospace;font-size:0.52rem;letter-spacing:0.15em;color:var(--muted);text-decoration:none;transition:color 0.3s}
+.nav-back:hover{color:var(--gold)}
+.nav-right{display:flex;gap:1rem;align-items:center}
+.btn-dl{font-family:'Space Mono',monospace;font-size:0.52rem;letter-spacing:0.15em;background:var(--gold);color:var(--bg);padding:0.5rem 1.2rem;border:none;cursor:pointer;text-transform:uppercase;transition:background 0.3s}
+.btn-dl:hover{background:var(--gold2)}
+
+/* REPORT HEADER */
+.report-header{position:relative;z-index:1;padding:8rem 4rem 3rem;max-width:960px;margin:0 auto}
+.report-classified-bar{background:rgba(139,32,32,0.15);border:1px solid rgba(139,32,32,0.3);padding:0.6rem 1.5rem;margin-bottom:2rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:0.5rem}
+.classified-text{font-family:'Space Mono',monospace;font-size:0.46rem;letter-spacing:0.25em;color:#c4826a;text-transform:uppercase}
+.report-ref{font-family:'Space Mono',monospace;font-size:0.46rem;letter-spacing:0.15em;color:var(--muted)}
+
+.report-title-block{border-bottom:1px solid var(--border);padding-bottom:2.5rem;margin-bottom:2.5rem}
+.report-type{font-family:'Space Mono',monospace;font-size:0.52rem;letter-spacing:0.3em;color:var(--gold);text-transform:uppercase;margin-bottom:1rem;display:flex;align-items:center;gap:0.8rem}
+.report-type::before{content:'';display:block;width:24px;height:1px;background:var(--gold)}
+.report-title{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,4vw,3.2rem);font-weight:300;line-height:1.1;margin-bottom:0.5rem}
+.report-title em{font-style:italic;color:var(--gold)}
+.report-subtitle{font-size:0.9rem;color:var(--muted2);margin-top:0.5rem}
+
+.report-meta-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);margin-bottom:3rem}
+.report-meta-item{background:var(--bg2);padding:1.2rem 1.5rem}
+.rmi-label{font-family:'Space Mono',monospace;font-size:0.44rem;letter-spacing:0.2em;color:var(--gold-dim);text-transform:uppercase;margin-bottom:0.4rem}
+.rmi-value{font-size:0.88rem;color:var(--off)}
+
+/* SCORE */
+.score-block{background:var(--bg2);border:1px solid var(--border);padding:2.5rem;margin-bottom:3rem;display:grid;grid-template-columns:1fr 1fr 1fr;gap:2px;background:var(--border)}
+.score-item{background:var(--bg2);padding:2rem;text-align:center}
+.score-num{font-family:'Cormorant Garamond',serif;font-size:3.5rem;font-weight:300;display:block;line-height:1;margin-bottom:0.5rem}
+.score-num.critical{color:#c4826a}
+.score-num.elevated{color:var(--gold)}
+.score-num.low{color:#6aad7a}
+.score-label{font-family:'Space Mono',monospace;font-size:0.46rem;letter-spacing:0.18em;color:var(--muted);text-transform:uppercase;display:block;margin-bottom:0.3rem}
+.score-desc{font-size:0.75rem;color:var(--muted2)}
+
+/* SECTIONS */
+.report-body{position:relative;z-index:1;max-width:960px;margin:0 auto;padding:0 4rem 4rem}
+.report-section{margin-bottom:3.5rem;padding-bottom:3.5rem;border-bottom:1px solid var(--border)}
+.report-section:last-child{border-bottom:none}
+.section-header{display:flex;align-items:center;gap:1.2rem;margin-bottom:1.5rem}
+.section-num{font-family:'Space Mono',monospace;font-size:0.48rem;letter-spacing:0.2em;color:var(--gold-dim)}
+.section-title{font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:400;color:var(--off)}
+.section-title em{font-style:italic;color:var(--gold)}
+
+.report-section p{font-size:0.88rem;color:var(--muted2);line-height:1.9;margin-bottom:1rem}
+.report-section strong{color:var(--off);font-weight:500}
+
+/* SIGNAL LIST */
+.signal-list{display:flex;flex-direction:column;gap:0.8rem;margin:1.5rem 0}
+.signal-item{display:grid;grid-template-columns:auto 1fr auto;gap:1.2rem;align-items:start;padding:1.2rem 1.5rem;background:var(--bg2);border:1px solid var(--border)}
+.signal-icon{font-family:'Space Mono',monospace;font-size:0.44rem;letter-spacing:0.1em;color:var(--gold-dim);padding-top:0.15rem}
+.signal-content h5{font-family:'Jost',sans-serif;font-size:0.85rem;font-weight:500;color:var(--off);margin-bottom:0.3rem}
+.signal-content p{font-size:0.8rem;color:var(--muted2);line-height:1.6;margin:0}
+.signal-level{font-family:'Space Mono',monospace;font-size:0.42rem;letter-spacing:0.1em;padding:0.2rem 0.6rem;border:1px solid;align-self:center;white-space:nowrap}
+.sl-critical{color:#c4826a;border-color:rgba(196,130,106,0.35)}
+.sl-elevated{color:var(--gold);border-color:var(--border2)}
+.sl-verified{color:#6aad7a;border-color:rgba(106,173,122,0.35)}
+.sl-inconclusive{color:var(--muted2);border-color:var(--border)}
+
+/* ENTITY TABLE */
+.entity-table{width:100%;border-collapse:collapse;margin:1.5rem 0;background:var(--bg2)}
+.entity-table th{font-family:'Space Mono',monospace;font-size:0.44rem;letter-spacing:0.18em;color:var(--gold-dim);text-transform:uppercase;padding:0.9rem 1.2rem;text-align:left;border-bottom:1px solid var(--border2);background:var(--bg3)}
+.entity-table td{font-size:0.82rem;color:var(--muted2);padding:0.9rem 1.2rem;border-bottom:1px solid var(--border);vertical-align:top;line-height:1.6}
+.entity-table tr:last-child td{border-bottom:none}
+.entity-table tr:hover td{background:var(--bg3)}
+.status-confirmed{color:#6aad7a}
+.status-unverified{color:var(--gold)}
+.status-inconsistent{color:#c4826a}
+
+/* CONCLUSION BOX */
+.conclusion-box{background:var(--bg2);border:1px solid var(--border2);border-left:3px solid var(--gold);padding:2rem 2.5rem;margin:2rem 0}
+.conclusion-box h4{font-family:'Jost',sans-serif;font-size:0.9rem;font-weight:500;color:var(--off);margin-bottom:1rem;letter-spacing:0.03em}
+.conclusion-box p{font-size:0.85rem;color:var(--muted2);line-height:1.8;margin-bottom:0.8rem}
+.conclusion-box p:last-child{margin-bottom:0}
+
+/* RECOMMENDATIONS */
+.reco-list{display:flex;flex-direction:column;gap:0.6rem;margin:1.2rem 0}
+.reco-item{display:flex;align-items:flex-start;gap:1rem;font-size:0.85rem;color:var(--muted2);line-height:1.6;padding:0.8rem 1rem;background:var(--bg2);border:1px solid var(--border)}
+.reco-num{font-family:'Space Mono',monospace;font-size:0.44rem;letter-spacing:0.1em;color:var(--gold);flex-shrink:0;margin-top:0.15rem}
+
+/* DISCLAIMER */
+.report-disclaimer{background:var(--bg3);border:1px solid var(--border);padding:1.5rem 2rem;margin-top:3rem}
+.disclaimer-label{font-family:'Space Mono',monospace;font-size:0.44rem;letter-spacing:0.2em;color:var(--gold-dim);text-transform:uppercase;margin-bottom:0.6rem;display:block}
+.report-disclaimer p{font-size:0.75rem;color:var(--muted);line-height:1.7}
+
+/* WATERMARK */
+.watermark{position:fixed;bottom:2rem;right:2rem;font-family:'Space Mono',monospace;font-size:0.42rem;letter-spacing:0.2em;color:rgba(196,164,74,0.15);text-transform:uppercase;z-index:50;writing-mode:vertical-rl}
+
+/* CTA */
+.report-cta{background:var(--bg2);border:1px solid var(--border);padding:3rem;text-align:center;margin-top:3rem}
+.report-cta h3{font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:400;margin-bottom:1rem}
+.report-cta h3 em{font-style:italic;color:var(--gold)}
+.report-cta p{font-size:0.85rem;color:var(--muted2);line-height:1.8;max-width:500px;margin:0 auto 2rem}
+.cta-btn{display:inline-block;background:var(--gold);color:var(--bg);font-family:'Space Mono',monospace;font-size:0.58rem;letter-spacing:0.18em;text-transform:uppercase;padding:0.9rem 2rem;text-decoration:none;transition:background 0.3s}
+.cta-btn:hover{background:var(--gold2)}
+
+footer{position:relative;z-index:1;padding:2rem 4rem;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-logo{font-family:'Space Mono',monospace;font-size:0.65rem;letter-spacing:0.25em;color:var(--gold)}
+.footer-copy{font-family:'Space Mono',monospace;font-size:0.44rem;letter-spacing:0.12em;color:var(--muted)}
+
+@media(max-width:768px){
+  nav,footer{padding:1.2rem 1.5rem}
+  .report-header,.report-body{padding-left:1.5rem;padding-right:1.5rem}
+  .report-header{padding-top:7rem}
+  .report-meta-grid{grid-template-columns:1fr 1fr}
+  .score-block{grid-template-columns:1fr}
+  .signal-item{grid-template-columns:auto 1fr}
+  .signal-level{display:none}
+  footer{flex-direction:column;text-align:center}
+}
+</style>
+</head>
+<body>
+
+<div class="watermark">SANGOUR3i · FICTIF · À TITRE ILLUSTRATIF</div>
+
+<nav>
+  <a href="index.html" class="nav-back">← Retour au site</a>
+  <a href="index.html" class="nav-logo">SANGOUR3i</a>
+  <div class="nav-right">
+    <button class="btn-dl" onclick="window.print()">Télécharger PDF ↓</button>
+  </div>
+</nav>
+
+<!-- REPORT HEADER -->
+<div class="report-header">
+
+  <div class="report-classified-bar">
+    <span class="classified-text">⚠ Document fictif · Illustratif uniquement · Toute ressemblance avec des personnes réelles est fortuite</span>
+    <span class="report-ref">REF : SGI-2026-DEMO-001 · TLP:WHITE</span>
+  </div>
+
+  <div class="report-title-block">
+    <div class="report-type">Rapport de Due Diligence Digitale</div>
+    <div class="report-title">Analyse d'Empreinte Numérique<br><em>Entité fictive : NEXORA CAPITAL SAS</em></div>
+    <div class="report-subtitle">Vérification préalable à engagement commercial — Analyse OSINT complète</div>
+  </div>
+
+  <div class="report-meta-grid">
+    <div class="report-meta-item">
+      <div class="rmi-label">Date d'analyse</div>
+      <div class="rmi-value">14 Avril 2026</div>
+    </div>
+    <div class="report-meta-item">
+      <div class="rmi-label">Durée de traitement</div>
+      <div class="rmi-value">52 heures</div>
+    </div>
+    <div class="report-meta-item">
+      <div class="rmi-label">Sources consultées</div>
+      <div class="rmi-value">47 sources ouvertes</div>
+    </div>
+    <div class="report-meta-item">
+      <div class="rmi-label">Analyste</div>
+      <div class="rmi-value">SANGOUR3i · Équipe OSINT</div>
+    </div>
+  </div>
+
+  <!-- SCORE GLOBAL -->
+  <div class="score-block">
+    <div class="score-item">
+      <span class="score-label">Score de risque global</span>
+      <span class="score-num elevated">67 / 100</span>
+      <span class="score-desc">Niveau d'alerte : ÉLEVÉ</span>
+    </div>
+    <div class="score-item">
+      <span class="score-label">Cohérence informationnelle</span>
+      <span class="score-num critical">41 / 100</span>
+      <span class="score-desc">Incohérences majeures détectées</span>
+    </div>
+    <div class="score-item">
+      <span class="score-label">Fiabilité des sources déclarées</span>
+      <span class="score-num elevated">58 / 100</span>
+      <span class="score-desc">Vérification partielle possible</span>
+    </div>
+  </div>
+
+</div>
+
+<!-- REPORT BODY -->
+<div class="report-body">
+
+  <!-- SECTION 1 : SYNTHÈSE -->
+  <div class="report-section">
+    <div class="section-header">
+      <span class="section-num">01</span>
+      <h2 class="section-title">Synthèse <em>exécutive</em></h2>
+    </div>
+    <p>L'analyse de l'empreinte numérique de <strong>NEXORA CAPITAL SAS</strong> révèle un profil caractérisé par de significatives incohérences entre les informations déclarées et les données vérifiables en sources ouvertes.</p>
+    <p>Trois signaux faibles majeurs ont été identifiés : une divergence entre la date de création déclarée et les premiers enregistrements numériques vérifiables, une structure de domaines web suggérant une activité antérieure non déclarée, et des profils de dirigeants présentant des historiques professionnels partiellement invérifiables.</p>
+    <div class="conclusion-box">
+      <h4>Recommandation analytique</h4>
+      <p><strong>Niveau d'alerte : ÉLEVÉ.</strong> Les incohérences identifiées ne permettent pas de conclure à une activité frauduleuse mais justifient un approfondissement avant tout engagement contractuel ou financier.</p>
+      <p>L'engagement est déconseillé sans obtention et vérification de documents complémentaires, notamment les statuts originaux, les comptes certifiés et les justificatifs d'identité des dirigeants réels.</p>
+    </div>
+  </div>
+
+  <!-- SECTION 2 : SIGNAUX FAIBLES -->
+  <div class="report-section">
+    <div class="section-header">
+      <span class="section-num">02</span>
+      <h2 class="section-title">Signaux faibles <em>détectés</em></h2>
+    </div>
+    <p>L'analyse systématique des sources ouvertes a permis d'identifier les signaux suivants, classifiés par niveau de criticité :</p>
+
+    <div class="signal-list">
+      <div class="signal-item">
+        <span class="signal-icon">◈</span>
+        <div class="signal-content">
+          <h5>Divergence de date de création</h5>
+          <p>La date de création déclarée (mars 2023) est incompatible avec l'enregistrement du domaine principal (juillet 2021) et les premiers contenus indexés (septembre 2021). L'entité présenterait donc une existence numérique antérieure de 18 mois à sa date déclarée.</p>
+        </div>
+        <span class="signal-level sl-critical">CRITIQUE</span>
+      </div>
+      <div class="signal-item">
+        <span class="signal-icon">◈</span>
+        <div class="signal-content">
+          <h5>Structure de domaines satellites</h5>
+          <p>4 domaines connexes enregistrés sous le même registrant WHOIS entre 2020 et 2022, présentant des contenus aujourd'hui supprimés mais partiellement accessibles via archives web. Contenu des archives : services financiers non réglementés destinés à un marché géographique différent du périmètre déclaré.</p>
+        </div>
+        <span class="signal-level sl-critical">CRITIQUE</span>
+      </div>
+      <div class="signal-item">
+        <span class="signal-icon">◈</span>
+        <div class="signal-content">
+          <h5>Profil LinkedIn du dirigeant : historique partiel</h5>
+          <p>Le profil LinkedIn du dirigeant déclaré (M. A. Fontaine) présente une lacune de 3 ans (2018–2021) non expliquée. Aucune trace vérifiable de l'expérience antérieure déclarée dans le secteur bancaire n'a pu être confirmée via sources primaires.</p>
+        </div>
+        <span class="signal-level sl-elevated">ÉLEVÉ</span>
+      </div>
+      <div class="signal-item">
+        <span class="signal-icon">◈</span>
+        <div class="signal-content">
+          <h5>Adresse de siège : cohérence limitée</h5>
+          <p>L'adresse de siège déclarée correspond à un espace de codomiciliation. 7 autres entités y sont enregistrées dont 3 présentent des statuts juridiques incertains ou radiés. Absence de présence physique vérifiable.</p>
+        </div>
+        <span class="signal-level sl-elevated">ÉLEVÉ</span>
+      </div>
+      <div class="signal-item">
+        <span class="signal-icon">◈</span>
+        <div class="signal-content">
+          <h5>Mentions presse : 1 résultat ambigu</h5>
+          <p>Un article de presse économique régionale (2022) mentionne une entité de nom proche dans un contexte de litige commercial non abouti. La corrélation n'est pas confirmée mais ne peut être exclue.</p>
+        </div>
+        <span class="signal-level sl-inconclusive">INCONCLUANT</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 3 : VÉRIFICATION ENTITÉS -->
+  <div class="report-section">
+    <div class="section-header">
+      <span class="section-num">03</span>
+      <h2 class="section-title">Vérification des <em>entités déclarées</em></h2>
+    </div>
+    <p>Le tableau suivant synthétise le niveau de vérification des informations déclarées par l'entité dans ses documents de présentation :</p>
+
+    <table class="entity-table">
+      <thead>
+        <tr>
+          <th>Information déclarée</th>
+          <th>Source de vérification</th>
+          <th>Statut</th>
+          <th>Observation</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Création mars 2023</td>
+          <td>Registre INPI / WHOIS</td>
+          <td class="status-inconsistent">INCOHÉRENT</td>
+          <td>Domaine enregistré juillet 2021</td>
+        </tr>
+        <tr>
+          <td>Capital 50 000 €</td>
+          <td>Infogreffe</td>
+          <td class="status-confirmed">CONFIRMÉ</td>
+          <td>Correspondance exacte</td>
+        </tr>
+        <tr>
+          <td>Siège Paris 8e</td>
+          <td>Google Maps / Cadastre</td>
+          <td class="status-unverified">PARTIEL</td>
+          <td>Adresse de domiciliation</td>
+        </tr>
+        <tr>
+          <td>Dirigeant A. Fontaine</td>
+          <td>LinkedIn / Sources RH</td>
+          <td class="status-unverified">PARTIEL</td>
+          <td>Parcours 2018–2021 non vérifiable</td>
+        </tr>
+        <tr>
+          <td>Partenariat déclaré BNP</td>
+          <td>Communiqués officiels BNP</td>
+          <td class="status-inconsistent">NON TROUVÉ</td>
+          <td>Aucune mention en sources primaires</td>
+        </tr>
+        <tr>
+          <td>Certifications ISO déclarées</td>
+          <td>Registres certificateurs</td>
+          <td class="status-inconsistent">NON TROUVÉ</td>
+          <td>Certificat non retrouvé dans registres officiels</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- SECTION 4 : RECOMMANDATIONS -->
+  <div class="report-section">
+    <div class="section-header">
+      <span class="section-num">04</span>
+      <h2 class="section-title"><em>Recommandations</em> opérationnelles</h2>
+    </div>
+    <p>Sur la base de l'analyse conduite, les actions suivantes sont recommandées avant tout engagement :</p>
+
+    <div class="reco-list">
+      <div class="reco-item">
+        <span class="reco-num">R-01</span>
+        Demander les statuts originaux notariés et les comptes certifiés des deux derniers exercices. Vérifier la cohérence des dates et des signatures.
+      </div>
+      <div class="reco-item">
+        <span class="reco-num">R-02</span>
+        Exiger une explication documentée de la divergence entre la date de création déclarée et les enregistrements numériques antérieurs identifiés.
+      </div>
+      <div class="reco-item">
+        <span class="reco-num">R-03</span>
+        Obtenir les justificatifs du partenariat déclaré avec BNP Paribas. En l'absence de preuve, considérer cette information comme non vérifiée.
+      </div>
+      <div class="reco-item">
+        <span class="reco-num">R-04</span>
+        Conduire un entretien direct avec le dirigeant en demandant la clarification des 3 années d'expérience non vérifiables (2018–2021).
+      </div>
+      <div class="reco-item">
+        <span class="reco-num">R-05</span>
+        Si l'engagement est maintenu malgré les incohérences : prévoir des clauses contractuelles de résiliation facilitée et limiter l'exposition financière initiale.
+      </div>
+    </div>
+
+    <div class="conclusion-box" style="margin-top:2rem;">
+      <h4>Conclusion analytique finale</h4>
+      <p>Ce rapport ne permet pas de conclure à une activité frauduleuse avérée. Il identifie un niveau d'incohérence informationnelle suffisamment significatif pour justifier une vigilance renforcée et des vérifications complémentaires avant engagement.</p>
+      <p>Score de risque global : <strong>67/100 — Niveau ÉLEVÉ.</strong> Décision finale à la discrétion du commanditaire sur la base des éléments complémentaires obtenus.</p>
+    </div>
+  </div>
+
+  <!-- DISCLAIMER -->
+  <div class="report-disclaimer">
+    <span class="disclaimer-label">Avis important</span>
+    <p>Ce document est un exemple fictif produit à titre illustratif uniquement. Toute ressemblance avec des entités, personnes ou situations réelles est purement fortuite. Les analyses SANGOUR3i réelles sont conduites exclusivement à partir de sources publiques légalement accessibles, dans le strict respect du cadre légal en vigueur. Ce rapport ne constitue pas un conseil juridique, financier ou professionnel.</p>
+  </div>
+
+  <!-- CTA -->
+  <div class="report-cta">
+    <h3>Besoin d'une analyse<br><em>sur votre situation réelle ?</em></h3>
+    <p>Ce rapport illustre notre méthodologie. Chaque mission réelle est conduite avec le même niveau de rigueur, adapté à votre périmètre spécifique, livré en 48–72 heures.</p>
+    <a href="index.html#contact" class="cta-btn">Demander une analyse →</a>
+  </div>
+
+</div>
+
+<footer>
+  <span class="footer-logo">SANGOUR3i</span>
+  <span class="footer-copy">© 2026 SANGOUR3i · Document fictif à titre illustratif · Intelligence Digitale Stratégique</span>
+</footer>
+
+</body>
+</html>

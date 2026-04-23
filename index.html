@@ -80,29 +80,29 @@ nav {
 .nav-cta:hover { background:var(--gold); color:var(--bg); }
 
 /* ── HERO ── */
-#hero { position:relative; min-height:100vh; display:flex; align-items:center; overflow:hidden; }
+#hero { position:relative; min-height:100vh; display:flex; align-items:center; justify-content:center; overflow:hidden; }
 
 .hero-bg {
   position:absolute; inset:0;
-  background: radial-gradient(ellipse 80% 60% at 70% 40%, rgba(196,164,74,0.05) 0%, transparent 65%),
+  background: radial-gradient(ellipse 80% 60% at 50% 40%, rgba(196,164,74,0.06) 0%, transparent 65%),
               radial-gradient(ellipse 50% 50% at 20% 80%, rgba(196,164,74,0.03) 0%, transparent 60%);
 }
 
-.hero-classified { position:absolute; top:0; right:0; width:50%; height:100%; border-left:1px solid var(--border); overflow:hidden; display:flex; align-items:center; justify-content:center; }
-.hero-classified-inner { display:flex; flex-direction:column; gap:1.5rem; padding:2rem; opacity:0.06; pointer-events:none; transform:rotate(-3deg); }
-.classified-line { font-family:'Space Mono', monospace; font-size:0.6rem; letter-spacing:0.3em; color:var(--gold); white-space:nowrap; }
+.hero-classified { display:none; }
+.hero-classified-inner { display:none; }
+.classified-line { display:none; }
 
-.hero-content { position:relative; z-index:1; padding:8rem 4rem; max-width:760px; }
+.hero-content { position:relative; z-index:1; padding:8rem 4rem 5rem; max-width:900px; width:100%; text-align:center; }
 
 .hero-label { font-family:'Space Mono', monospace; font-size:0.6rem; letter-spacing:0.35em; color:var(--gold); text-transform:uppercase; margin-bottom:2.5rem; display:flex; align-items:center; gap:1rem; opacity:0; animation:fadeUp 0.9s 0.2s forwards; }
 .hero-label::before { content:''; display:block; width:36px; height:1px; background:var(--gold); }
 
-h1 { font-family:'Cormorant Garamond', serif; font-size:clamp(3.5rem, 7vw, 6.5rem); font-weight:300; line-height:1.0; letter-spacing:-0.02em; margin-bottom:2rem; opacity:0; animation:fadeUp 0.9s 0.4s forwards; }
+h1 { font-family:'Cormorant Garamond', serif; font-size:clamp(2.8rem, 5vw, 5rem); font-weight:300; line-height:1.0; letter-spacing:-0.02em; margin-bottom:2rem; opacity:0; animation:fadeUp 0.9s 0.4s forwards; }
 h1 em { font-style:italic; color:var(--gold); }
 
-.hero-proposition { font-family:'Cormorant Garamond', serif; font-size:1.25rem; font-style:italic; font-weight:300; color:var(--muted2); line-height:1.7; max-width:580px; margin-bottom:3rem; border-left:1px solid var(--border2); padding-left:1.5rem; opacity:0; animation:fadeUp 0.9s 0.6s forwards; }
+.hero-proposition { font-family:'Cormorant Garamond', serif; font-size:1.15rem; font-style:italic; font-weight:300; color:var(--muted2); line-height:1.7; max-width:620px; margin:0 auto 3rem; border-left:none; padding-left:0; border-top:1px solid var(--border); border-bottom:1px solid var(--border); padding:1.2rem 2rem; opacity:0; animation:fadeUp 0.9s 0.6s forwards; }
 
-.hero-actions { display:flex; gap:1.5rem; align-items:center; opacity:0; animation:fadeUp 0.9s 0.8s forwards; }
+.hero-actions { display:flex; gap:1.5rem; align-items:center; opacity:0; animation:fadeUp 0.9s 0.8s forwards; justify-content:center; }
 
 .btn-primary { background:var(--gold); color:var(--bg); font-family:'Space Mono', monospace; font-size:0.65rem; letter-spacing:0.18em; text-transform:uppercase; padding:1rem 2.5rem; text-decoration:none; transition:all 0.3s; display:inline-block; }
 .btn-primary:hover { background:var(--gold2); }
@@ -112,9 +112,9 @@ h1 em { font-style:italic; color:var(--gold); }
 .btn-ghost:hover { color:var(--off); }
 .btn-ghost:hover::after { transform:translateX(4px); }
 
-.hero-metrics { display:flex; flex-direction:column; gap:1.5rem; opacity:0; animation:fadeUp 0.9s 1s forwards; z-index:1; margin-top: 3rem; }
+.hero-metrics { display:flex; flex-direction:row; gap:1.5rem; opacity:0; animation:fadeUp 0.9s 1s forwards; z-index:1; margin-top:3rem; justify-content:center; }
 
-.metric { text-align:right; padding:1.2rem 1.5rem; border:1px solid var(--border); background:rgba(13,15,22,0.6); backdrop-filter:blur(8px); min-width:160px; }
+.metric { text-align:center; padding:1.2rem 2rem; border:1px solid var(--border); background:rgba(13,15,22,0.6); backdrop-filter:blur(8px); min-width:160px; }
 .metric-num { font-family:'Cormorant Garamond', serif; font-size:2.2rem; font-weight:300; color:var(--gold); display:block; line-height:1; }
 .metric-label { font-family:'Space Mono', monospace; font-size:0.48rem; letter-spacing:0.22em; color:var(--muted); text-transform:uppercase; display:block; margin-top:0.3rem; }
 
@@ -339,7 +339,8 @@ footer { position:relative; z-index:1; padding:2.5rem 4rem; border-top:1px solid
 <!-- ═══ NAV ═══ -->
 <nav>
   <a href="#hero" class="nav-logo-wrap">
-    <span class="nav-logo">SANGOUR3i</span>
+    <img src="logo.png" alt="SANGOUR3i" style="height:38px; width:auto;" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+    <span class="nav-logo" style="display:none;">SANGOUR3i</span>
   </a>
   <ul class="nav-links">
     <li><a href="#hero"     data-en="Home"     data-fr="Accueil">Accueil</a></li>
@@ -593,7 +594,7 @@ footer { position:relative; z-index:1; padding:2.5rem 4rem; border-top:1px solid
     </div>
 
     <!-- S7 -->
-    <div class="service-card reveal service-7">
+    <div class="service-card reveal service-7" style="grid-column: 1 / -1; display:grid; grid-template-columns:1fr 1fr; gap:3rem; align-items:start;">
       <div class="service-num">07 <span class="service-tag-type">Pré-engagement</span></div>
       <h3>Vérification Documentaire</h3>
       <p class="service-hook">Analyse d'authenticité et de cohérence des documents.</p>
@@ -613,6 +614,11 @@ footer { position:relative; z-index:1; padding:2.5rem 4rem; border-top:1px solid
         <a href="#contact" class="service-btn">Commander →</a>
       </div>
     </div>
+      <div style="display:flex; align-items:center; justify-content:center; flex-direction:column; gap:1.5rem; padding:2rem; border-left:1px solid var(--border);">
+        <div style="font-family:'Cormorant Garamond',serif; font-size:3.5rem; color:rgba(196,164,74,0.15); line-height:1;">⬡</div>
+        <p style="font-family:'Space Mono',monospace; font-size:0.5rem; letter-spacing:0.25em; color:var(--gold-dim); text-transform:uppercase; text-align:center; line-height:2;">Une mission spécifique ?<br>Parlons-en.</p>
+        <a href="#contact" class="service-btn" style="margin-top:0.5rem;">Demande sur mesure →</a>
+      </div>
 
   </div><!-- /.services-grid -->
 
@@ -839,7 +845,8 @@ sur la manière dont l'information influence le risque, l'exposition et la prise
 <!-- ═══ FOOTER ═══ -->
 <footer>
   <div class="footer-logo-wrap">
-    <span class="footer-logo">SANGOUR3i</span>
+    <img src="logo.png" alt="SANGOUR3i" style="height:28px; width:auto; opacity:0.85;" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+    <span class="footer-logo" style="display:none;">SANGOUR3i</span>
     <span class="footer-sub" data-en="Digital Intelligence · Discretion · Expertise" data-fr="Intelligence Digitale · Discrétion · Expertise">Intelligence Digitale · Discrétion · Expertise</span>
   </div>
   <ul class="footer-links">
