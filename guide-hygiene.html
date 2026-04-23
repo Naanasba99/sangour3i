@@ -18,6 +18,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;justify-content
 .nav-back{font-family:'Space Mono',monospace;font-size:0.52rem;letter-spacing:0.15em;color:var(--muted);text-decoration:none;transition:color 0.3s;display:flex;align-items:center;gap:0.5rem}
 .nav-back:hover{color:var(--gold)}
 .nav-right{display:flex;gap:1rem;align-items:center}
+#lang-toggle{font-family:'Space Mono',monospace;font-size:0.52rem;letter-spacing:0.2em;color:var(--muted);background:transparent;border:1px solid var(--border);padding:0.4rem 0.75rem;cursor:pointer;transition:all 0.3s}
+#lang-toggle:hover{color:var(--gold);border-color:var(--border2)}
 .btn-dl{font-family:'Space Mono',monospace;font-size:0.52rem;letter-spacing:0.15em;background:var(--gold);color:var(--bg);padding:0.5rem 1.2rem;border:none;cursor:pointer;text-transform:uppercase;transition:background 0.3s}
 .btn-dl:hover{background:var(--gold2)}
 
@@ -90,73 +92,72 @@ footer{position:relative;z-index:1;padding:2rem 4rem;border-top:1px solid var(--
 <body>
 
 <nav>
-  <a href="index.html" class="nav-back">← Retour au site</a>
+  <a href="index.html" class="nav-back" data-fr="← Retour au site" data-en="← Back to site">← Retour au site</a>
   <a href="index.html" class="nav-logo">SANGOUR3i</a>
   <div class="nav-right">
-    <button class="btn-dl" onclick="window.print()">Télécharger PDF ↓</button>
+    <button id="lang-toggle">EN</button>
+    <button class="btn-dl" onclick="window.print()" data-fr="Télécharger PDF ↓" data-en="Download PDF ↓">Télécharger PDF ↓</button>
   </div>
 </nav>
 
 <div class="doc-hero">
-  <div class="doc-badge">Guide Opérationnel · 2026</div>
-  <h1>Hygiène Numérique<br>pour <em>Décideurs</em></h1>
-  <p>12 réflexes de sécurité immédiatement actionnables. Conçu pour les dirigeants, cadres et professionnels exposés — sans formation technique requise.</p>
+  <div class="doc-badge" data-fr="Guide Opérationnel · 2026" data-en="Operational Guide · 2026">Guide Opérationnel · 2026</div>
+  <h1 data-fr-html="Hygiène Numérique<br>pour <em>Décideurs</em>" data-en-html="Digital Hygiene<br>for <em>Executives</em>">Hygiène Numérique<br>pour <em>Décideurs</em></h1>
+  <p data-fr="12 réflexes de sécurité immédiatement actionnables. Conçu pour les dirigeants, cadres et professionnels exposés — sans formation technique requise." data-en="12 immediately actionable security habits. Designed for executives and exposed professionals — no technical training required.">12 réflexes de sécurité immédiatement actionnables. Conçu pour les dirigeants, cadres et professionnels exposés — sans formation technique requise.</p>
   <div class="doc-meta">
     <div class="doc-meta-item">
-      <span class="doc-meta-label">Édition</span>
-      <span class="doc-meta-value">Avril 2026</span>
+      <span class="doc-meta-label" data-fr="Édition" data-en="Edition">Édition</span>
+      <span class="doc-meta-value" data-fr="Avril 2026" data-en="April 2026">Avril 2026</span>
     </div>
     <div class="doc-meta-item">
-      <span class="doc-meta-label">Source</span>
+      <span class="doc-meta-label" data-fr="Source" data-en="Source">Source</span>
       <span class="doc-meta-value">SANGOUR3i Intelligence Digitale</span>
     </div>
     <div class="doc-meta-item">
-      <span class="doc-meta-label">Classification</span>
-      <span class="doc-meta-value">Public · Usage libre</span>
+      <span class="doc-meta-label" data-fr="Classification" data-en="Classification">Classification</span>
+      <span class="doc-meta-value" data-fr="Public · Usage libre" data-en="Public · Free use">Public · Usage libre</span>
     </div>
     <div class="doc-meta-item">
-      <span class="doc-meta-label">Éléments</span>
-      <span class="doc-meta-value">12 actions · 4 catégories</span>
+      <span class="doc-meta-label" data-fr="Éléments" data-en="Elements">Éléments</span>
+      <span class="doc-meta-value" data-fr="12 actions · 4 catégories" data-en="12 actions · 4 categories">12 actions · 4 catégories</span>
     </div>
   </div>
 </div>
 
 <div class="progress-bar-wrap">
-  <span class="progress-label">Progression</span>
+  <span class="progress-label" data-fr="Progression" data-en="Progress">Progression</span>
   <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
   <span class="progress-count" id="progressCount">0 / 12</span>
 </div>
 
 <div class="doc-body">
 
-  <div class="doc-intro">
-    « La plupart des incidents de sécurité numériques exploitent non pas des failles techniques, mais des comportements prévisibles. Ce guide est conçu pour réduire votre surface d'exposition en 12 actions concrètes. »
-  </div>
+  <div class="doc-intro" data-fr="« La plupart des incidents de sécurité numériques exploitent non pas des failles techniques, mais des comportements prévisibles. Ce guide est conçu pour réduire votre surface d'exposition en 12 actions concrètes. »" data-en="« Most digital security incidents exploit not technical vulnerabilities, but predictable behaviors. This guide is designed to reduce your exposure surface through 12 concrete actions. »">« La plupart des incidents de sécurité numériques exploitent non pas des failles techniques, mais des comportements prévisibles. Ce guide est conçu pour réduire votre surface d'exposition en 12 actions concrètes. »</div>
 
   <!-- SECTION 1 -->
   <div class="checklist-section">
     <div class="checklist-section-header">
       <span class="checklist-section-num">01</span>
       <div>
-        <div class="checklist-section-title">Authentification & Accès</div>
-        <div class="checklist-section-sub">La première ligne de défense</div>
+        <div class="checklist-section-title" data-fr="Authentification & Accès" data-en="Authentication & Access">Authentification & Accès</div>
+        <div class="checklist-section-sub" data-fr="La première ligne de défense" data-en="The first line of defense">La première ligne de défense</div>
       </div>
     </div>
     <div class="checklist-items">
       <div class="checklist-item" onclick="toggleCheck(this)">
         <div class="check-box"></div>
-        <div class="check-text"><strong style="color:var(--off);font-weight:500;">Activer l'authentification à deux facteurs (2FA)</strong> sur tous les comptes professionnels critiques — email, banque, cloud, réseaux sociaux. Utiliser une application dédiée (Authy, Google Authenticator) plutôt que les SMS.</div>
-        <span class="check-level level-critical">CRITIQUE</span>
+        <div class="check-text" data-fr="Activer l'authentification à deux facteurs (2FA) sur tous les comptes professionnels critiques — email, banque, cloud, réseaux sociaux. Utiliser une application dédiée (Authy, Google Authenticator) plutôt que les SMS." data-en="Enable two-factor authentication (2FA) on all critical professional accounts — email, banking, cloud, social media. Use a dedicated app (Authy, Google Authenticator) rather than SMS."><strong style="color:var(--off);font-weight:500;">Activer l'authentification à deux facteurs (2FA)</strong> sur tous les comptes professionnels critiques — email, banque, cloud, réseaux sociaux. Utiliser une application dédiée (Authy, Google Authenticator) plutôt que les SMS.</div>
+        <span class="check-level level-critical" data-fr="CRITIQUE" data-en="CRITICAL">CRITIQUE</span>
       </div>
       <div class="checklist-item" onclick="toggleCheck(this)">
         <div class="check-box"></div>
-        <div class="check-text"><strong style="color:var(--off);font-weight:500;">Utiliser un gestionnaire de mots de passe</strong> (Bitwarden, 1Password). Chaque compte doit avoir un mot de passe unique, long (20+ caractères) et aléatoire. Ne jamais réutiliser.</div>
-        <span class="check-level level-critical">CRITIQUE</span>
+        <div class="check-text" data-fr="Utiliser un gestionnaire de mots de passe (Bitwarden, 1Password). Chaque compte doit avoir un mot de passe unique, long (20+ caractères) et aléatoire. Ne jamais réutiliser." data-en="Use a password manager (Bitwarden, 1Password). Every account must have a unique, long (20+ characters) and random password. Never reuse."><strong style="color:var(--off);font-weight:500;">Utiliser un gestionnaire de mots de passe</strong> (Bitwarden, 1Password). Chaque compte doit avoir un mot de passe unique, long (20+ caractères) et aléatoire. Ne jamais réutiliser.</div>
+        <span class="check-level level-critical" data-fr="CRITIQUE" data-en="CRITICAL">CRITIQUE</span>
       </div>
       <div class="checklist-item" onclick="toggleCheck(this)">
         <div class="check-box"></div>
-        <div class="check-text"><strong style="color:var(--off);font-weight:500;">Vérifier les appareils connectés</strong> à vos comptes principaux (Google, Apple, Microsoft). Révoquer tout accès non reconnu ou obsolète.</div>
-        <span class="check-level level-high">ÉLEVÉ</span>
+        <div class="check-text" data-fr="Vérifier les appareils connectés à vos comptes principaux (Google, Apple, Microsoft). Révoquer tout accès non reconnu ou obsolète." data-en="Review connected devices on your main accounts (Google, Apple, Microsoft). Revoke any unrecognized or obsolete access."><strong style="color:var(--off);font-weight:500;">Vérifier les appareils connectés</strong> à vos comptes principaux (Google, Apple, Microsoft). Révoquer tout accès non reconnu ou obsolète.</div>
+        <span class="check-level level-high" data-fr="ÉLEVÉ" data-en="HIGH">ÉLEVÉ</span>
       </div>
     </div>
   </div>
@@ -166,25 +167,25 @@ footer{position:relative;z-index:1;padding:2rem 4rem;border-top:1px solid var(--
     <div class="checklist-section-header">
       <span class="checklist-section-num">02</span>
       <div>
-        <div class="checklist-section-title">Exposition Numérique Publique</div>
-        <div class="checklist-section-sub">Ce que les autres voient de vous</div>
+        <div class="checklist-section-title" data-fr="Exposition Numérique Publique" data-en="Public Digital Exposure">Exposition Numérique Publique</div>
+        <div class="checklist-section-sub" data-fr="Ce que les autres voient de vous" data-en="What others see about you">Ce que les autres voient de vous</div>
       </div>
     </div>
     <div class="checklist-items">
       <div class="checklist-item" onclick="toggleCheck(this)">
         <div class="check-box"></div>
-        <div class="check-text"><strong style="color:var(--off);font-weight:500;">Auditer votre profil LinkedIn</strong> : vérifier les informations visibles publiquement (coordonnées, historique, connexions). Restreindre la visibilité de votre réseau de contacts.</div>
-        <span class="check-level level-high">ÉLEVÉ</span>
+        <div class="check-text" data-fr="Auditer votre profil LinkedIn : vérifier les informations visibles publiquement (coordonnées, historique, connexions). Restreindre la visibilité de votre réseau de contacts." data-en="Audit your LinkedIn profile: review publicly visible information (contact details, history, connections). Restrict the visibility of your contact network."><strong style="color:var(--off);font-weight:500;">Auditer votre profil LinkedIn</strong> : vérifier les informations visibles publiquement (coordonnées, historique, connexions). Restreindre la visibilité de votre réseau de contacts.</div>
+        <span class="check-level level-high" data-fr="ÉLEVÉ" data-en="HIGH">ÉLEVÉ</span>
       </div>
       <div class="checklist-item" onclick="toggleCheck(this)">
         <div class="check-box"></div>
-        <div class="check-text"><strong style="color:var(--off);font-weight:500;">Rechercher votre propre nom</strong> sur Google, Bing et DuckDuckGo. Identifier les informations publiques potentiellement sensibles (adresse, numéro de téléphone, photos géolocalisées).</div>
-        <span class="check-level level-high">ÉLEVÉ</span>
+        <div class="check-text" data-fr="Rechercher votre propre nom sur Google, Bing et DuckDuckGo. Identifier les informations publiques potentiellement sensibles (adresse, numéro de téléphone, photos géolocalisées)." data-en="Search your own name on Google, Bing and DuckDuckGo. Identify potentially sensitive public information (address, phone number, geolocated photos)."><strong style="color:var(--off);font-weight:500;">Rechercher votre propre nom</strong> sur Google, Bing et DuckDuckGo. Identifier les informations publiques potentiellement sensibles (adresse, numéro de téléphone, photos géolocalisées).</div>
+        <span class="check-level level-high" data-fr="ÉLEVÉ" data-en="HIGH">ÉLEVÉ</span>
       </div>
       <div class="checklist-item" onclick="toggleCheck(this)">
         <div class="check-box"></div>
-        <div class="check-text"><strong style="color:var(--off);font-weight:500;">Vérifier les fuites de données</strong> associées à votre email professionnel sur haveibeenpwned.com. Changer immédiatement les mots de passe des comptes compromis.</div>
-        <span class="check-level level-critical">CRITIQUE</span>
+        <div class="check-text" data-fr="Vérifier les fuites de données associées à votre email professionnel sur haveibeenpwned.com. Changer immédiatement les mots de passe des comptes compromis." data-en="Check for data breaches linked to your professional email on haveibeenpwned.com. Immediately change passwords for compromised accounts."><strong style="color:var(--off);font-weight:500;">Vérifier les fuites de données</strong> associées à votre email professionnel sur haveibeenpwned.com. Changer immédiatement les mots de passe des comptes compromis.</div>
+        <span class="check-level level-critical" data-fr="CRITIQUE" data-en="CRITICAL">CRITIQUE</span>
       </div>
     </div>
   </div>
@@ -194,25 +195,25 @@ footer{position:relative;z-index:1;padding:2rem 4rem;border-top:1px solid var(--
     <div class="checklist-section-header">
       <span class="checklist-section-num">03</span>
       <div>
-        <div class="checklist-section-title">Communications & Appareils</div>
-        <div class="checklist-section-sub">Sécuriser les canaux sensibles</div>
+        <div class="checklist-section-title" data-fr="Communications & Appareils" data-en="Communications & Devices">Communications & Appareils</div>
+        <div class="checklist-section-sub" data-fr="Sécuriser les canaux sensibles" data-en="Securing sensitive channels">Sécuriser les canaux sensibles</div>
       </div>
     </div>
     <div class="checklist-items">
       <div class="checklist-item" onclick="toggleCheck(this)">
         <div class="check-box"></div>
-        <div class="check-text"><strong style="color:var(--off);font-weight:500;">Utiliser Signal</strong> pour les communications sensibles. Les SMS et appels téléphoniques classiques ne sont pas chiffrés et peuvent être interceptés.</div>
-        <span class="check-level level-high">ÉLEVÉ</span>
+        <div class="check-text" data-fr="Utiliser Signal pour les communications sensibles. Les SMS et appels téléphoniques classiques ne sont pas chiffrés et peuvent être interceptés." data-en="Use Signal for sensitive communications. Standard SMS and phone calls are not encrypted and can be intercepted."><strong style="color:var(--off);font-weight:500;">Utiliser Signal</strong> pour les communications sensibles. Les SMS et appels téléphoniques classiques ne sont pas chiffrés et peuvent être interceptés.</div>
+        <span class="check-level level-high" data-fr="ÉLEVÉ" data-en="HIGH">ÉLEVÉ</span>
       </div>
       <div class="checklist-item" onclick="toggleCheck(this)">
         <div class="check-box"></div>
-        <div class="check-text"><strong style="color:var(--off);font-weight:500;">Activer le chiffrement complet</strong> de vos appareils (FileVault sur Mac, BitLocker sur Windows, chiffrement activé sur iOS/Android). Indispensable en cas de vol ou perte.</div>
-        <span class="check-level level-high">ÉLEVÉ</span>
+        <div class="check-text" data-fr="Activer le chiffrement complet de vos appareils (FileVault sur Mac, BitLocker sur Windows, chiffrement activé sur iOS/Android). Indispensable en cas de vol ou perte." data-en="Enable full-device encryption (FileVault on Mac, BitLocker on Windows, encryption enabled on iOS/Android). Essential in case of theft or loss."><strong style="color:var(--off);font-weight:500;">Activer le chiffrement complet</strong> de vos appareils (FileVault sur Mac, BitLocker sur Windows, chiffrement activé sur iOS/Android). Indispensable en cas de vol ou perte.</div>
+        <span class="check-level level-high" data-fr="ÉLEVÉ" data-en="HIGH">ÉLEVÉ</span>
       </div>
       <div class="checklist-item" onclick="toggleCheck(this)">
         <div class="check-box"></div>
-        <div class="check-text"><strong style="color:var(--off);font-weight:500;">Mettre à jour systématiquement</strong> tous les systèmes d'exploitation et applications. 80% des attaques exploitent des vulnérabilités connues pour lesquelles des correctifs existent.</div>
-        <span class="check-level level-medium">MOYEN</span>
+        <div class="check-text" data-fr="Mettre à jour systématiquement tous les systèmes d'exploitation et applications. 80% des attaques exploitent des vulnérabilités connues pour lesquelles des correctifs existent." data-en="Systematically update all operating systems and applications. 80% of attacks exploit known vulnerabilities for which patches already exist."><strong style="color:var(--off);font-weight:500;">Mettre à jour systématiquement</strong> tous les systèmes d'exploitation et applications. 80% des attaques exploitent des vulnérabilités connues pour lesquelles des correctifs existent.</div>
+        <span class="check-level level-medium" data-fr="MOYEN" data-en="MEDIUM">MOYEN</span>
       </div>
     </div>
   </div>
@@ -222,40 +223,40 @@ footer{position:relative;z-index:1;padding:2rem 4rem;border-top:1px solid var(--
     <div class="checklist-section-header">
       <span class="checklist-section-num">04</span>
       <div>
-        <div class="checklist-section-title">Vigilance & Comportement</div>
-        <div class="checklist-section-sub">Réduire la vulnérabilité humaine</div>
+        <div class="checklist-section-title" data-fr="Vigilance & Comportement" data-en="Vigilance & Behavior">Vigilance & Comportement</div>
+        <div class="checklist-section-sub" data-fr="Réduire la vulnérabilité humaine" data-en="Reducing human vulnerability">Réduire la vulnérabilité humaine</div>
       </div>
     </div>
     <div class="checklist-items">
       <div class="checklist-item" onclick="toggleCheck(this)">
         <div class="check-box"></div>
-        <div class="check-text"><strong style="color:var(--off);font-weight:500;">Vérifier systématiquement l'expéditeur</strong> avant toute action sur un email (clic, téléchargement, paiement). L'adresse d'affichage peut être falsifiée — vérifier le domaine réel de l'expéditeur.</div>
-        <span class="check-level level-critical">CRITIQUE</span>
+        <div class="check-text" data-fr="Vérifier systématiquement l'expéditeur avant toute action sur un email (clic, téléchargement, paiement). L'adresse d'affichage peut être falsifiée — vérifier le domaine réel de l'expéditeur." data-en="Systematically verify the sender before any action on an email (click, download, payment). The display address can be spoofed — always check the actual sender domain."><strong style="color:var(--off);font-weight:500;">Vérifier systématiquement l'expéditeur</strong> avant toute action sur un email (clic, téléchargement, paiement). L'adresse d'affichage peut être falsifiée — vérifier le domaine réel de l'expéditeur.</div>
+        <span class="check-level level-critical" data-fr="CRITIQUE" data-en="CRITICAL">CRITIQUE</span>
       </div>
       <div class="checklist-item" onclick="toggleCheck(this)">
         <div class="check-box"></div>
-        <div class="check-text"><strong style="color:var(--off);font-weight:500;">Établir un protocole de vérification</strong> pour les demandes urgentes ou inhabituelles (virement, changement de coordonnées). Toujours rappeler par un canal connu et préalablement établi.</div>
-        <span class="check-level level-critical">CRITIQUE</span>
+        <div class="check-text" data-fr="Établir un protocole de vérification pour les demandes urgentes ou inhabituelles (virement, changement de coordonnées). Toujours rappeler par un canal connu et préalablement établi." data-en="Establish a verification protocol for urgent or unusual requests (transfer, contact change). Always call back via a known and pre-established channel."><strong style="color:var(--off);font-weight:500;">Établir un protocole de vérification</strong> pour les demandes urgentes ou inhabituelles (virement, changement de coordonnées). Toujours rappeler par un canal connu et préalablement établi.</div>
+        <span class="check-level level-critical" data-fr="CRITIQUE" data-en="CRITICAL">CRITIQUE</span>
       </div>
       <div class="checklist-item" onclick="toggleCheck(this)">
         <div class="check-box"></div>
-        <div class="check-text"><strong style="color:var(--off);font-weight:500;">Limiter les informations partagées</strong> lors des appels et visioconférences non sécurisés. Ne jamais confirmer des informations sensibles (identifiants, données financières) sur un canal non vérifié.</div>
-        <span class="check-level level-medium">MOYEN</span>
+        <div class="check-text" data-fr="Limiter les informations partagées lors des appels et visioconférences non sécurisés. Ne jamais confirmer des informations sensibles (identifiants, données financières) sur un canal non vérifié." data-en="Limit information shared during unsecured calls and video conferences. Never confirm sensitive information (credentials, financial data) on an unverified channel."><strong style="color:var(--off);font-weight:500;">Limiter les informations partagées</strong> lors des appels et visioconférences non sécurisés. Ne jamais confirmer des informations sensibles (identifiants, données financières) sur un canal non vérifié.</div>
+        <span class="check-level level-medium" data-fr="MOYEN" data-en="MEDIUM">MOYEN</span>
       </div>
     </div>
   </div>
 
   <div class="doc-conclusion">
-    <h3>Votre exposition numérique,<br><em>analysée et structurée.</em></h3>
-    <p>Ce guide couvre les réflexes de base. Pour une analyse complète de votre empreinte numérique, de vos vulnérabilités réelles et un plan de remédiation personnalisé, SANGOUR3i propose un audit structuré en 48–72h.</p>
-    <a href="index.html#contact" class="cta-btn">Demander un audit →</a>
+    <h3 data-fr-html="Votre exposition numérique,<br><em>analysée et structurée.</em>" data-en-html="Your digital exposure,<br><em>analyzed and structured.</em>">Votre exposition numérique,<br><em>analysée et structurée.</em></h3>
+    <p data-fr="Ce guide couvre les réflexes de base. Pour une analyse complète de votre empreinte numérique, de vos vulnérabilités réelles et un plan de remédiation personnalisé, SANGOUR3i propose un audit structuré en 48–72h." data-en="This guide covers basic habits. For a complete analysis of your digital footprint, real vulnerabilities and a personalized remediation plan, SANGOUR3i offers a structured audit within 48–72 hours.">Ce guide couvre les réflexes de base. Pour une analyse complète de votre empreinte numérique, de vos vulnérabilités réelles et un plan de remédiation personnalisé, SANGOUR3i propose un audit structuré en 48–72h.</p>
+    <a href="index.html#contact" class="cta-btn" data-fr="Demander un audit →" data-en="Request an audit →">Demander un audit →</a>
   </div>
 
 </div>
 
 <footer>
   <span class="footer-logo">SANGOUR3i</span>
-  <span class="footer-copy">© 2026 SANGOUR3i · Intelligence Digitale Stratégique · Usage libre avec mention de source</span>
+  <span class="footer-copy" data-fr="© 2026 SANGOUR3i · Intelligence Digitale Stratégique · Usage libre avec mention de source" data-en="© 2026 SANGOUR3i · Strategic Digital Intelligence · Free use with source credit">© 2026 SANGOUR3i · Intelligence Digitale Stratégique · Usage libre avec mention de source</span>
 </footer>
 
 <script>
@@ -268,6 +269,33 @@ function toggleCheck(el) {
   document.getElementById('progressFill').style.width = (checked/total*100) + '%';
   document.getElementById('progressCount').textContent = checked + ' / ' + total;
 }
+
+let currentLang = 'fr';
+function setLang(lang) {
+  currentLang = lang;
+  document.querySelectorAll('[data-fr]').forEach(el => {
+    const val = el.dataset[lang];
+    if (val !== undefined) el.textContent = val;
+  });
+  document.querySelectorAll('[data-fr-html]').forEach(el => {
+    const val = lang === 'en' ? el.dataset.enHtml : el.dataset.frHtml;
+    if (val !== undefined) el.innerHTML = val;
+  });
+  document.documentElement.lang = lang;
+  document.getElementById('lang-toggle').textContent = lang === 'en' ? 'FR' : 'EN';
+  document.title = lang === 'en' ? 'SANGOUR3i — Digital Hygiene Guide 2026' : 'SANGOUR3i — Guide Hygiène Numérique 2026';
+  try { localStorage.setItem('lang', lang); } catch(e) {}
+}
+document.getElementById('lang-toggle').addEventListener('click', () => {
+  setLang(currentLang === 'fr' ? 'en' : 'fr');
+});
+(function(){
+  try {
+    const saved = localStorage.getItem('lang');
+    const browser = navigator.language && navigator.language.startsWith('en') ? 'en' : 'fr';
+    setLang(saved || browser);
+  } catch(e) { setLang('fr'); }
+})();
 </script>
 </body>
 </html>
