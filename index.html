@@ -94,13 +94,13 @@ nav {
 
 .hero-content { position:relative; z-index:1; padding:8rem 4rem 5rem; max-width:900px; width:100%; text-align:center; }
 
-.hero-label { font-family:'Space Mono', monospace; font-size:0.6rem; letter-spacing:0.35em; color:var(--gold); text-transform:uppercase; margin-bottom:2.5rem; display:flex; align-items:center; gap:1rem; opacity:0; animation:fadeUp 0.9s 0.2s forwards; }
+.hero-label { font-family:'Space Mono', monospace; font-size:0.6rem; letter-spacing:0.35em; color:var(--gold); text-transform:uppercase; margin-bottom:2.5rem; display:flex; align-items:center; justify-content:center; gap:1rem; opacity:0; animation:fadeUp 0.9s 0.2s forwards; }
 .hero-label::before { content:''; display:block; width:36px; height:1px; background:var(--gold); }
 
 h1 { font-family:'Cormorant Garamond', serif; font-size:clamp(2.8rem, 5vw, 5rem); font-weight:300; line-height:1.0; letter-spacing:-0.02em; margin-bottom:2rem; opacity:0; animation:fadeUp 0.9s 0.4s forwards; }
 h1 em { font-style:italic; color:var(--gold); }
 
-.hero-proposition { font-family:'Cormorant Garamond', serif; font-size:1.15rem; font-style:italic; font-weight:300; color:var(--muted2); line-height:1.7; max-width:620px; margin:0 auto 3rem; border-left:none; padding-left:0; border-top:1px solid var(--border); border-bottom:1px solid var(--border); padding:1.2rem 2rem; opacity:0; animation:fadeUp 0.9s 0.6s forwards; }
+.hero-proposition { font-family:'Cormorant Garamond', serif; font-size:1.15rem; font-style:italic; font-weight:300; color:var(--muted2); line-height:1.7; max-width:620px; margin:0 auto 3rem; border-top:1px solid var(--border); border-bottom:1px solid var(--border); padding:1.2rem 2rem; opacity:0; animation:fadeUp 0.9s 0.6s forwards; }
 
 .hero-actions { display:flex; gap:1.5rem; align-items:center; opacity:0; animation:fadeUp 0.9s 0.8s forwards; justify-content:center; }
 
@@ -157,7 +157,7 @@ h2 em { font-style:italic; color:var(--gold); }
 .services-header { display:grid; grid-template-columns:1fr 1fr; gap:4rem; align-items:end; margin-bottom:5rem; max-width:1300px; margin-left:auto; margin-right:auto; }
 .services-intro { color:var(--muted2); font-size:0.95rem; line-height:1.9; }
 
-.services-grid { display:grid; grid-template-columns:repeat(2, 1fr); gap:2px; background:var(--border); max-width:1300px; margin:0 auto; }
+.services-grid { display:grid; grid-template-columns:repeat(2, 1fr); gap:2px; background:var(--bg2); max-width:1300px; margin:0 auto; }
 
 .service-card { background:var(--bg2); padding:3rem; position:relative; overflow:hidden; transition:background 0.35s; }
 .service-card::after { content:''; position:absolute; bottom:0; left:0; right:0; height:2px; background:linear-gradient(90deg, transparent, var(--gold), transparent); transform:scaleX(0); transform-origin:center; transition:transform 0.4s; }
@@ -177,6 +177,10 @@ h2 em { font-style:italic; color:var(--gold); }
 .deliverable { font-size:0.78rem; color:var(--muted); display:flex; align-items:flex-start; gap:0.7rem; line-height:1.5; }
 .deliverable::before { content:'—'; color:var(--gold-dim); flex-shrink:0; margin-top:0.05rem; }
 
+.service-score { display:flex; align-items:center; gap:1rem; margin-bottom:1.2rem; padding:0.8rem 1rem; background:var(--bg3); border:1px solid var(--border); }
+.service-score-label { font-family:'Space Mono', monospace; font-size:0.44rem; letter-spacing:0.15em; color:var(--gold-dim); text-transform:uppercase; }
+.service-score-value { font-family:'Cormorant Garamond', serif; font-size:1.1rem; color:var(--gold); font-weight:300; margin-left:auto; }
+
 .service-footer { display:flex; align-items:center; justify-content:space-between; padding-top:1.2rem; border-top:1px solid var(--border); flex-wrap:wrap; gap:0.8rem; }
 .service-btn { font-family:'Space Mono', monospace; font-size:0.5rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--gold); border:1px solid var(--gold); padding:0.5rem 1.1rem; text-decoration:none; transition:all 0.3s; display:inline-block; white-space:nowrap; }
 .service-btn:hover { background:var(--gold); color:var(--bg); }
@@ -192,22 +196,12 @@ h2 em { font-style:italic; color:var(--gold); }
 .about-frame { border:1px solid var(--border); padding:3rem; background:var(--bg2); position:relative; }
 .about-frame::before { content:''; position:absolute; top:10px; left:10px; right:-10px; bottom:-10px; border:1px solid rgba(196,164,74,0.06); pointer-events:none; }
 
-.about-photo-placeholder { width:100%; aspect-ratio:1/1; background:var(--bg3); border:1px solid var(--border); display:flex; align-items:center; justify-content:center; margin-bottom:2rem; position:relative; overflow:hidden; }
-.about-photo-placeholder::before { content:'◎'; font-size:3rem; color:var(--border2); }
-
-.about-name { font-family:'Cormorant Garamond', serif; font-size:1.8rem; font-weight:400; color:var(--off); margin-bottom:0.3rem; }
-.about-role { font-family:'Space Mono', monospace; font-size:0.55rem; letter-spacing:0.2em; color:var(--gold); text-transform:uppercase; margin-bottom:1.5rem; display:block; }
-
 .about-cert-list { display:flex; flex-wrap:wrap; gap:0.5rem; }
 .cert { font-family:'Space Mono', monospace; font-size:0.46rem; letter-spacing:0.1em; color:var(--muted); border:1px solid var(--border); padding:0.25rem 0.6rem; }
 .cert.active { color:var(--gold-dim); border-color:var(--border2); }
 
 .about-text p { font-size:0.9rem; color:var(--muted2); line-height:1.9; margin-bottom:1.5rem; white-space:pre-line; }
 .about-text strong { color:var(--off); font-weight:400; }
-
-.expertise-list { display:flex; flex-direction:column; gap:0.6rem; margin-top:2rem; padding-top:2rem; border-top:1px solid var(--border); }
-.expertise-item { display:flex; align-items:center; gap:1rem; font-size:0.85rem; color:var(--muted2); }
-.expertise-item::before { content:''; width:22px; height:1px; background:var(--gold); flex-shrink:0; }
 
 /* ── PROMISE ── */
 #promise { background:var(--bg2); border-top:1px solid var(--border); border-bottom:1px solid var(--border); padding:6rem 4rem; text-align:center; }
@@ -358,32 +352,22 @@ footer { position:relative; z-index:1; padding:2.5rem 4rem; border-top:1px solid
 <!-- ═══ HERO ═══ -->
 <section id="hero">
   <div class="hero-bg"></div>
-  <div class="hero-classified">
-    <div class="hero-classified-inner">
-      <span class="classified-line">CLASSIFIED · TLP:AMBER · RESTRICTED</span>
-      <span class="classified-line">OSINT INTELLIGENCE REPORT · REF: SGI-2026</span>
-      <span class="classified-line">SOURCE VERIFICATION COMPLETE · LEVEL 3</span>
-      <span class="classified-line">DFIR METHODOLOGY APPLIED · VALIDATED</span>
-      <span class="classified-line">THREAT INTELLIGENCE ACTIVE · MONITORING</span>
-      <span class="classified-line">CONFIDENTIAL · DECISION-GRADE · SECURE</span>
-    </div>
-  </div>
   <div class="hero-content">
     <div class="hero-label"
          data-en="Digital Intelligence & Risk Advisory"
          data-fr="Digital Intelligence & Risk Advisory">Digital Intelligence & Risk Advisory</div>
     <h1>
       <span data-en="Reducing uncertainty" data-fr="Réduire l'incertitude">Réduire l'incertitude</span><br>
-      <span data-en="in " data-fr="dans des ">dans des </span><em data-en="complex environments." data-fr="environnements complexes.">environnements complexes.</em>
+      <em data-en="Structure decision-making." data-fr="Structurer la décision.">Structurer la décision.</em>
     </h1>
     <p class="hero-proposition"
-       data-en="We transform open-source data into verified and structured information to support critical decision-making in high-risk contexts."
-       data-fr="Nous transformons des données ouvertes en information vérifiée et structurée, afin de soutenir des décisions critiques dans des contextes à risque.">
-      Nous transformons des données ouvertes en information vérifiée et structurée, afin de soutenir des décisions critiques dans des contextes à risque.
+       data-en="We transform open-source data into structured and objectified signals to support decision-making in complex and high-exposure environments. Fact-based approach. Structured analysis. Controlled decision-making."
+       data-fr="Nous transformons des données ouvertes en signaux objectivés et hiérarchisés, afin d'éclairer la prise de décision dans des environnements complexes et exposés. Approche factuelle. Analyse structurée. Décision maîtrisée.">
+      Nous transformons des données ouvertes en signaux objectivés et hiérarchisés, afin d'éclairer la prise de décision dans des environnements complexes et exposés. Approche factuelle. Analyse structurée. Décision maîtrisée.
     </p>
     <div class="hero-actions">
       <a href="#contact" class="btn-primary" data-en="Request confidential assessment" data-fr="Demande d'évaluation confidentielle">Demande d'évaluation confidentielle</a>
-      <a href="#services" class="btn-ghost" data-en="Discover services" data-fr="Découvrir les services">Découvrir les services</a>
+      <a href="rapport-exemple.html" class="btn-ghost" data-en="View sample report" data-fr="Consulter un exemple de rapport">Consulter un exemple de rapport</a>
     </div>
     <div class="hero-metrics">
       <div class="metric">
@@ -409,42 +393,45 @@ footer { position:relative; z-index:1; padding:2.5rem 4rem; border-top:1px solid
 </div>
 
 <!-- ═══ POSITIONING ═══ -->
+<!-- MODIFICATION 1 : nouveau texte doctrine -->
 <div id="positioning">
   <div class="pos-left reveal">
     <div class="section-label" data-en="Our approach" data-fr="Notre approche">Notre approche</div>
-    <h2 data-en-html="Information<br>as a <em>decision driver.</em>" data-fr-html="L'information<br>comme <em>levier de décision.</em>">L'information<br>comme <em>levier de décision.</em></h2>
-    <p data-en="Investissement, partenariat, recrutement, expansion, réputation : chaque décision expose à un risque lorsque l'information est incomplète, incertaine ou biaisée. Chaque mission repose sur trois principes : Vérifier (fiabilité des sources et des données); Structurer (organisation claire de l'information); Analyser (lecture factuelle orientée décision). Nous n'ajoutons pas de complexité. Nous supprimons l'incertitude inutile."
-       data-fr="Investissement, partenariat, recrutement, expansion, réputation : chaque décision expose à un risque lorsque l'information est incomplète, incertaine ou biaisée. Chaque mission repose sur trois principes : Vérifier (fiabilité des sources et des données); Structurer (organisation claire de l'information); Analyser (lecture factuelle orientée décision). Nous n'ajoutons pas de complexité. Nous supprimons l'incertitude inutile.">
-      Investissement, partenariat, recrutement, expansion, réputation : chaque décision expose à un risque lorsque l'information est incomplète, incertaine ou biaisée. Chaque mission repose sur trois principes : Vérifier (fiabilité des sources et des données); Structurer (organisation claire de l'information); Analyser (lecture factuelle orientée décision). Nous n'ajoutons pas de complexité. Nous supprimons l'incertitude inutile.</p>
-    <div class="pos-quote" data-en="&ldquo; A clear framework. Rigorous methods. Discreet delivery. &rdquo;" data-fr="« Un cadre d'analyse clair. Des méthodes rigoureuses. Une restitution discrète. »">« Un cadre d'analyse clair. Des méthodes rigoureuses. Une restitution discrète. »</div>
+    <h2 data-en-html="Structuring<br>the <em>decision.</em>" data-fr-html="Structurer<br>la <em>décision.</em>">Structurer<br>la <em>décision.</em></h2>
+    <p data-en="In environments where information is abundant but rarely exploitable as-is, the challenge is no longer data access — it is structuring. We intervene upstream of the decision, transforming scattered technical elements into readable, comparable, and actionable indicators. Our objective is not to interpret. Our objective is to reduce operational uncertainty."
+       data-fr="Dans des environnements où l'information est abondante mais rarement exploitable telle quelle, la difficulté n'est plus l'accès à la donnée, mais sa structuration. Nous intervenons en amont de la décision, en transformant des éléments techniques dispersés en indicateurs lisibles, comparables et exploitables. Notre objectif n'est pas d'interpréter. Notre objectif est de réduire l'incertitude opérationnelle.">
+      Dans des environnements où l'information est abondante mais rarement exploitable telle quelle, la difficulté n'est plus l'accès à la donnée, mais sa structuration. Nous intervenons en amont de la décision, en transformant des éléments techniques dispersés en indicateurs lisibles, comparables et exploitables. Notre objectif n'est pas d'interpréter. Notre objectif est de réduire l'incertitude opérationnelle.</p>
+    <div class="pos-quote"
+         data-en="&ldquo; We do not produce opinion. We produce decision structures. &rdquo;"
+         data-fr="« Nous ne produisons pas d'opinion. Nous produisons des structures de décision. »">« Nous ne produisons pas d'opinion. Nous produisons des structures de décision. »</div>
   </div>
   <div class="pos-right reveal">
     <div class="differentiator">
       <div class="diff-icon">01</div>
       <div class="diff-content">
-        <h4 data-en="Security-grade methodology" data-fr="Méthodologie sécurité opérationnelle">Méthodologie sécurité opérationnelle</h4>
-        <p data-en="Analysis methods drawn from SOC, DFIR and Threat Intelligence environments." data-fr="Méthodes d'analyse issues des environnements SOC, DFIR et Threat Intelligence.">Méthodes d'analyse issues des environnements SOC, DFIR et Threat Intelligence.</p>
+        <h4 data-en="Objectivation" data-fr="Objectivation">Objectivation</h4>
+        <p data-en="Analyses are based exclusively on verifiable data from open sources." data-fr="Les analyses sont fondées exclusivement sur des données vérifiables issues de sources ouvertes.">Les analyses sont fondées exclusivement sur des données vérifiables issues de sources ouvertes.</p>
+      </div>
+    </div>
+    <div class="differentiator">
+      <div class="diff-icon">02</div>
+      <div class="diff-content">
+        <h4 data-en="Systematisation" data-fr="Systématisation">Systématisation</h4>
+        <p data-en="Evaluation is based on explicit, reproducible, and non-arbitrary rules." data-fr="L'évaluation repose sur des règles explicites, reproductibles et non arbitraires.">L'évaluation repose sur des règles explicites, reproductibles et non arbitraires.</p>
       </div>
     </div>
     <div class="differentiator">
       <div class="diff-icon">03</div>
       <div class="diff-content">
-        <h4 data-en="Readable, actionable deliverables" data-fr="Livrables lisibles et actionnables">Livrables lisibles et actionnables</h4>
-        <p data-en="Reports structured for decision-makers, not technical teams." data-fr="Les rapports sont structurés pour les décideurs, non pour les équipes techniques.">Les rapports sont structurés pour les décideurs, non pour les équipes techniques.</p>
+        <h4 data-en="Analytical neutrality" data-fr="Neutralité analytique">Neutralité analytique</h4>
+        <p data-en="No conclusion is drawn from human interpretation or speculation." data-fr="Aucune conclusion n'est issue d'une interprétation humaine ou spéculative.">Aucune conclusion n'est issue d'une interprétation humaine ou spéculative.</p>
       </div>
     </div>
     <div class="differentiator">
       <div class="diff-icon">04</div>
       <div class="diff-content">
-        <h4 data-en="Confidentiality — systematic" data-fr="Confidentialité — systématique">Confidentialité — systématique</h4>
-        <p data-en="All engagements are subject to a confidentiality framework." data-fr="Chaque engagement est soumis à un cadre de confidentialité stricte.">Chaque engagement est soumis à un cadre de confidentialité stricte.</p>
-      </div>
-    </div>
-    <div class="differentiator">
-      <div class="diff-icon">05</div>
-      <div class="diff-content">
         <h4 data-en="100% legal — open sources only" data-fr="100% légal — sources ouvertes uniquement">100% légal — sources ouvertes uniquement</h4>
-        <p data-en="All investigations conducted exclusively from publicly available sources." data-fr="Toutes les investigations conduites exclusivement à partir de sources publiques. Pas de surveillance, pas d'intrusion.">Toutes les investigations conduites exclusivement à partir de sources publiques. Pas de surveillance, pas d'intrusion.</p>
+        <p data-en="All investigations conducted exclusively from publicly available sources. No surveillance, no intrusion." data-fr="Toutes les investigations conduites exclusivement à partir de sources publiques. Pas de surveillance, pas d'intrusion.">Toutes les investigations conduites exclusivement à partir de sources publiques. Pas de surveillance, pas d'intrusion.</p>
       </div>
     </div>
   </div>
@@ -467,6 +454,11 @@ footer { position:relative; z-index:1; padding:2.5rem 4rem; border-top:1px solid
       <h3>Hygiène Numérique Personnelle</h3>
       <p class="service-hook">Nous évaluons votre exposition numérique réelle en une session structurée de 2 heures.</p>
       <p class="service-body">Analyse des appareils, comptes, systèmes d'authentification et usages numériques afin d'identifier les vulnérabilités évitables et les points d'exposition.</p>
+      <!-- MODIFICATION 2 : score 0-100 -->
+      <div class="service-score">
+        <span class="service-score-label" data-en="Risk score" data-fr="Score de risque">Score de risque</span>
+        <span class="service-score-value">0 – 100</span>
+      </div>
       <div class="service-deliverables">
         <div class="deliverable">Identification claire des vulnérabilités</div>
         <div class="deliverable">Actions correctives concrètes et priorisées</div>
@@ -489,11 +481,15 @@ footer { position:relative; z-index:1; padding:2.5rem 4rem; border-top:1px solid
       <h3>Due Diligence Digitale</h3>
       <p class="service-hook">Nous vérifions l'empreinte numérique d'un individu ou d'une entité avant toute décision.</p>
       <p class="service-body">Analyse des incohérences, signaux faibles et zones d'incertitude.</p>
+      <div class="service-score">
+        <span class="service-score-label" data-en="Risk score · Alert level" data-fr="Score de risque · Niveau d'alerte">Score de risque · Niveau d'alerte</span>
+        <span class="service-score-value">0 – 100</span>
+      </div>
       <div class="service-deliverables">
         <div class="deliverable">Rapport d'aide à la décision</div>
         <div class="deliverable">Vérification croisée des informations</div>
         <div class="deliverable">Détection d'anomalies</div>
-        <div class="deliverable">Classification du niveau de risque</div>
+        <div class="deliverable" data-en="Normalized risk score (0–100) + hierarchical alert level" data-fr="Score de risque normalisé (0–100) + niveau d'alerte hiérarchisé">Score de risque normalisé (0–100) + niveau d'alerte hiérarchisé</div>
       </div>
       <div class="service-footer">
         <div class="service-tags">
@@ -511,6 +507,10 @@ footer { position:relative; z-index:1; padding:2.5rem 4rem; border-top:1px solid
       <h3>Audit d'Empreinte Digitale</h3>
       <p class="service-hook">Nous cartographions et analysons votre présence numérique publique.</p>
       <p class="service-body">Évaluation des informations exposées et de leur impact potentiel.</p>
+      <div class="service-score">
+        <span class="service-score-label" data-en="Exposure score" data-fr="Score d'exposition">Score d'exposition</span>
+        <span class="service-score-value">0 – 100</span>
+      </div>
       <div class="service-deliverables">
         <div class="deliverable">Cartographie de l'exposition numérique</div>
         <div class="deliverable">Identification des données sensibles</div>
@@ -533,6 +533,10 @@ footer { position:relative; z-index:1; padding:2.5rem 4rem; border-top:1px solid
       <h3>Veille Réputationnelle</h3>
       <p class="service-hook">Nous surveillons en continu votre environnement informationnel et votre réputation en ligne.</p>
       <p class="service-body">Détection des signaux faibles avant escalade.</p>
+      <div class="service-score">
+        <span class="service-score-label" data-en="Threat level · Monthly" data-fr="Niveau de menace · Mensuel">Niveau de menace · Mensuel</span>
+        <span class="service-score-value">0 – 100</span>
+      </div>
       <div class="service-deliverables">
         <div class="deliverable">Surveillance continue des sources</div>
         <div class="deliverable">Rapport mensuel d'intelligence</div>
@@ -577,6 +581,10 @@ footer { position:relative; z-index:1; padding:2.5rem 4rem; border-top:1px solid
       <h3>OSINT Investigation</h3>
       <p class="service-hook">Investigations structurées à partir de sources ouvertes.</p>
       <p class="service-body">Analyse des relations et connexions invisibles.</p>
+      <div class="service-score">
+        <span class="service-score-label" data-en="Risk score · Sourced conclusions" data-fr="Score de risque · Conclusions sourcées">Score de risque · Conclusions sourcées</span>
+        <span class="service-score-value">0 – 100</span>
+      </div>
       <div class="service-deliverables">
         <div class="deliverable">Rapport d'intelligence structuré</div>
         <div class="deliverable">Cartographie des réseaux</div>
@@ -594,11 +602,15 @@ footer { position:relative; z-index:1; padding:2.5rem 4rem; border-top:1px solid
     </div>
 
     <!-- S7 -->
-    <div class="service-card reveal service-7" style="grid-column: 1 / -1; display:grid; grid-template-columns:1fr 1fr; gap:3rem; align-items:start;">
+    <div class="service-card reveal service-7">
       <div class="service-num">07 <span class="service-tag-type">Pré-engagement</span></div>
       <h3>Vérification Documentaire</h3>
       <p class="service-hook">Analyse d'authenticité et de cohérence des documents.</p>
       <p class="service-body">Détection des anomalies et falsifications.</p>
+      <div class="service-score">
+        <span class="service-score-label" data-en="Confidence level" data-fr="Niveau de confiance">Niveau de confiance</span>
+        <span class="service-score-value">0 – 100</span>
+      </div>
       <div class="service-deliverables">
         <div class="deliverable">Analyse de cohérence</div>
         <div class="deliverable">Vérification métadonnées</div>
@@ -614,11 +626,6 @@ footer { position:relative; z-index:1; padding:2.5rem 4rem; border-top:1px solid
         <a href="#contact" class="service-btn">Commander →</a>
       </div>
     </div>
-      <div style="display:flex; align-items:center; justify-content:center; flex-direction:column; gap:1.5rem; padding:2rem; border-left:1px solid var(--border);">
-        <div style="font-family:'Cormorant Garamond',serif; font-size:3.5rem; color:rgba(196,164,74,0.15); line-height:1;">⬡</div>
-        <p style="font-family:'Space Mono',monospace; font-size:0.5rem; letter-spacing:0.25em; color:var(--gold-dim); text-transform:uppercase; text-align:center; line-height:2;">Une mission spécifique ?<br>Parlons-en.</p>
-        <a href="#contact" class="service-btn" style="margin-top:0.5rem;">Demande sur mesure →</a>
-      </div>
 
   </div><!-- /.services-grid -->
 
@@ -633,6 +640,7 @@ footer { position:relative; z-index:1; padding:2.5rem 4rem; border-top:1px solid
 </section><!-- /#services -->
 
 <!-- ═══ ABOUT ═══ -->
+<!-- MODIFICATION 3 : signature ajoutée -->
 <section id="about">
   <div style="max-width:1300px; margin:0 auto; padding:7rem 4rem;">
     <div class="section-label reveal" data-en="Who we are" data-fr="Qui sommes-nous">Qui sommes-nous</div>
@@ -640,7 +648,7 @@ footer { position:relative; z-index:1; padding:2.5rem 4rem; border-top:1px solid
     <div class="about-grid">
       <div class="about-visual reveal">
         <div class="about-frame" style="aspect-ratio:unset; min-height:300px; display:flex; align-items:center; justify-content:center; flex-direction:column; gap:2rem;">
-          <div style="font-family:'Cormorant Garamond',serif; font-size:4rem; color:rgba(196,164,74,0.2); line-height:1;">⬡</div>
+          <img src="logo.png" alt="SANGOUR3i" style="height:100px; width:auto; opacity:0.85;">
           <div style="font-family:'Space Mono',monospace; font-size:0.5rem; letter-spacing:0.3em; color:var(--gold-dim); text-transform:uppercase; text-align:center;">SANGOUR3i<br>Intelligence Digitale Stratégique</div>
           <div style="display:flex; flex-wrap:wrap; gap:0.5rem; justify-content:center; margin-top:1rem;">
             <span class="cert active">100% Sources ouvertes</span>
@@ -675,7 +683,9 @@ Nos interventions couvrent notamment la due diligence digitale, l'analyse d'empr
 Toutes les analyses sont réalisées exclusivement à partir de données publiques, selon une méthodologie de vérification, de recoupement et de structuration.
 
 Aucune intrusion, aucune surveillance, aucune spéculation. Uniquement des informations vérifiées, organisées et directement exploitables.</p>
-        <div class="pos-quote" data-en="&ldquo; Discretion, precision, and speed — at the core of every analysis. &rdquo;" data-fr="« Discrétion, précision, rapidité — au cœur de chaque analyse. »">« Discrétion, précision, rapidité — au cœur de chaque analyse. »</div>
+        <div class="pos-quote"
+             data-en="&ldquo; In an environment where signals are numerous but rarely structured, the ability to qualify before acting becomes a determining factor. We provide that capability. &rdquo;"
+             data-fr="« Dans un environnement où les signaux sont nombreux mais rarement structurés, la capacité à qualifier avant d'agir devient un facteur déterminant. Nous apportons cette capacité. »">« Dans un environnement où les signaux sont nombreux mais rarement structurés, la capacité à qualifier avant d'agir devient un facteur déterminant. Nous apportons cette capacité. »</div>
       </div>
     </div>
   </div>
@@ -722,7 +732,6 @@ sur la manière dont l'information influence le risque, l'exposition et la prise
   </div>
 
   <div class="blog-grid">
-    <!-- Featured -->
     <div class="blog-card featured reveal">
       <div>
         <span class="blog-featured-badge" data-en="Featured analysis" data-fr="Analyse à la une">Analyse à la une</span>
@@ -743,35 +752,20 @@ sur la manière dont l'information influence le risque, l'exposition et la prise
         </div>
       </div>
     </div>
-
-    <!-- Article 2 -->
     <div class="blog-card reveal">
-      <div class="blog-meta">
-        <span class="blog-date">Mars 2026</span>
-        <span class="blog-category">Due Diligence</span>
-      </div>
+      <div class="blog-meta"><span class="blog-date">Mars 2026</span><span class="blog-category">Due Diligence</span></div>
       <h3 data-en="5 red flags that your due diligence missed" data-fr="5 signaux d'alerte que votre due diligence a manqués">5 signaux d'alerte que votre due diligence a manqués</h3>
       <p data-en="The most dangerous risks are rarely in official documents." data-fr="Les risques les plus dangereux sont rarement dans les documents officiels. Voici les cinq signaux digitaux que la plupart des due diligences manquent.">Les risques les plus dangereux sont rarement dans les documents officiels. Voici les cinq signaux digitaux que la plupart des due diligences manquent.</p>
       <span class="blog-read-more" data-en="Read article" data-fr="Lire l'article">Lire l'article</span>
     </div>
-
-    <!-- Article 3 -->
     <div class="blog-card reveal">
-      <div class="blog-meta">
-        <span class="blog-date">Février 2026</span>
-        <span class="blog-category">Threat Intel</span>
-      </div>
+      <div class="blog-meta"><span class="blog-date">Février 2026</span><span class="blog-category">Threat Intel</span></div>
       <h3 data-en="Deepfakes in business: the new face of executive fraud" data-fr="Deepfakes en entreprise : le nouveau visage de la fraude au dirigeant">Deepfakes en entreprise : le nouveau visage de la fraude au dirigeant</h3>
       <p data-en="In 2025, several African companies lost significant sums following video calls with fake executives." data-fr="En 2025, plusieurs entreprises africaines ont perdu des sommes importantes suite à des appels vidéo avec de faux dirigeants. Quelles méthodes de détection ?">En 2025, plusieurs entreprises africaines ont perdu des sommes importantes suite à des appels vidéo avec de faux dirigeants. Quelles méthodes de détection ?</p>
       <span class="blog-read-more" data-en="Read article" data-fr="Lire l'article">Lire l'article</span>
     </div>
-
-    <!-- Article 4 -->
     <div class="blog-card reveal">
-      <div class="blog-meta">
-        <span class="blog-date">Janvier 2026</span>
-        <span class="blog-category">OPSEC</span>
-      </div>
+      <div class="blog-meta"><span class="blog-date">Janvier 2026</span><span class="blog-category">OPSEC</span></div>
       <h3 data-en="Digital hygiene checklist for executives in 2026" data-fr="Checklist hygiène numérique pour dirigeants en 2026">Checklist hygiène numérique pour dirigeants en 2026</h3>
       <p data-en="A practical, non-technical guide to the 12 security reflexes that every executive should have in 2026." data-fr="Un guide pratique et non technique sur les 12 réflexes de sécurité que tout dirigeant devrait avoir en 2026. Simple et immédiatement actionnable.">Un guide pratique et non technique sur les 12 réflexes de sécurité que tout dirigeant devrait avoir en 2026. Simple et immédiatement actionnable.</p>
       <span class="blog-read-more" data-en="Read guide" data-fr="Lire le guide">Lire le guide</span>
@@ -780,6 +774,45 @@ sur la manière dont l'information influence le risque, l'exposition et la prise
 
   <div class="blog-cta reveal">
     <a href="#" data-en="View all articles →" data-fr="Voir tous les articles →">Voir tous les articles →</a>
+  </div>
+</section>
+
+<!-- ═══ RESSOURCES ═══ -->
+<section style="position:relative;z-index:1;background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:5rem 4rem;">
+  <div style="max-width:1300px;margin:0 auto;">
+    <div style="display:flex;align-items:center;gap:0.8rem;margin-bottom:3rem;">
+      <span style="display:block;width:28px;height:1px;background:var(--gold);"></span>
+      <span style="font-family:'Space Mono',monospace;font-size:0.56rem;letter-spacing:0.35em;color:var(--gold);text-transform:uppercase;" data-fr="Ressources gratuites" data-en="Free resources">Ressources gratuites</span>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:2px;background:var(--border);">
+
+      <!-- GUIDE -->
+      <div style="background:var(--bg2);padding:3rem;position:relative;overflow:hidden;transition:background 0.35s;" onmouseover="this.style.background='var(--bg3)'" onmouseout="this.style.background='var(--bg2)'">
+        <div style="font-family:'Space Mono',monospace;font-size:0.46rem;letter-spacing:0.2em;color:var(--gold);border:1px solid var(--border2);padding:0.2rem 0.6rem;display:inline-block;margin-bottom:1.2rem;text-transform:uppercase;" data-fr="Guide · Gratuit" data-en="Guide · Free">Guide · Gratuit</div>
+        <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.7rem;font-weight:400;margin-bottom:0.6rem;line-height:1.2;" data-fr="Hygiène Numérique<br>pour Décideurs" data-en="Digital Hygiene<br>for Executives">Hygiène Numérique<br>pour Décideurs</h3>
+        <p style="font-size:0.85rem;color:var(--muted2);line-height:1.8;margin-bottom:1.5rem;" data-fr="12 réflexes de sécurité immédiatement actionnables. Checklist interactive sans jargon technique." data-en="12 immediately actionable security habits. Interactive checklist, no technical jargon required.">12 réflexes de sécurité immédiatement actionnables. Checklist interactive sans jargon technique.</p>
+        <div style="display:flex;flex-wrap:wrap;gap:0.4rem;margin-bottom:1.8rem;">
+          <span style="font-family:'Space Mono',monospace;font-size:0.45rem;letter-spacing:0.1em;color:var(--muted);border:1px solid var(--border);padding:0.2rem 0.5rem;">OPSEC</span>
+          <span style="font-family:'Space Mono',monospace;font-size:0.45rem;letter-spacing:0.1em;color:var(--muted);border:1px solid var(--border);padding:0.2rem 0.5rem;">Checklist</span>
+          <span style="font-family:'Space Mono',monospace;font-size:0.45rem;letter-spacing:0.1em;color:var(--muted);border:1px solid var(--border);padding:0.2rem 0.5rem;">2026</span>
+        </div>
+        <a href="guide-hygiene.html" style="font-family:'Space Mono',monospace;font-size:0.52rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--bg);background:var(--gold);padding:0.7rem 1.4rem;text-decoration:none;transition:all 0.3s;display:inline-block;" onmouseover="this.style.background='var(--gold2)'" onmouseout="this.style.background='var(--gold)'" data-fr="Accéder au guide →" data-en="Access guide →">Accéder au guide →</a>
+      </div>
+
+      <!-- RAPPORT EXEMPLE -->
+      <div style="background:var(--bg2);padding:3rem;position:relative;overflow:hidden;transition:background 0.35s;" onmouseover="this.style.background='var(--bg3)'" onmouseout="this.style.background='var(--bg2)'">
+        <div style="font-family:'Space Mono',monospace;font-size:0.46rem;letter-spacing:0.2em;color:var(--gold);border:1px solid var(--border2);padding:0.2rem 0.6rem;display:inline-block;margin-bottom:1.2rem;text-transform:uppercase;" data-fr="Exemple · Illustratif" data-en="Sample · Illustrative">Exemple · Illustratif</div>
+        <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.7rem;font-weight:400;margin-bottom:0.6rem;line-height:1.2;" data-fr="Exemple de Rapport<br>OSINT Due Diligence" data-en="Sample OSINT<br>Due Diligence Report">Exemple de Rapport<br>OSINT Due Diligence</h3>
+        <p style="font-size:0.85rem;color:var(--muted2);line-height:1.8;margin-bottom:1.5rem;" data-fr="Rapport fictif illustrant notre méthodologie : score de risque, signaux faibles, vérification d'entités, recommandations." data-en="Fictitious report illustrating our methodology: risk score, weak signals, entity verification, operational recommendations.">Rapport fictif illustrant notre méthodologie : score de risque, signaux faibles, vérification d'entités, recommandations.</p>
+        <div style="display:flex;flex-wrap:wrap;gap:0.4rem;margin-bottom:1.8rem;">
+          <span style="font-family:'Space Mono',monospace;font-size:0.45rem;letter-spacing:0.1em;color:var(--muted);border:1px solid var(--border);padding:0.2rem 0.5rem;">OSINT</span>
+          <span style="font-family:'Space Mono',monospace;font-size:0.45rem;letter-spacing:0.1em;color:var(--muted);border:1px solid var(--border);padding:0.2rem 0.5rem;">Due Diligence</span>
+          <span style="font-family:'Space Mono',monospace;font-size:0.45rem;letter-spacing:0.1em;color:var(--muted);border:1px solid var(--border);padding:0.2rem 0.5rem;">Score 0–100</span>
+        </div>
+        <a href="rapport-exemple.html" style="font-family:'Space Mono',monospace;font-size:0.52rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--bg);background:var(--gold);padding:0.7rem 1.4rem;text-decoration:none;transition:all 0.3s;display:inline-block;" onmouseover="this.style.background='var(--gold2)'" onmouseout="this.style.background='var(--gold)'" data-fr="Consulter le rapport →" data-en="View sample report →">Consulter le rapport →</a>
+      </div>
+
+    </div>
   </div>
 </section>
 
@@ -811,11 +844,11 @@ sur la manière dont l'information influence le risque, l'exposition et la prise
       <div class="form-row">
         <div class="form-field">
           <label data-en="Name / Organisation" data-fr="Nom / Organisation">Nom / Organisation</label>
-          <input type="text" placeholder="Jean Dupont / Acme Corp" required>
+          <input type="text" placeholder="" required>
         </div>
         <div class="form-field">
           <label>Email</label>
-          <input type="email" placeholder="contact@exemple.com" required>
+          <input type="email" placeholder="" required>
         </div>
       </div>
       <div class="form-field">
@@ -843,6 +876,7 @@ sur la manière dont l'information influence le risque, l'exposition et la prise
 </section>
 
 <!-- ═══ FOOTER ═══ -->
+<!-- CORRECTION : src="logo.png" rétabli -->
 <footer>
   <div class="footer-logo-wrap">
     <img src="logo.png" alt="SANGOUR3i" style="height:28px; width:auto; opacity:0.85;" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
