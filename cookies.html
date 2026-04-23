@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SANGOUR3i — Politique de Cookies / Cookie Policy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Space+Mono:wght@400;700&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#07080C;--bg2:#0D0F16;--bg3:#12151E;--gold:#C4A44A;--gold2:#DFC070;--gold-dim:#7A6530;--off:#E8E2D4;--muted:#6E6C66;--muted2:#9A9690;--border:rgba(196,164,74,0.14);--border2:rgba(196,164,74,0.28)}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--off);font-family:'Jost',sans-serif;font-weight:300;overflow-x:hidden;line-height:1.6}
+body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(196,164,74,0.025) 1px,transparent 1px),linear-gradient(90deg,rgba(196,164,74,0.025) 1px,transparent 1px);background-size:80px 80px;pointer-events:none;z-index:0}
+nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;justify-content:space-between;align-items:center;padding:1.4rem 4rem;background:rgba(7,8,12,0.92);backdrop-filter:blur(16px);border-bottom:1px solid var(--border)}
+.nav-logo{font-family:'Space Mono',monospace;font-size:0.78rem;letter-spacing:0.28em;color:var(--gold);text-decoration:none}
+.nav-right{display:flex;align-items:center;gap:1rem}
+#lang-toggle{font-family:'Space Mono',monospace;font-size:0.55rem;letter-spacing:0.2em;color:var(--muted);background:transparent;border:1px solid var(--border);padding:0.4rem 0.75rem;cursor:pointer;transition:all 0.3s}
+#lang-toggle:hover{color:var(--gold);border-color:var(--border2)}
+.nav-cta{font-family:'Space Mono',monospace;font-size:0.6rem;letter-spacing:0.15em;color:var(--gold);border:1px solid var(--gold);padding:0.55rem 1.3rem;text-decoration:none;transition:all 0.3s}
+.nav-cta:hover{background:var(--gold);color:var(--bg)}
+.nav-back{font-family:'Space Mono',monospace;font-size:0.55rem;letter-spacing:0.15em;color:var(--muted);text-decoration:none;transition:color 0.3s}
+.nav-back:hover{color:var(--gold)}
+.legal-hero{position:relative;z-index:1;padding:10rem 4rem 4rem;max-width:900px;margin:0 auto;border-bottom:1px solid var(--border)}
+.legal-label{font-family:'Space Mono',monospace;font-size:0.56rem;letter-spacing:0.35em;color:var(--gold);text-transform:uppercase;margin-bottom:1.5rem;display:flex;align-items:center;gap:0.8rem}
+.legal-label::before{content:'';display:block;width:28px;height:1px;background:var(--gold)}
+.legal-hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2.5rem,5vw,4rem);font-weight:300;line-height:1.1;margin-bottom:1rem}
+.legal-hero h1 em{font-style:italic;color:var(--gold)}
+.legal-meta{display:flex;gap:2rem;flex-wrap:wrap;margin-top:2rem}
+.legal-meta-item{display:flex;flex-direction:column;gap:0.3rem}
+.legal-meta-label{font-family:'Space Mono',monospace;font-size:0.46rem;letter-spacing:0.2em;color:var(--gold-dim);text-transform:uppercase}
+.legal-meta-value{font-size:0.85rem;color:var(--muted2)}
+.legal-body{position:relative;z-index:1;max-width:900px;margin:0 auto;padding:4rem}
+.lang-block{display:none}
+.lang-block.active{display:block}
+.legal-section{margin-bottom:4rem;padding-bottom:4rem;border-bottom:1px solid var(--border)}
+.legal-section:last-child{border-bottom:none}
+.section-num{font-family:'Space Mono',monospace;font-size:0.48rem;letter-spacing:0.25em;color:var(--gold-dim);text-transform:uppercase;margin-bottom:0.6rem;display:block}
+.legal-section h2{font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:400;color:var(--off);margin-bottom:1.5rem;line-height:1.2}
+.legal-section h2 em{font-style:italic;color:var(--gold)}
+.legal-section p{font-size:0.9rem;color:var(--muted2);line-height:1.9;margin-bottom:1rem}
+.legal-section strong{color:var(--off);font-weight:500}
+.legal-section ul{list-style:none;display:flex;flex-direction:column;gap:0.5rem;margin:1rem 0}
+.legal-section ul li{font-size:0.88rem;color:var(--muted2);display:flex;align-items:flex-start;gap:0.8rem;line-height:1.7}
+.legal-section ul li::before{content:'—';color:var(--gold-dim);flex-shrink:0;margin-top:0.1rem}
+.legal-section h3{font-family:'Jost',sans-serif;font-size:0.95rem;font-weight:500;color:var(--off);margin:1.8rem 0 0.8rem;letter-spacing:0.02em}
+.highlight-box{background:var(--bg2);border:1px solid var(--border);border-left:2px solid var(--gold);padding:1.5rem 2rem;margin:1.5rem 0;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.05rem;color:var(--off);line-height:1.6}
+
+/* Cookie table */
+.cookie-table{width:100%;border-collapse:collapse;margin:2rem 0;background:var(--bg2)}
+.cookie-table th{font-family:'Space Mono',monospace;font-size:0.46rem;letter-spacing:0.2em;color:var(--gold-dim);text-transform:uppercase;padding:1rem 1.2rem;text-align:left;border-bottom:1px solid var(--border2);background:var(--bg3)}
+.cookie-table td{font-size:0.83rem;color:var(--muted2);padding:0.9rem 1.2rem;border-bottom:1px solid var(--border);vertical-align:top;line-height:1.6}
+.cookie-table tr:last-child td{border-bottom:none}
+.cookie-table tr:hover td{background:var(--bg3)}
+.badge{font-family:'Space Mono',monospace;font-size:0.42rem;letter-spacing:0.1em;padding:0.2rem 0.5rem;border:1px solid;display:inline-block}
+.badge-green{color:#6aad7a;border-color:rgba(106,173,122,0.3)}
+.badge-yellow{color:var(--gold);border-color:var(--border2)}
+.badge-red{color:#c4826a;border-color:rgba(196,130,106,0.3)}
+
+/* Banner preview */
+.banner-preview{background:var(--bg3);border:1px solid var(--border);padding:2rem;margin:2rem 0;position:relative}
+.banner-preview-label{font-family:'Space Mono',monospace;font-size:0.44rem;letter-spacing:0.2em;color:var(--gold-dim);text-transform:uppercase;margin-bottom:1.2rem;display:flex;align-items:center;gap:0.6rem}
+.banner-preview-label::before{content:'';width:16px;height:1px;background:var(--gold-dim)}
+.banner-content{display:flex;justify-content:space-between;align-items:center;gap:2rem;flex-wrap:wrap}
+.banner-text{font-size:0.85rem;color:var(--muted2);line-height:1.7;flex:1;min-width:200px}
+.banner-btns{display:flex;gap:0.8rem;flex-shrink:0;flex-wrap:wrap}
+.banner-btn-accept{background:var(--gold);color:var(--bg);font-family:'Space Mono',monospace;font-size:0.5rem;letter-spacing:0.15em;padding:0.6rem 1.2rem;border:none;cursor:pointer}
+.banner-btn-refuse{background:transparent;color:var(--muted);font-family:'Space Mono',monospace;font-size:0.5rem;letter-spacing:0.15em;padding:0.6rem 1.2rem;border:1px solid var(--border);cursor:pointer}
+
+footer{position:relative;z-index:1;padding:2.5rem 4rem;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-logo{font-family:'Space Mono',monospace;font-size:0.72rem;letter-spacing:0.25em;color:var(--gold)}
+.footer-links{display:flex;gap:2rem;list-style:none}
+.footer-links a{font-family:'Space Mono',monospace;font-size:0.5rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color 0.3s}
+.footer-links a:hover{color:var(--gold)}
+.footer-copy{font-family:'Space Mono',monospace;font-size:0.48rem;letter-spacing:0.12em;color:var(--muted)}
+@media(max-width:900px){
+  nav{padding:1.2rem 1.5rem}
+  .legal-hero,.legal-body{padding-left:1.5rem;padding-right:1.5rem}
+  .legal-hero{padding-top:8rem}
+  .cookie-table{font-size:0.78rem}
+  .banner-content{flex-direction:column;align-items:flex-start}
+  footer{padding:2rem 1.5rem;flex-direction:column;text-align:center}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-back">← Retour</a>
+  <a href="index.html" class="nav-logo">SANGOUR3i</a>
+  <div class="nav-right">
+    <button id="lang-toggle">EN</button>
+    <a href="index.html#contact" class="nav-cta" data-fr="Demande confidentielle" data-en="Confidential inquiry">Demande confidentielle</a>
+  </div>
+</nav>
+
+<div class="legal-hero">
+  <div class="legal-label" data-fr="Transparence numérique" data-en="Digital transparency">Transparence numérique</div>
+  <h1 class="lang-block active" id="title-fr">Politique<br>de <em>Cookies</em></h1>
+  <h1 class="lang-block" id="title-en">Cookie<br><em>Policy</em></h1>
+  <div class="legal-meta">
+    <div class="legal-meta-item">
+      <span class="legal-meta-label">Version</span>
+      <span class="legal-meta-value">1.0 — Avril 2026</span>
+    </div>
+    <div class="legal-meta-item">
+      <span class="legal-meta-label" data-fr="Conformité" data-en="Compliance">Conformité</span>
+      <span class="legal-meta-value">RGPD · ePrivacy · CNIL</span>
+    </div>
+  </div>
+</div>
+
+<div class="legal-body">
+
+  <!-- ══ FRENCH ══ -->
+  <div class="lang-block active" id="body-fr">
+
+    <div class="legal-section" id="c1-fr">
+      <span class="section-num">Section 01</span>
+      <h2>Qu'est-ce <em>qu'un cookie ?</em></h2>
+      <p>Un cookie est un petit fichier texte déposé sur votre terminal (ordinateur, tablette, mobile) lors de votre visite sur un site web. Il permet au site de mémoriser des informations sur votre navigation et vos préférences.</p>
+      <div class="highlight-box">« SANGOUR3i adopte une approche minimaliste en matière de cookies. Nous n'installons que ce qui est strictement nécessaire au fonctionnement du site. »</div>
+    </div>
+
+    <div class="legal-section" id="c2-fr">
+      <span class="section-num">Section 02</span>
+      <h2>Cookies utilisés <em>sur ce site</em></h2>
+
+      <h3>Cookies strictement nécessaires <span class="badge badge-green">Toujours actifs</span></h3>
+      <table class="cookie-table">
+        <thead>
+          <tr>
+            <th>Nom</th>
+            <th>Finalité</th>
+            <th>Durée</th>
+            <th>Type</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>lang</strong></td>
+            <td>Mémorise la préférence de langue (FR/EN) choisie par l'utilisateur</td>
+            <td>Session / localStorage</td>
+            <td><span class="badge badge-green">Fonctionnel</span></td>
+          </tr>
+          <tr>
+            <td><strong>cookie_consent</strong></td>
+            <td>Mémorise votre choix concernant les cookies</td>
+            <td>13 mois</td>
+            <td><span class="badge badge-green">Nécessaire</span></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3 style="margin-top:2rem;">Cookies analytiques <span class="badge badge-yellow">Soumis à consentement</span></h3>
+      <p>Si vous l'acceptez, nous pouvons utiliser des cookies analytiques pour comprendre comment les visiteurs utilisent le site. Ces données sont agrégées et anonymisées — elles ne permettent pas de vous identifier personnellement.</p>
+      <table class="cookie-table">
+        <thead>
+          <tr>
+            <th>Nom</th>
+            <th>Finalité</th>
+            <th>Durée</th>
+            <th>Type</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>_analytics</strong></td>
+            <td>Mesure d'audience anonymisée (pages vues, temps de visite)</td>
+            <td>13 mois</td>
+            <td><span class="badge badge-yellow">Analytique</span></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3 style="margin-top:2rem;">Cookies publicitaires ou de tracking tiers <span class="badge badge-red">Non utilisés</span></h3>
+      <p><strong>SANGOUR3i n'installe aucun cookie publicitaire, aucun pixel de tracking, aucun outil de retargeting.</strong> Aucune régie publicitaire tierce n'a accès à vos données de navigation via notre site.</p>
+    </div>
+
+    <div class="legal-section" id="c3-fr">
+      <span class="section-num">Section 03</span>
+      <h2>Votre <em>consentement</em></h2>
+      <p>Conformément aux recommandations de la CNIL et au RGPD, les cookies non strictement nécessaires ne sont déposés qu'après recueil de votre consentement explicite via la bannière cookies affichée lors de votre première visite.</p>
+
+      <h3>Aperçu de la bannière cookies</h3>
+      <div class="banner-preview">
+        <div class="banner-preview-label">Aperçu · Interface réelle</div>
+        <div class="banner-content">
+          <div class="banner-text">
+            <strong style="color:var(--off);font-weight:500;">SANGOUR3i utilise des cookies.</strong><br>
+            Les cookies nécessaires assurent le bon fonctionnement du site. Les cookies analytiques, soumis à consentement, nous aident à améliorer votre expérience. Aucun cookie publicitaire.
+          </div>
+          <div class="banner-btns">
+            <button class="banner-btn-accept">Accepter</button>
+            <button class="banner-btn-refuse">Refuser</button>
+          </div>
+        </div>
+      </div>
+
+      <p>Vous pouvez à tout moment modifier votre choix en <strong>contactant SANGOUR3i à contact@sangour3i.com</strong> ou en effaçant les cookies via les paramètres de votre navigateur.</p>
+    </div>
+
+    <div class="legal-section" id="c4-fr">
+      <span class="section-num">Section 04</span>
+      <h2>Gérer les cookies <em>dans votre navigateur</em></h2>
+      <p>Vous pouvez à tout moment paramétrer votre navigateur pour accepter ou refuser les cookies. Voici comment accéder aux paramètres des principaux navigateurs :</p>
+      <ul>
+        <li><strong>Chrome</strong> : Paramètres → Confidentialité et sécurité → Cookies</li>
+        <li><strong>Firefox</strong> : Options → Vie privée et sécurité → Cookies et données du site</li>
+        <li><strong>Safari</strong> : Préférences → Confidentialité → Cookies et données du site web</li>
+        <li><strong>Edge</strong> : Paramètres → Confidentialité, recherche et services → Cookies</li>
+      </ul>
+      <p>La suppression ou le blocage des cookies nécessaires peut affecter le bon fonctionnement du site (ex. : la préférence de langue ne sera pas mémorisée).</p>
+    </div>
+
+    <div class="legal-section" id="c5-fr">
+      <span class="section-num">Section 05</span>
+      <h2>Contact <em>et mise à jour</em></h2>
+      <p>Pour toute question relative aux cookies : <strong>contact@sangour3i.com</strong></p>
+      <p>La présente politique peut être mise à jour pour refléter les évolutions légales ou techniques. La date de version en en-tête indique la date de la dernière mise à jour.</p>
+    </div>
+
+  </div><!-- /body-fr -->
+
+  <!-- ══ ENGLISH ══ -->
+  <div class="lang-block" id="body-en">
+
+    <div class="legal-section" id="c1-en">
+      <span class="section-num">Section 01</span>
+      <h2>What <em>is a cookie?</em></h2>
+      <p>A cookie is a small text file placed on your device (computer, tablet, mobile) when you visit a website. It allows the site to remember information about your browsing and preferences.</p>
+      <div class="highlight-box">"SANGOUR3i takes a minimalist approach to cookies. We only install what is strictly necessary for the website to function."</div>
+    </div>
+
+    <div class="legal-section" id="c2-en">
+      <span class="section-num">Section 02</span>
+      <h2>Cookies used <em>on this site</em></h2>
+
+      <h3>Strictly necessary cookies <span class="badge badge-green">Always active</span></h3>
+      <table class="cookie-table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Purpose</th>
+            <th>Duration</th>
+            <th>Type</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>lang</strong></td>
+            <td>Remembers the user's language preference (FR/EN)</td>
+            <td>Session / localStorage</td>
+            <td><span class="badge badge-green">Functional</span></td>
+          </tr>
+          <tr>
+            <td><strong>cookie_consent</strong></td>
+            <td>Remembers your cookie choice</td>
+            <td>13 months</td>
+            <td><span class="badge badge-green">Necessary</span></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3 style="margin-top:2rem;">Analytics cookies <span class="badge badge-yellow">Consent required</span></h3>
+      <p>If you accept, we may use analytics cookies to understand how visitors use the site. This data is aggregated and anonymized — it does not allow personal identification.</p>
+      <table class="cookie-table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Purpose</th>
+            <th>Duration</th>
+            <th>Type</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>_analytics</strong></td>
+            <td>Anonymized audience measurement (pages viewed, visit duration)</td>
+            <td>13 months</td>
+            <td><span class="badge badge-yellow">Analytics</span></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3 style="margin-top:2rem;">Advertising or third-party tracking cookies <span class="badge badge-red">Not used</span></h3>
+      <p><strong>SANGOUR3i does not install any advertising cookies, tracking pixels, or retargeting tools.</strong> No third-party advertising network has access to your browsing data via our website.</p>
+    </div>
+
+    <div class="legal-section" id="c3-en">
+      <span class="section-num">Section 03</span>
+      <h2>Your <em>consent</em></h2>
+      <p>In line with GDPR requirements, non-essential cookies are only set after obtaining your explicit consent via the cookie banner displayed on your first visit.</p>
+
+      <h3>Cookie banner preview</h3>
+      <div class="banner-preview">
+        <div class="banner-preview-label">Preview · Actual interface</div>
+        <div class="banner-content">
+          <div class="banner-text">
+            <strong style="color:var(--off);font-weight:500;">SANGOUR3i uses cookies.</strong><br>
+            Necessary cookies ensure the website functions correctly. Analytics cookies, subject to consent, help us improve your experience. No advertising cookies.
+          </div>
+          <div class="banner-btns">
+            <button class="banner-btn-accept">Accept</button>
+            <button class="banner-btn-refuse">Decline</button>
+          </div>
+        </div>
+      </div>
+
+      <p>You can change your choice at any time by <strong>contacting SANGOUR3i at contact@sangour3i.com</strong> or by clearing cookies in your browser settings.</p>
+    </div>
+
+    <div class="legal-section" id="c4-en">
+      <span class="section-num">Section 04</span>
+      <h2>Managing cookies <em>in your browser</em></h2>
+      <p>You can configure your browser at any time to accept or refuse cookies:</p>
+      <ul>
+        <li><strong>Chrome</strong>: Settings → Privacy and security → Cookies</li>
+        <li><strong>Firefox</strong>: Options → Privacy & Security → Cookies and Site Data</li>
+        <li><strong>Safari</strong>: Preferences → Privacy → Cookies and Website Data</li>
+        <li><strong>Edge</strong>: Settings → Privacy, search and services → Cookies</li>
+      </ul>
+      <p>Deleting or blocking necessary cookies may affect the website's proper functioning (e.g., language preference will not be remembered).</p>
+    </div>
+
+    <div class="legal-section" id="c5-en">
+      <span class="section-num">Section 05</span>
+      <h2>Contact <em>and updates</em></h2>
+      <p>For any questions about cookies: <strong>contact@sangour3i.com</strong></p>
+      <p>This policy may be updated to reflect legal or technical changes. The version date in the header indicates the date of the last update.</p>
+    </div>
+
+  </div><!-- /body-en -->
+
+</div><!-- /legal-body -->
+
+<footer>
+  <span class="footer-logo">SANGOUR3i</span>
+  <ul class="footer-links">
+    <li><a href="index.html" data-fr="Accueil" data-en="Home">Accueil</a></li>
+    <li><a href="terms.html" data-fr="CGV" data-en="Terms">CGV</a></li>
+    <li><a href="privacy.html" data-fr="Confidentialité" data-en="Privacy">Confidentialité</a></li>
+    <li><a href="cookies.html" data-fr="Cookies" data-en="Cookies">Cookies</a></li>
+    <li><a href="index.html#contact" data-fr="Contact" data-en="Contact">Contact</a></li>
+  </ul>
+  <div class="footer-copy" data-fr="© 2026 SANGOUR3i · Tous droits réservés" data-en="© 2026 SANGOUR3i · All rights reserved">© 2026 SANGOUR3i · Tous droits réservés</div>
+</footer>
+
+<script>
+let currentLang='fr';
+function setLang(lang){
+  currentLang=lang;
+  document.querySelectorAll('.lang-block').forEach(el=>el.classList.remove('active'));
+  document.querySelectorAll(`[id$="-${lang}"]`).forEach(el=>el.classList.add('active'));
+  document.querySelectorAll('[data-fr]').forEach(el=>{const v=el.dataset[lang];if(v)el.textContent=v;});
+  document.documentElement.lang=lang;
+  document.getElementById('lang-toggle').textContent=lang==='en'?'FR':'EN';
+  document.title=lang==='en'?'SANGOUR3i — Cookie Policy':'SANGOUR3i — Politique de Cookies';
+  try{localStorage.setItem('lang',lang);}catch(e){}
+}
+document.getElementById('lang-toggle').addEventListener('click',()=>setLang(currentLang==='fr'?'en':'fr'));
+(function(){try{const s=localStorage.getItem('lang');const b=navigator.language&&navigator.language.startsWith('en')?'en':'fr';setLang(s||b);}catch(e){setLang('fr');}})();
+</script>
+</body>
+</html>

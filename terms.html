@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SANGOUR3i — Conditions Générales / Terms & Conditions</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Space+Mono:wght@400;700&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:#07080C; --bg2:#0D0F16; --bg3:#12151E;
+  --gold:#C4A44A; --gold2:#DFC070; --gold-dim:#7A6530;
+  --off:#E8E2D4; --muted:#6E6C66; --muted2:#9A9690;
+  --border:rgba(196,164,74,0.14); --border2:rgba(196,164,74,0.28);
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--off);font-family:'Jost',sans-serif;font-weight:300;overflow-x:hidden;line-height:1.6}
+body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(196,164,74,0.025) 1px,transparent 1px),linear-gradient(90deg,rgba(196,164,74,0.025) 1px,transparent 1px);background-size:80px 80px;pointer-events:none;z-index:0}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;justify-content:space-between;align-items:center;padding:1.4rem 4rem;background:rgba(7,8,12,0.92);backdrop-filter:blur(16px);border-bottom:1px solid var(--border)}
+.nav-logo{font-family:'Space Mono',monospace;font-size:0.78rem;letter-spacing:0.28em;color:var(--gold);text-decoration:none}
+.nav-right{display:flex;align-items:center;gap:1rem}
+#lang-toggle{font-family:'Space Mono',monospace;font-size:0.55rem;letter-spacing:0.2em;color:var(--muted);background:transparent;border:1px solid var(--border);padding:0.4rem 0.75rem;cursor:pointer;transition:all 0.3s}
+#lang-toggle:hover{color:var(--gold);border-color:var(--border2)}
+.nav-cta{font-family:'Space Mono',monospace;font-size:0.6rem;letter-spacing:0.15em;color:var(--gold);border:1px solid var(--gold);padding:0.55rem 1.3rem;text-decoration:none;transition:all 0.3s}
+.nav-cta:hover{background:var(--gold);color:var(--bg)}
+.nav-back{font-family:'Space Mono',monospace;font-size:0.55rem;letter-spacing:0.15em;color:var(--muted);text-decoration:none;transition:color 0.3s;display:flex;align-items:center;gap:0.5rem}
+.nav-back:hover{color:var(--gold)}
+
+.legal-hero{position:relative;z-index:1;padding:10rem 4rem 4rem;max-width:900px;margin:0 auto;border-bottom:1px solid var(--border)}
+.legal-label{font-family:'Space Mono',monospace;font-size:0.56rem;letter-spacing:0.35em;color:var(--gold);text-transform:uppercase;margin-bottom:1.5rem;display:flex;align-items:center;gap:0.8rem}
+.legal-label::before{content:'';display:block;width:28px;height:1px;background:var(--gold)}
+.legal-hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2.5rem,5vw,4rem);font-weight:300;line-height:1.1;margin-bottom:1rem}
+.legal-hero h1 em{font-style:italic;color:var(--gold)}
+.legal-meta{display:flex;gap:2rem;flex-wrap:wrap;margin-top:2rem}
+.legal-meta-item{display:flex;flex-direction:column;gap:0.3rem}
+.legal-meta-label{font-family:'Space Mono',monospace;font-size:0.46rem;letter-spacing:0.2em;color:var(--gold-dim);text-transform:uppercase}
+.legal-meta-value{font-size:0.85rem;color:var(--muted2)}
+
+.legal-toc{position:relative;z-index:1;padding:3rem 4rem;max-width:900px;margin:0 auto;background:var(--bg2);border-bottom:1px solid var(--border)}
+.toc-title{font-family:'Space Mono',monospace;font-size:0.52rem;letter-spacing:0.25em;color:var(--gold-dim);text-transform:uppercase;margin-bottom:1.2rem}
+.toc-list{list-style:none;display:flex;flex-direction:column;gap:0.4rem}
+.toc-list a{font-family:'Space Mono',monospace;font-size:0.52rem;letter-spacing:0.1em;color:var(--muted);text-decoration:none;display:flex;align-items:center;gap:0.8rem;transition:color 0.3s}
+.toc-list a::before{content:'→';color:var(--gold-dim);flex-shrink:0}
+.toc-list a:hover{color:var(--gold)}
+
+.legal-body{position:relative;z-index:1;max-width:900px;margin:0 auto;padding:4rem}
+
+/* Lang blocks */
+.lang-block{display:none}
+.lang-block.active{display:block}
+
+.legal-section{margin-bottom:4rem;padding-bottom:4rem;border-bottom:1px solid var(--border)}
+.legal-section:last-child{border-bottom:none}
+.section-num{font-family:'Space Mono',monospace;font-size:0.48rem;letter-spacing:0.25em;color:var(--gold-dim);text-transform:uppercase;margin-bottom:0.6rem;display:block}
+.legal-section h2{font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:400;color:var(--off);margin-bottom:1.5rem;line-height:1.2}
+.legal-section h2 em{font-style:italic;color:var(--gold)}
+.legal-section p{font-size:0.9rem;color:var(--muted2);line-height:1.9;margin-bottom:1rem}
+.legal-section strong{color:var(--off);font-weight:500}
+.legal-section ul{list-style:none;display:flex;flex-direction:column;gap:0.5rem;margin:1rem 0 1rem 0}
+.legal-section ul li{font-size:0.88rem;color:var(--muted2);display:flex;align-items:flex-start;gap:0.8rem;line-height:1.7}
+.legal-section ul li::before{content:'—';color:var(--gold-dim);flex-shrink:0;margin-top:0.1rem}
+.legal-section h3{font-family:'Jost',sans-serif;font-size:0.95rem;font-weight:500;color:var(--off);margin:1.8rem 0 0.8rem;letter-spacing:0.02em}
+.highlight-box{background:var(--bg2);border:1px solid var(--border);border-left:2px solid var(--gold);padding:1.5rem 2rem;margin:1.5rem 0;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.05rem;color:var(--off);line-height:1.6}
+.warning-box{background:rgba(139,32,32,0.08);border:1px solid rgba(139,32,32,0.25);padding:1.2rem 1.5rem;margin:1.5rem 0;font-size:0.85rem;color:#c4826a;line-height:1.7}
+.warning-box strong{color:#d9a090}
+
+footer{position:relative;z-index:1;padding:2.5rem 4rem;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-logo{font-family:'Space Mono',monospace;font-size:0.72rem;letter-spacing:0.25em;color:var(--gold)}
+.footer-links{display:flex;gap:2rem;list-style:none}
+.footer-links a{font-family:'Space Mono',monospace;font-size:0.5rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color 0.3s}
+.footer-links a:hover{color:var(--gold)}
+.footer-copy{font-family:'Space Mono',monospace;font-size:0.48rem;letter-spacing:0.12em;color:var(--muted)}
+
+@media(max-width:900px){
+  nav{padding:1.2rem 1.5rem}
+  .legal-hero,.legal-toc,.legal-body{padding-left:1.5rem;padding-right:1.5rem}
+  .legal-hero{padding-top:8rem}
+  footer{padding:2rem 1.5rem;flex-direction:column;text-align:center}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-back">← Retour</a>
+  <a href="index.html" class="nav-logo">SANGOUR3i</a>
+  <div class="nav-right">
+    <button id="lang-toggle">EN</button>
+    <a href="index.html#contact" class="nav-cta" data-fr="Demande confidentielle" data-en="Confidential inquiry">Demande confidentielle</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="legal-hero">
+  <div class="legal-label" data-fr="Documents légaux" data-en="Legal documents">Documents légaux</div>
+  <h1 class="lang-block active" id="title-fr">Conditions Générales<br>de <em>Prestation de Services</em></h1>
+  <h1 class="lang-block" id="title-en">Terms &amp;<br><em>Conditions</em></h1>
+  <div class="legal-meta">
+    <div class="legal-meta-item">
+      <span class="legal-meta-label" data-fr="Version" data-en="Version">Version</span>
+      <span class="legal-meta-value">1.0 — Avril 2026</span>
+    </div>
+    <div class="legal-meta-item">
+      <span class="legal-meta-label" data-fr="Applicable à" data-en="Applicable to">Applicable à</span>
+      <span class="legal-meta-value" data-fr="Toutes les prestations SANGOUR3i" data-en="All SANGOUR3i services">Toutes les prestations SANGOUR3i</span>
+    </div>
+    <div class="legal-meta-item">
+      <span class="legal-meta-label" data-fr="Droit applicable" data-en="Governing law">Droit applicable</span>
+      <span class="legal-meta-value" data-fr="Droit français" data-en="French law">Droit français</span>
+    </div>
+  </div>
+</div>
+
+<!-- TABLE OF CONTENTS -->
+<div class="legal-toc">
+  <p class="toc-title" data-fr="Sommaire" data-en="Table of contents">Sommaire</p>
+  <ul class="toc-list lang-block active" id="toc-fr">
+    <li><a href="#s1-fr">1. Objet et champ d'application</a></li>
+    <li><a href="#s2-fr">2. Description des services</a></li>
+    <li><a href="#s3-fr">3. Commande et acceptation</a></li>
+    <li><a href="#s4-fr">4. Tarifs et modalités de paiement</a></li>
+    <li><a href="#s5-fr">5. Obligations des parties</a></li>
+    <li><a href="#s6-fr">6. Confidentialité</a></li>
+    <li><a href="#s7-fr">7. Propriété intellectuelle</a></li>
+    <li><a href="#s8-fr">8. Limitation de responsabilité</a></li>
+    <li><a href="#s9-fr">9. Durée et résiliation</a></li>
+    <li><a href="#s10-fr">10. Droit applicable et litiges</a></li>
+  </ul>
+  <ul class="toc-list lang-block" id="toc-en">
+    <li><a href="#s1-en">1. Purpose and scope</a></li>
+    <li><a href="#s2-en">2. Description of services</a></li>
+    <li><a href="#s3-en">3. Order and acceptance</a></li>
+    <li><a href="#s4-en">4. Pricing and payment</a></li>
+    <li><a href="#s5-en">5. Obligations of the parties</a></li>
+    <li><a href="#s6-en">6. Confidentiality</a></li>
+    <li><a href="#s7-en">7. Intellectual property</a></li>
+    <li><a href="#s8-en">8. Limitation of liability</a></li>
+    <li><a href="#s9-en">9. Term and termination</a></li>
+    <li><a href="#s10-en">10. Governing law and disputes</a></li>
+  </ul>
+</div>
+
+<!-- BODY -->
+<div class="legal-body">
+
+  <!-- ══ FRENCH VERSION ══ -->
+  <div class="lang-block active" id="body-fr">
+
+    <div class="legal-section" id="s1-fr">
+      <span class="section-num">Article 01</span>
+      <h2>Objet et champ <em>d'application</em></h2>
+      <p>Les présentes Conditions Générales de Prestation de Services (ci-après « CGPS ») régissent l'ensemble des prestations proposées par <strong>SANGOUR3i</strong>, service d'intelligence digitale stratégique (ci-après « le Prestataire »), à destination de toute personne physique ou morale (ci-après « le Client ») souhaitant y avoir recours.</p>
+      <p>Toute commande de prestation implique l'acceptation pleine et entière des présentes CGPS. Le Client déclare en avoir pris connaissance et y adhère sans réserve.</p>
+      <p>Ces conditions prévalent sur tout autre document du Client, notamment ses propres conditions générales d'achat, sauf accord écrit préalable du Prestataire.</p>
+      <div class="highlight-box">« L'acceptation d'un devis ou la validation d'une commande vaut acceptation sans réserve des présentes conditions générales. »</div>
+    </div>
+
+    <div class="legal-section" id="s2-fr">
+      <span class="section-num">Article 02</span>
+      <h2>Description <em>des services</em></h2>
+      <p>SANGOUR3i propose des services d'analyse et de structuration de l'information à partir de sources ouvertes (OSINT), incluant notamment :</p>
+      <ul>
+        <li>Due Diligence Digitale — vérification de l'empreinte numérique d'individus ou d'entités</li>
+        <li>Audit d'Empreinte Digitale — cartographie et analyse de l'exposition numérique publique</li>
+        <li>Veille Réputationnelle — surveillance continue de l'environnement informationnel</li>
+        <li>Investigations OSINT — investigations structurées à partir de sources ouvertes</li>
+        <li>Atelier Anti-Manipulation — formation aux techniques de manipulation numérique</li>
+        <li>Vérification Documentaire — analyse d'authenticité et de cohérence documentaire</li>
+        <li>Hygiène Numérique Personnelle — audit de l'exposition et des pratiques numériques</li>
+      </ul>
+      <div class="warning-box"><strong>Important :</strong> L'ensemble des analyses est réalisé exclusivement à partir de sources publiquement disponibles. SANGOUR3i n'effectue aucune opération d'intrusion, de surveillance illégale, d'interception de communications ou d'accès non autorisé à des systèmes informatiques. Les services fournis ne constituent pas des conseils juridiques, financiers ou médicaux.</div>
+    </div>
+
+    <div class="legal-section" id="s3-fr">
+      <span class="section-num">Article 03</span>
+      <h2>Commande <em>et acceptation</em></h2>
+      <p>Toute demande de prestation doit être formulée par le Client via les canaux de contact officiels de SANGOUR3i. Le Prestataire adresse au Client un devis détaillant la nature, le périmètre et le coût de la prestation envisagée.</p>
+      <h3>Processus de commande</h3>
+      <ul>
+        <li>Le Client soumet une demande via le formulaire de contact ou par email</li>
+        <li>SANGOUR3i adresse un devis dans un délai de 48 heures ouvrées</li>
+        <li>La commande est validée par retour écrit du Client et règlement de l'acompte convenu</li>
+        <li>La mission démarre à réception de la confirmation et de l'acompte</li>
+      </ul>
+      <p>Le Prestataire se réserve le droit de refuser toute demande qu'il jugerait contraire aux lois en vigueur, à l'éthique professionnelle, ou susceptible de causer un préjudice à des tiers.</p>
+    </div>
+
+    <div class="legal-section" id="s4-fr">
+      <span class="section-num">Article 04</span>
+      <h2>Tarifs et modalités <em>de paiement</em></h2>
+      <p>Les tarifs sont indiqués sur le site à titre indicatif et peuvent être adaptés selon la complexité, le périmètre géographique et les délais de chaque mission. Le devis définitif fait foi.</p>
+      <h3>Conditions de paiement</h3>
+      <ul>
+        <li>Un acompte de 50% est exigé à la commande pour toute prestation ponctuelle</li>
+        <li>Le solde est dû à la livraison du rapport final</li>
+        <li>Les prestations récurrentes (veille) font l'objet d'une facturation mensuelle à terme échu</li>
+        <li>Les paiements s'effectuent par virement bancaire ou via les moyens convenus dans le devis</li>
+      </ul>
+      <p>Tout retard de paiement au-delà de 30 jours entraîne l'application de pénalités égales à trois fois le taux d'intérêt légal en vigueur, sans mise en demeure préalable.</p>
+    </div>
+
+    <div class="legal-section" id="s5-fr">
+      <span class="section-num">Article 05</span>
+      <h2>Obligations <em>des parties</em></h2>
+      <h3>Obligations du Prestataire</h3>
+      <ul>
+        <li>Réaliser les prestations avec diligence, professionnalisme et dans le respect du cadre légal</li>
+        <li>Respecter strictement la confidentialité des informations communiquées par le Client</li>
+        <li>Informer le Client de toute difficulté susceptible d'affecter la réalisation de la mission</li>
+        <li>Livrer les rapports dans les délais convenus, ou informer le Client de tout retard</li>
+        <li>N'utiliser que des sources légalement accessibles au public</li>
+      </ul>
+      <h3>Obligations du Client</h3>
+      <ul>
+        <li>Fournir des informations exactes, complètes et légalement obtenues nécessaires à la mission</li>
+        <li>Garantir que la demande de prestation est conforme aux lois applicables</li>
+        <li>Ne pas utiliser les rapports ou analyses à des fins illicites, diffamatoires ou frauduleuses</li>
+        <li>Régler les factures dans les délais convenus</li>
+        <li>Assumer l'entière responsabilité des décisions prises sur la base des analyses fournies</li>
+      </ul>
+      <div class="warning-box"><strong>Attention :</strong> Le Client garantit que toute demande de vérification visant une tierce personne est réalisée dans un cadre légal (recrutement, due diligence commerciale, etc.) et ne vise pas à porter atteinte à la vie privée, à harceler ou à surveiller illégalement un individu.</div>
+    </div>
+
+    <div class="legal-section" id="s6-fr">
+      <span class="section-num">Article 06</span>
+      <h2><em>Confidentialité</em></h2>
+      <p>SANGOUR3i s'engage à traiter comme strictement confidentielles toutes les informations communiquées par le Client dans le cadre des prestations. Cet engagement de confidentialité est réciproque.</p>
+      <ul>
+        <li>Aucune information relative à l'identité du Client, à la nature de sa demande ou aux résultats de la mission ne sera divulguée à des tiers</li>
+        <li>Les rapports produits sont destinés exclusivement au Client commanditaire</li>
+        <li>SANGOUR3i ne conserve pas de copies des rapports finaux au-delà d'un délai de 90 jours après livraison</li>
+        <li>Cet engagement de confidentialité s'applique sans limite de durée</li>
+      </ul>
+      <div class="highlight-box">« Votre identité, vos besoins et les résultats de chaque mission restent strictement confidentiels. Aucune exception. »</div>
+    </div>
+
+    <div class="legal-section" id="s7-fr">
+      <span class="section-num">Article 07</span>
+      <h2>Propriété <em>intellectuelle</em></h2>
+      <p>Les rapports, analyses et livrables produits par SANGOUR3i dans le cadre des prestations sont la propriété exclusive du Client dès règlement complet de la facture correspondante.</p>
+      <p>Toutefois, les méthodes, outils, frameworks et processus analytiques utilisés par SANGOUR3i restent la propriété exclusive du Prestataire et ne sont pas cédés au Client.</p>
+      <p>Le Client s'engage à ne pas reproduire, diffuser ou commercialiser les livrables reçus sans accord préalable écrit de SANGOUR3i.</p>
+    </div>
+
+    <div class="legal-section" id="s8-fr">
+      <span class="section-num">Article 08</span>
+      <h2>Limitation <em>de responsabilité</em></h2>
+      <p>SANGOUR3i est soumis à une <strong>obligation de moyens</strong> et non de résultat. Le Prestataire s'engage à mettre en œuvre tous les moyens raisonnables pour fournir des analyses rigoureuses et sourcées, sans garantir l'exhaustivité ou l'infaillibilité des informations collectées.</p>
+      <ul>
+        <li>SANGOUR3i ne saurait être tenu responsable des décisions prises par le Client sur la base des analyses fournies</li>
+        <li>La responsabilité du Prestataire est limitée au montant total des sommes effectivement versées par le Client pour la prestation concernée</li>
+        <li>SANGOUR3i n'est pas responsable des dommages indirects, immatériels ou consécutifs</li>
+        <li>Les analyses OSINT étant basées sur des données publiques, leur exactitude dépend de la qualité des sources disponibles au moment de la mission</li>
+      </ul>
+      <div class="warning-box"><strong>Clause de non-conseil :</strong> Les livrables de SANGOUR3i constituent des analyses d'aide à la décision et ne constituent en aucun cas des conseils juridiques, financiers, médicaux ou professionnels. Le Client est seul responsable de ses décisions.</div>
+    </div>
+
+    <div class="legal-section" id="s9-fr">
+      <span class="section-num">Article 09</span>
+      <h2>Durée <em>et résiliation</em></h2>
+      <p>Les prestations ponctuelles prennent fin à la livraison du rapport final et au règlement intégral de la facture.</p>
+      <p>Les prestations récurrentes (veille) sont conclues pour une durée minimale d'un mois et renouvelables par tacite reconduction. Chacune des parties peut y mettre fin avec un préavis de 30 jours par notification écrite.</p>
+      <p>En cas de manquement grave du Client à ses obligations (non-paiement, utilisation illicite des livrables), SANGOUR3i se réserve le droit de suspendre ou résilier la prestation de plein droit, sans indemnité.</p>
+    </div>
+
+    <div class="legal-section" id="s10-fr">
+      <span class="section-num">Article 10</span>
+      <h2>Droit applicable <em>et litiges</em></h2>
+      <p>Les présentes CGPS sont soumises au <strong>droit français</strong>. En cas de litige relatif à leur interprétation ou leur exécution, les parties s'engagent à rechercher une solution amiable dans un délai de 30 jours.</p>
+      <p>À défaut d'accord amiable, tout litige sera soumis à la compétence exclusive des tribunaux compétents du ressort du siège de SANGOUR3i.</p>
+      <p>Pour toute question relative aux présentes conditions : <strong>contact@sangour3i.com</strong></p>
+    </div>
+
+  </div><!-- /body-fr -->
+
+  <!-- ══ ENGLISH VERSION ══ -->
+  <div class="lang-block" id="body-en">
+
+    <div class="legal-section" id="s1-en">
+      <span class="section-num">Article 01</span>
+      <h2>Purpose <em>and scope</em></h2>
+      <p>These Terms and Conditions (hereinafter "T&C") govern all services offered by <strong>SANGOUR3i</strong>, a strategic digital intelligence service (hereinafter "the Provider"), to any individual or legal entity (hereinafter "the Client") wishing to use them.</p>
+      <p>Any service order implies full and unconditional acceptance of these T&C. The Client acknowledges having read and accepted them without reservation.</p>
+      <p>These conditions take precedence over any other Client document, including their own general purchasing conditions, unless expressly agreed otherwise in writing by the Provider.</p>
+      <div class="highlight-box">"Acceptance of a quote or validation of an order constitutes unconditional acceptance of these general terms and conditions."</div>
+    </div>
+
+    <div class="legal-section" id="s2-en">
+      <span class="section-num">Article 02</span>
+      <h2>Description <em>of services</em></h2>
+      <p>SANGOUR3i provides information analysis and structuring services from open sources (OSINT), including:</p>
+      <ul>
+        <li>Digital Due Diligence — verification of the digital footprint of individuals or entities</li>
+        <li>Digital Footprint Audit — mapping and analysis of public digital exposure</li>
+        <li>Reputation Monitoring — continuous monitoring of the informational environment</li>
+        <li>OSINT Investigations — structured investigations from open sources</li>
+        <li>Anti-Manipulation Workshop — training on digital manipulation techniques</li>
+        <li>Document Verification — authenticity and consistency analysis</li>
+        <li>Personal Digital Hygiene — audit of digital exposure and practices</li>
+      </ul>
+      <div class="warning-box"><strong>Important:</strong> All analyses are conducted exclusively from publicly available sources. SANGOUR3i does not perform any intrusion, illegal surveillance, interception of communications, or unauthorized access to computer systems. Services provided do not constitute legal, financial, or medical advice.</div>
+    </div>
+
+    <div class="legal-section" id="s3-en">
+      <span class="section-num">Article 03</span>
+      <h2>Order <em>and acceptance</em></h2>
+      <p>Any service request must be submitted by the Client through SANGOUR3i's official contact channels. The Provider sends the Client a quote detailing the nature, scope, and cost of the proposed service.</p>
+      <h3>Order process</h3>
+      <ul>
+        <li>The Client submits a request via the contact form or by email</li>
+        <li>SANGOUR3i sends a quote within 48 business hours</li>
+        <li>The order is confirmed by written reply from the Client and payment of the agreed deposit</li>
+        <li>The mission starts upon receipt of confirmation and deposit</li>
+      </ul>
+      <p>The Provider reserves the right to refuse any request it deems contrary to applicable laws, professional ethics, or likely to cause harm to third parties.</p>
+    </div>
+
+    <div class="legal-section" id="s4-en">
+      <span class="section-num">Article 04</span>
+      <h2>Pricing <em>and payment</em></h2>
+      <p>Prices shown on the website are indicative and may be adjusted based on complexity, geographical scope, and timeframes of each mission. The final quote is binding.</p>
+      <h3>Payment conditions</h3>
+      <ul>
+        <li>A 50% deposit is required upon ordering for any one-time service</li>
+        <li>The balance is due upon delivery of the final report</li>
+        <li>Recurring services (monitoring) are invoiced monthly in arrears</li>
+        <li>Payments are made by bank transfer or via the means agreed in the quote</li>
+      </ul>
+      <p>Any payment delayed beyond 30 days will incur penalties equal to three times the applicable legal interest rate, without prior notice.</p>
+    </div>
+
+    <div class="legal-section" id="s5-en">
+      <span class="section-num">Article 05</span>
+      <h2>Obligations <em>of the parties</em></h2>
+      <h3>Provider obligations</h3>
+      <ul>
+        <li>Perform services with diligence, professionalism, and in compliance with applicable law</li>
+        <li>Strictly maintain confidentiality of all information provided by the Client</li>
+        <li>Inform the Client of any difficulty likely to affect the mission</li>
+        <li>Deliver reports within agreed timeframes, or notify the Client of any delay</li>
+        <li>Use only legally publicly accessible sources</li>
+      </ul>
+      <h3>Client obligations</h3>
+      <ul>
+        <li>Provide accurate, complete, and lawfully obtained information necessary for the mission</li>
+        <li>Warrant that the service request complies with applicable laws</li>
+        <li>Not use reports or analyses for unlawful, defamatory, or fraudulent purposes</li>
+        <li>Pay invoices within agreed timeframes</li>
+        <li>Assume full responsibility for decisions made based on provided analyses</li>
+      </ul>
+      <div class="warning-box"><strong>Important:</strong> The Client warrants that any verification request targeting a third party is conducted within a legal framework (recruitment, commercial due diligence, etc.) and does not aim to infringe privacy, harass, or illegally monitor an individual.</div>
+    </div>
+
+    <div class="legal-section" id="s6-en">
+      <span class="section-num">Article 06</span>
+      <h2><em>Confidentiality</em></h2>
+      <p>SANGOUR3i undertakes to treat as strictly confidential all information communicated by the Client in the context of the services. This confidentiality commitment is reciprocal.</p>
+      <ul>
+        <li>No information relating to the Client's identity, the nature of the request, or mission results will be disclosed to third parties</li>
+        <li>Reports are intended exclusively for the commissioning Client</li>
+        <li>SANGOUR3i does not retain copies of final reports beyond 90 days after delivery</li>
+        <li>This confidentiality commitment applies without time limit</li>
+      </ul>
+      <div class="highlight-box">"Your identity, your needs, and the results of every mission remain strictly confidential. No exceptions."</div>
+    </div>
+
+    <div class="legal-section" id="s7-en">
+      <span class="section-num">Article 07</span>
+      <h2>Intellectual <em>property</em></h2>
+      <p>Reports, analyses, and deliverables produced by SANGOUR3i are the exclusive property of the Client upon full payment of the corresponding invoice.</p>
+      <p>However, the methods, tools, frameworks, and analytical processes used by SANGOUR3i remain the exclusive property of the Provider and are not transferred to the Client.</p>
+      <p>The Client undertakes not to reproduce, distribute, or commercialize received deliverables without prior written consent from SANGOUR3i.</p>
+    </div>
+
+    <div class="legal-section" id="s8-en">
+      <span class="section-num">Article 08</span>
+      <h2>Limitation <em>of liability</em></h2>
+      <p>SANGOUR3i is subject to a <strong>best-efforts obligation</strong> and not an obligation of result. The Provider undertakes to deploy all reasonable means to provide rigorous, sourced analyses, without guaranteeing the exhaustiveness or infallibility of collected information.</p>
+      <ul>
+        <li>SANGOUR3i cannot be held liable for decisions made by the Client based on provided analyses</li>
+        <li>The Provider's liability is limited to the total amount actually paid by the Client for the relevant service</li>
+        <li>SANGOUR3i is not liable for indirect, intangible, or consequential damages</li>
+        <li>OSINT analyses being based on public data, their accuracy depends on source quality available at the time of the mission</li>
+      </ul>
+      <div class="warning-box"><strong>Non-advice disclaimer:</strong> SANGOUR3i deliverables constitute decision-support analyses and do not constitute legal, financial, medical, or professional advice in any form. The Client bears sole responsibility for their decisions.</div>
+    </div>
+
+    <div class="legal-section" id="s9-en">
+      <span class="section-num">Article 09</span>
+      <h2>Term <em>and termination</em></h2>
+      <p>One-time services end upon delivery of the final report and full payment of the invoice.</p>
+      <p>Recurring services (monitoring) are concluded for a minimum duration of one month and automatically renewed. Either party may terminate with 30 days' written notice.</p>
+      <p>In the event of serious breach by the Client (non-payment, unlawful use of deliverables), SANGOUR3i reserves the right to immediately suspend or terminate the service without compensation.</p>
+    </div>
+
+    <div class="legal-section" id="s10-en">
+      <span class="section-num">Article 10</span>
+      <h2>Governing law <em>and disputes</em></h2>
+      <p>These T&C are governed by <strong>French law</strong>. In the event of any dispute regarding their interpretation or performance, the parties undertake to seek an amicable resolution within 30 days.</p>
+      <p>Failing amicable agreement, any dispute shall be submitted to the exclusive jurisdiction of the competent courts in SANGOUR3i's registered office jurisdiction.</p>
+      <p>For any questions regarding these terms: <strong>contact@sangour3i.com</strong></p>
+    </div>
+
+  </div><!-- /body-en -->
+
+</div><!-- /legal-body -->
+
+<footer>
+  <span class="footer-logo">SANGOUR3i</span>
+  <ul class="footer-links">
+    <li><a href="index.html" data-fr="Accueil" data-en="Home">Accueil</a></li>
+    <li><a href="terms.html" data-fr="CGV" data-en="Terms">CGV</a></li>
+    <li><a href="privacy.html" data-fr="Confidentialité" data-en="Privacy">Confidentialité</a></li>
+    <li><a href="cookies.html" data-fr="Cookies" data-en="Cookies">Cookies</a></li>
+    <li><a href="index.html#contact" data-fr="Contact" data-en="Contact">Contact</a></li>
+  </ul>
+  <div class="footer-copy" data-fr="© 2026 SANGOUR3i · Tous droits réservés" data-en="© 2026 SANGOUR3i · All rights reserved">© 2026 SANGOUR3i · Tous droits réservés</div>
+</footer>
+
+<script>
+let currentLang = 'fr';
+function setLang(lang) {
+  currentLang = lang;
+  // Show/hide lang blocks
+  document.querySelectorAll('.lang-block').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll(`[id$="-${lang}"]`).forEach(el => el.classList.add('active'));
+  // data-fr/data-en text
+  document.querySelectorAll('[data-fr]').forEach(el => {
+    const val = el.dataset[lang];
+    if(val) el.textContent = val;
+  });
+  document.documentElement.lang = lang;
+  document.getElementById('lang-toggle').textContent = lang === 'en' ? 'FR' : 'EN';
+  document.title = lang === 'en' ? 'SANGOUR3i — Terms & Conditions' : 'SANGOUR3i — Conditions Générales';
+  try{ localStorage.setItem('lang', lang); }catch(e){}
+}
+document.getElementById('lang-toggle').addEventListener('click', () => {
+  setLang(currentLang === 'fr' ? 'en' : 'fr');
+});
+(function(){
+  try{
+    const saved = localStorage.getItem('lang');
+    const browser = navigator.language && navigator.language.startsWith('en') ? 'en' : 'fr';
+    setLang(saved || browser);
+  }catch(e){ setLang('fr'); }
+})();
+</script>
+</body>
+</html>

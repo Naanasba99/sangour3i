@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SANGOUR3i — Intelligence Digitale Stratégique</title>
+<meta name="description" content="Conseil en intelligence digitale pour décideurs exigeants. Due diligence, audit réputationnel, investigation OSINT. Afrique francophone · Europe · Amérique Latine.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Space+Mono:wght@400;700&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:       #07080C;
+  --bg2:      #0D0F16;
+  --bg3:      #12151E;
+  --bg4:      #171A24;
+  --gold:     #C4A44A;
+  --gold2:    #DFC070;
+  --gold-dim: #7A6530;
+  --gold-faint: rgba(196,164,74,0.08);
+  --off:      #E8E2D4;
+  --muted:    #6E6C66;
+  --muted2:   #9A9690;
+  --border:   rgba(196,164,74,0.14);
+  --border2:  rgba(196,164,74,0.28);
+  --red:      #8B2020;
+}
+
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--off);
+  font-family: 'Jost', sans-serif;
+  font-weight:300;
+  overflow-x:hidden;
+  line-height:1.6;
+}
+
+body::before {
+  content:'';
+  position:fixed; inset:0;
+  background-image:
+    linear-gradient(rgba(196,164,74,0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(196,164,74,0.025) 1px, transparent 1px);
+  background-size:80px 80px;
+  pointer-events:none;
+  z-index:0;
+}
+
+/* ── REVEAL ── */
+.reveal { opacity:1; transform:translateY(0); transition:opacity 0.75s ease, transform 0.75s ease; }
+.js-animate .reveal { opacity:0; transform:translateY(28px); }
+.js-animate .reveal.visible { opacity:1; transform:translateY(0); }
+
+/* ── NAV ── */
+nav {
+  position:fixed; top:0; left:0; right:0; z-index:200;
+  display:flex; justify-content:space-between; align-items:center;
+  padding:1.4rem 4rem;
+  background:rgba(7,8,12,0.92);
+  backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--border);
+}
+
+.nav-logo-wrap { display:flex; flex-direction:column; gap:0.1rem; text-decoration:none; }
+.nav-logo { font-family:'Space Mono', monospace; font-size:0.78rem; letter-spacing:0.28em; color:var(--gold); display:block; }
+.nav-logo-sub { font-family:'Space Mono', monospace; font-size:0.46rem; letter-spacing:0.3em; color:var(--muted); text-transform:uppercase; }
+
+.nav-links { display:flex; gap:2.5rem; list-style:none; }
+.nav-links a { font-family:'Space Mono', monospace; font-size:0.58rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--muted); text-decoration:none; transition:color 0.3s; }
+.nav-links a:hover { color:var(--gold); }
+
+.nav-right { display:flex; align-items:center; gap:1rem; }
+
+#lang-toggle { font-family:'Space Mono', monospace; font-size:0.55rem; letter-spacing:0.2em; color:var(--muted); background:transparent; border:1px solid var(--border); padding:0.4rem 0.75rem; cursor:pointer; transition:all 0.3s; }
+#lang-toggle:hover { color:var(--gold); border-color:var(--border2); }
+
+.nav-cta { font-family:'Space Mono', monospace; font-size:0.6rem; letter-spacing:0.15em; color:var(--gold); border:1px solid var(--gold); padding:0.55rem 1.3rem; text-decoration:none; transition:all 0.3s; }
+.nav-cta:hover { background:var(--gold); color:var(--bg); }
+
+/* ── HERO ── */
+#hero { position:relative; min-height:100vh; display:flex; align-items:center; overflow:hidden; }
+
+.hero-bg {
+  position:absolute; inset:0;
+  background: radial-gradient(ellipse 80% 60% at 70% 40%, rgba(196,164,74,0.05) 0%, transparent 65%),
+              radial-gradient(ellipse 50% 50% at 20% 80%, rgba(196,164,74,0.03) 0%, transparent 60%);
+}
+
+.hero-classified { position:absolute; top:0; right:0; width:50%; height:100%; border-left:1px solid var(--border); overflow:hidden; display:flex; align-items:center; justify-content:center; }
+.hero-classified-inner { display:flex; flex-direction:column; gap:1.5rem; padding:2rem; opacity:0.06; pointer-events:none; transform:rotate(-3deg); }
+.classified-line { font-family:'Space Mono', monospace; font-size:0.6rem; letter-spacing:0.3em; color:var(--gold); white-space:nowrap; }
+
+.hero-content { position:relative; z-index:1; padding:8rem 4rem; max-width:760px; }
+
+.hero-label { font-family:'Space Mono', monospace; font-size:0.6rem; letter-spacing:0.35em; color:var(--gold); text-transform:uppercase; margin-bottom:2.5rem; display:flex; align-items:center; gap:1rem; opacity:0; animation:fadeUp 0.9s 0.2s forwards; }
+.hero-label::before { content:''; display:block; width:36px; height:1px; background:var(--gold); }
+
+h1 { font-family:'Cormorant Garamond', serif; font-size:clamp(3.5rem, 7vw, 6.5rem); font-weight:300; line-height:1.0; letter-spacing:-0.02em; margin-bottom:2rem; opacity:0; animation:fadeUp 0.9s 0.4s forwards; }
+h1 em { font-style:italic; color:var(--gold); }
+
+.hero-proposition { font-family:'Cormorant Garamond', serif; font-size:1.25rem; font-style:italic; font-weight:300; color:var(--muted2); line-height:1.7; max-width:580px; margin-bottom:3rem; border-left:1px solid var(--border2); padding-left:1.5rem; opacity:0; animation:fadeUp 0.9s 0.6s forwards; }
+
+.hero-actions { display:flex; gap:1.5rem; align-items:center; opacity:0; animation:fadeUp 0.9s 0.8s forwards; }
+
+.btn-primary { background:var(--gold); color:var(--bg); font-family:'Space Mono', monospace; font-size:0.65rem; letter-spacing:0.18em; text-transform:uppercase; padding:1rem 2.5rem; text-decoration:none; transition:all 0.3s; display:inline-block; }
+.btn-primary:hover { background:var(--gold2); }
+
+.btn-ghost { color:var(--muted); font-family:'Space Mono', monospace; font-size:0.65rem; letter-spacing:0.15em; text-transform:uppercase; text-decoration:none; display:flex; align-items:center; gap:0.7rem; transition:color 0.3s; }
+.btn-ghost::after { content:'→'; transition:transform 0.3s; }
+.btn-ghost:hover { color:var(--off); }
+.btn-ghost:hover::after { transform:translateX(4px); }
+
+.hero-metrics { display:flex; flex-direction:column; gap:1.5rem; opacity:0; animation:fadeUp 0.9s 1s forwards; z-index:1; margin-top: 3rem; }
+
+.metric { text-align:right; padding:1.2rem 1.5rem; border:1px solid var(--border); background:rgba(13,15,22,0.6); backdrop-filter:blur(8px); min-width:160px; }
+.metric-num { font-family:'Cormorant Garamond', serif; font-size:2.2rem; font-weight:300; color:var(--gold); display:block; line-height:1; }
+.metric-label { font-family:'Space Mono', monospace; font-size:0.48rem; letter-spacing:0.22em; color:var(--muted); text-transform:uppercase; display:block; margin-top:0.3rem; }
+
+/* ── STRIP ── */
+.strip { position:relative; z-index:1; border-top:1px solid var(--border); border-bottom:1px solid var(--border); padding:1.2rem 4rem; background:var(--bg2); display:flex; gap:4rem; align-items:center; overflow:hidden; }
+.strip-item { display:flex; align-items:center; gap:1rem; white-space:nowrap; }
+.strip-dot { width:5px; height:5px; border-radius:50%; background:var(--gold); flex-shrink:0; }
+.strip-text { font-family:'Space Mono', monospace; font-size:0.52rem; letter-spacing:0.22em; color:var(--muted2); text-transform:uppercase; }
+
+/* ── SECTION BASE ── */
+section { position:relative; z-index:1; }
+
+.section-label { font-family:'Space Mono', monospace; font-size:0.56rem; letter-spacing:0.35em; color:var(--gold); text-transform:uppercase; margin-bottom:1rem; display:flex; align-items:center; gap:0.8rem; }
+.section-label::before { content:''; display:block; width:28px; height:1px; background:var(--gold); }
+
+h2 { font-family:'Cormorant Garamond', serif; font-size:clamp(2.5rem, 4vw, 4rem); font-weight:300; line-height:1.1; margin-bottom:1rem; letter-spacing:-0.01em; }
+h2 em { font-style:italic; color:var(--gold); }
+
+/* ── POSITIONING ── */
+#positioning { padding:7rem 4rem; max-width:1300px; margin:0 auto; display:grid; grid-template-columns:1fr 1fr; gap:7rem; align-items:center; border-bottom:1px solid var(--border); }
+
+.pos-left p { font-size:1rem; color:var(--muted2); line-height:1.9; margin-bottom:1.5rem; max-width:480px; }
+.pos-left strong { color:var(--off); font-weight:400; }
+
+.pos-quote { margin-top:2.5rem; padding:1.8rem 2rem; border-left:2px solid var(--gold); background:var(--bg2); font-family:'Cormorant Garamond', serif; font-style:italic; font-size:1.2rem; color:var(--off); line-height:1.6; }
+
+.pos-right { display:flex; flex-direction:column; gap:0; border:1px solid var(--border); }
+
+.differentiator { padding:2rem 2.5rem; border-bottom:1px solid var(--border); display:grid; grid-template-columns:36px 1fr; gap:1.5rem; align-items:start; transition:background 0.3s; }
+.differentiator:last-child { border-bottom:none; }
+.differentiator:hover { background:var(--bg3); }
+
+.diff-icon { font-family:'Space Mono', monospace; font-size:0.55rem; letter-spacing:0.1em; color:var(--gold-dim); padding-top:0.2rem; line-height:1.4; }
+.diff-content h4 { font-family:'Jost', sans-serif; font-size:0.88rem; font-weight:500; color:var(--off); margin-bottom:0.35rem; letter-spacing:0.03em; }
+.diff-content p { font-size:0.82rem; color:var(--muted); line-height:1.75; }
+
+/* ── SERVICES ── */
+#services { background:var(--bg2); border-top:1px solid var(--border); border-bottom:1px solid var(--border); padding:7rem 4rem; }
+
+.services-header { display:grid; grid-template-columns:1fr 1fr; gap:4rem; align-items:end; margin-bottom:5rem; max-width:1300px; margin-left:auto; margin-right:auto; }
+.services-intro { color:var(--muted2); font-size:0.95rem; line-height:1.9; }
+
+.services-grid { display:grid; grid-template-columns:repeat(2, 1fr); gap:2px; background:var(--border); max-width:1300px; margin:0 auto; }
+
+.service-card { background:var(--bg2); padding:3rem; position:relative; overflow:hidden; transition:background 0.35s; }
+.service-card::after { content:''; position:absolute; bottom:0; left:0; right:0; height:2px; background:linear-gradient(90deg, transparent, var(--gold), transparent); transform:scaleX(0); transform-origin:center; transition:transform 0.4s; }
+.service-card:hover::after { transform:scaleX(1); }
+.service-card:hover { background:var(--bg3); }
+
+.service-num { font-family:'Space Mono', monospace; font-size:0.52rem; letter-spacing:0.25em; color:var(--gold-dim); margin-bottom:1rem; display:flex; align-items:center; gap:0.8rem; }
+.service-num::before { content:''; display:inline-block; width:5px; height:5px; border-radius:50%; background:var(--gold-dim); }
+
+.service-tag-type { font-family:'Space Mono', monospace; font-size:0.45rem; letter-spacing:0.2em; color:var(--gold); text-transform:uppercase; border:1px solid var(--border2); padding:0.15rem 0.5rem; float:right; margin-top:-0.1rem; }
+
+.service-card h3 { font-family:'Cormorant Garamond', serif; font-size:1.7rem; font-weight:400; margin-bottom:0.5rem; line-height:1.2; clear:both; }
+.service-card .service-hook { font-family:'Cormorant Garamond', serif; font-style:italic; font-size:1rem; color:var(--gold); margin-bottom:1.2rem; line-height:1.4; }
+.service-card .service-body { font-size:0.85rem; color:var(--muted2); line-height:1.85; margin-bottom:1.5rem; }
+
+.service-deliverables { display:flex; flex-direction:column; gap:0.4rem; margin-bottom:1.5rem; }
+.deliverable { font-size:0.78rem; color:var(--muted); display:flex; align-items:flex-start; gap:0.7rem; line-height:1.5; }
+.deliverable::before { content:'—'; color:var(--gold-dim); flex-shrink:0; margin-top:0.05rem; }
+
+.service-footer { display:flex; align-items:center; justify-content:space-between; padding-top:1.2rem; border-top:1px solid var(--border); flex-wrap:wrap; gap:0.8rem; }
+.service-btn { font-family:'Space Mono', monospace; font-size:0.5rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--gold); border:1px solid var(--gold); padding:0.5rem 1.1rem; text-decoration:none; transition:all 0.3s; display:inline-block; white-space:nowrap; }
+.service-btn:hover { background:var(--gold); color:var(--bg); }
+.service-price { display: none; }
+.service-tags { display:flex; flex-wrap:wrap; gap:0.4rem; }
+.tag { font-family:'Space Mono', monospace; font-size:0.45rem; letter-spacing:0.1em; color:var(--muted); border:1px solid var(--border); padding:0.2rem 0.5rem; }
+
+/* ── ABOUT ── */
+#about { padding:7rem 4rem; max-width:1300px; margin:0 auto; }
+
+.about-grid { display:grid; grid-template-columns:1fr 1.1fr; gap:7rem; align-items:start; margin-top:4rem; }
+
+.about-frame { border:1px solid var(--border); padding:3rem; background:var(--bg2); position:relative; }
+.about-frame::before { content:''; position:absolute; top:10px; left:10px; right:-10px; bottom:-10px; border:1px solid rgba(196,164,74,0.06); pointer-events:none; }
+
+.about-photo-placeholder { width:100%; aspect-ratio:1/1; background:var(--bg3); border:1px solid var(--border); display:flex; align-items:center; justify-content:center; margin-bottom:2rem; position:relative; overflow:hidden; }
+.about-photo-placeholder::before { content:'◎'; font-size:3rem; color:var(--border2); }
+
+.about-name { font-family:'Cormorant Garamond', serif; font-size:1.8rem; font-weight:400; color:var(--off); margin-bottom:0.3rem; }
+.about-role { font-family:'Space Mono', monospace; font-size:0.55rem; letter-spacing:0.2em; color:var(--gold); text-transform:uppercase; margin-bottom:1.5rem; display:block; }
+
+.about-cert-list { display:flex; flex-wrap:wrap; gap:0.5rem; }
+.cert { font-family:'Space Mono', monospace; font-size:0.46rem; letter-spacing:0.1em; color:var(--muted); border:1px solid var(--border); padding:0.25rem 0.6rem; }
+.cert.active { color:var(--gold-dim); border-color:var(--border2); }
+
+.about-text p { font-size:0.9rem; color:var(--muted2); line-height:1.9; margin-bottom:1.5rem; white-space:pre-line; }
+.about-text strong { color:var(--off); font-weight:400; }
+
+.expertise-list { display:flex; flex-direction:column; gap:0.6rem; margin-top:2rem; padding-top:2rem; border-top:1px solid var(--border); }
+.expertise-item { display:flex; align-items:center; gap:1rem; font-size:0.85rem; color:var(--muted2); }
+.expertise-item::before { content:''; width:22px; height:1px; background:var(--gold); flex-shrink:0; }
+
+/* ── PROMISE ── */
+#promise { background:var(--bg2); border-top:1px solid var(--border); border-bottom:1px solid var(--border); padding:6rem 4rem; text-align:center; }
+
+.promise-inner { max-width:800px; margin:0 auto; }
+
+.promise-eyebrow { font-family:'Space Mono', monospace; font-size:0.55rem; letter-spacing:0.3em; color:var(--gold-dim); text-transform:uppercase; margin-bottom:2.5rem; display:flex; align-items:center; justify-content:center; gap:1.5rem; }
+.promise-eyebrow::before, .promise-eyebrow::after { content:''; width:40px; height:1px; background:var(--gold-dim); }
+
+.promise-quote { font-family:'Cormorant Garamond', serif; font-size:clamp(1.6rem, 3vw, 2.5rem); font-weight:300; font-style:italic; line-height:1.4; color:var(--off); margin-bottom:3rem; letter-spacing:-0.01em; white-space:pre-line; }
+
+.promise-items { display:grid; grid-template-columns:repeat(3, 1fr); gap:2px; background:var(--border); text-align:left; }
+.promise-item { background:var(--bg2); padding:2rem; }
+.promise-num { font-family:'Cormorant Garamond', serif; font-size:2.5rem; font-weight:300; color:var(--gold); display:block; line-height:1; margin-bottom:0.8rem; }
+.promise-item h4 { font-family:'Jost', sans-serif; font-size:0.85rem; font-weight:500; color:var(--off); margin-bottom:0.5rem; }
+.promise-item p { font-size:0.78rem; color:var(--muted); line-height:1.7; }
+
+/* ── BLOG ── */
+#blog { padding:7rem 4rem; max-width:1300px; margin:0 auto; border-bottom:1px solid var(--border); }
+
+.blog-header { display:grid; grid-template-columns:1fr 1fr; gap:4rem; align-items:end; margin-bottom:4rem; }
+.blog-intro { color:var(--muted2); font-size:0.95rem; line-height:1.9; }
+
+.blog-grid { display:grid; grid-template-columns:repeat(3, 1fr); gap:2px; background:var(--border); }
+
+.blog-card { background:var(--bg2); padding:2.5rem; position:relative; overflow:hidden; transition:background 0.35s; cursor:pointer; }
+.blog-card:hover { background:var(--bg3); }
+.blog-card::after { content:''; position:absolute; bottom:0; left:0; right:0; height:2px; background:linear-gradient(90deg, transparent, var(--gold), transparent); transform:scaleX(0); transform-origin:center; transition:transform 0.4s; }
+.blog-card:hover::after { transform:scaleX(1); }
+
+.blog-card.featured { grid-column:1/-1; display:grid; grid-template-columns:1fr 1fr; gap:3rem; align-items:center; }
+
+.blog-meta { display:flex; align-items:center; gap:1rem; margin-bottom:1.2rem; }
+.blog-date { font-family:'Space Mono', monospace; font-size:0.48rem; letter-spacing:0.2em; color:var(--gold-dim); }
+.blog-category { font-family:'Space Mono', monospace; font-size:0.45rem; letter-spacing:0.15em; color:var(--muted); border:1px solid var(--border); padding:0.15rem 0.5rem; text-transform:uppercase; }
+
+.blog-card h3 { font-family:'Cormorant Garamond', serif; font-size:1.4rem; font-weight:400; line-height:1.3; margin-bottom:0.8rem; color:var(--off); }
+.blog-card.featured h3 { font-size:2rem; }
+
+.blog-card p { font-size:0.82rem; color:var(--muted2); line-height:1.8; margin-bottom:1.5rem; }
+
+.blog-read-more { font-family:'Space Mono', monospace; font-size:0.52rem; letter-spacing:0.15em; color:var(--gold); display:flex; align-items:center; gap:0.5rem; text-transform:uppercase; }
+.blog-read-more::after { content:'→'; transition:transform 0.3s; }
+.blog-card:hover .blog-read-more::after { transform:translateX(4px); }
+
+.blog-featured-badge { font-family:'Space Mono', monospace; font-size:0.45rem; letter-spacing:0.2em; color:var(--gold); border:1px solid var(--border2); padding:0.3rem 0.7rem; display:inline-block; margin-bottom:1rem; }
+
+.blog-cta { text-align:center; margin-top:3rem; }
+.blog-cta a { font-family:'Space Mono', monospace; font-size:0.58rem; letter-spacing:0.18em; color:var(--muted); border:1px solid var(--border); padding:0.8rem 2rem; text-decoration:none; transition:all 0.3s; display:inline-block; text-transform:uppercase; }
+.blog-cta a:hover { color:var(--gold); border-color:var(--border2); }
+
+/* ── CONTACT ── */
+#contact { padding:7rem 4rem; max-width:1000px; margin:0 auto; }
+
+.contact-header { text-align:center; margin-bottom:5rem; }
+.contact-header h2 { margin-bottom:1.2rem; }
+.contact-header p { color:var(--muted2); font-size:0.95rem; line-height:1.8; max-width:520px; margin:0 auto; }
+
+.contact-grid { display:grid; grid-template-columns:1fr 1.4fr; gap:5rem; align-items:start; }
+
+.contact-info-block h3 { font-family:'Cormorant Garamond', serif; font-size:1.5rem; font-weight:400; margin-bottom:2rem; color:var(--off); }
+
+.cinfo-item { display:flex; flex-direction:column; gap:0.3rem; padding:1.2rem 0; border-bottom:1px solid var(--border); }
+.cinfo-item:first-of-type { border-top:1px solid var(--border); }
+.cinfo-label { font-family:'Space Mono', monospace; font-size:0.48rem; letter-spacing:0.2em; color:var(--gold-dim); text-transform:uppercase; }
+.cinfo-value { font-size:0.9rem; color:var(--off); }
+
+.contact-promise { margin-top:2rem; padding:1.5rem; background:var(--bg2); border:1px solid var(--border); font-family:'Cormorant Garamond', serif; font-style:italic; font-size:1rem; color:var(--muted2); line-height:1.6; }
+
+.contact-form { display:flex; flex-direction:column; gap:1rem; }
+.form-row { display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
+.form-field { display:flex; flex-direction:column; gap:0.4rem; }
+.form-field label { font-family:'Space Mono', monospace; font-size:0.5rem; letter-spacing:0.2em; color:var(--gold-dim); text-transform:uppercase; }
+.form-field input, .form-field textarea, .form-field select { background:var(--bg2); border:1px solid var(--border); color:var(--off); font-family:'Jost', sans-serif; font-size:0.9rem; font-weight:300; padding:0.9rem 1rem; outline:none; transition:border-color 0.3s; -webkit-appearance:none; resize:none; }
+.form-field input:focus, .form-field textarea:focus, .form-field select:focus { border-color:var(--border2); }
+.form-field textarea { height:120px; }
+.form-field select option { background:var(--bg2); }
+
+.form-submit { background:var(--gold); color:var(--bg); font-family:'Space Mono', monospace; font-size:0.65rem; letter-spacing:0.2em; text-transform:uppercase; padding:1.1rem; border:none; cursor:pointer; transition:background 0.3s; width:100%; margin-top:0.5rem; }
+.form-submit:hover { background:var(--gold2); }
+
+.form-note { font-family:'Space Mono', monospace; font-size:0.48rem; letter-spacing:0.15em; color:var(--muted); text-align:center; margin-top:0.5rem; }
+
+/* ── FOOTER ── */
+footer { position:relative; z-index:1; padding:2.5rem 4rem; border-top:1px solid var(--border); display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem; }
+
+.footer-logo-wrap { display:flex; flex-direction:column; gap:0.2rem; }
+.footer-logo { font-family:'Space Mono', monospace; font-size:0.72rem; letter-spacing:0.25em; color:var(--gold); }
+.footer-sub { font-family:'Space Mono', monospace; font-size:0.44rem; letter-spacing:0.25em; color:var(--muted); }
+
+.footer-links { display:flex; gap:2rem; list-style:none; }
+.footer-links a { font-family:'Space Mono', monospace; font-size:0.5rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--muted); text-decoration:none; transition:color 0.3s; }
+.footer-links a:hover { color:var(--gold); }
+
+.footer-copy { font-family:'Space Mono', monospace; font-size:0.48rem; letter-spacing:0.12em; color:var(--muted); }
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp { from { opacity:0; transform:translateY(22px); } to { opacity:1; transform:translateY(0); } }
+
+/* ── MOBILE ── */
+@media (max-width:900px) {
+  nav { padding:1.2rem 1.5rem; }
+  .nav-links { display:none; }
+  .hero-classified { display:none; }
+  .hero-content { padding:8rem 1.5rem 4rem; }
+  .hero-metrics { position:static; flex-direction:row; margin:2rem 1.5rem 0; flex-wrap:wrap; }
+  .strip { padding:1.2rem 1.5rem; flex-wrap:wrap; gap:1.5rem; }
+  #positioning { grid-template-columns:1fr; padding:5rem 1.5rem; gap:3rem; }
+  #services { padding:5rem 1.5rem; }
+  .services-header { grid-template-columns:1fr; margin-bottom:3rem; }
+  .services-grid { grid-template-columns:1fr; }
+  #about { padding:5rem 1.5rem; }
+  .about-grid { grid-template-columns:1fr; gap:3rem; }
+  #promise { padding:5rem 1.5rem; }
+  .promise-items { grid-template-columns:1fr; }
+  #blog { padding:5rem 1.5rem; }
+  .blog-header { grid-template-columns:1fr; }
+  .blog-grid { grid-template-columns:1fr; }
+  .blog-card.featured { grid-column:auto; grid-template-columns:1fr; }
+  #contact { padding:5rem 1.5rem; }
+  .contact-grid { grid-template-columns:1fr; gap:3rem; }
+  .form-row { grid-template-columns:1fr; }
+  footer { padding:2rem 1.5rem; flex-direction:column; text-align:center; }
+}
+</style>
+</head>
+<body>
+
+<!-- ═══ NAV ═══ -->
+<nav>
+  <a href="#hero" class="nav-logo-wrap">
+    <span class="nav-logo">SANGOUR3i</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#hero"     data-en="Home"     data-fr="Accueil">Accueil</a></li>
+    <li><a href="#services" data-en="Services" data-fr="Services">Services</a></li>
+    <li><a href="#about"    data-en="About"    data-fr="À propos">À propos</a></li>
+    <li><a href="#blog"     data-en="Blog"     data-fr="Blog">Blog</a></li>
+    <li><a href="#contact"  data-en="Contact"  data-fr="Contact">Contact</a></li>
+  </ul>
+  <div class="nav-right">
+    <button id="lang-toggle">EN</button>
+    <a href="#contact" class="nav-cta" data-en="Confidential inquiry" data-fr="Demande confidentielle">Demande confidentielle</a>
+  </div>
+</nav>
+
+<!-- ═══ HERO ═══ -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-classified">
+    <div class="hero-classified-inner">
+      <span class="classified-line">CLASSIFIED · TLP:AMBER · RESTRICTED</span>
+      <span class="classified-line">OSINT INTELLIGENCE REPORT · REF: SGI-2026</span>
+      <span class="classified-line">SOURCE VERIFICATION COMPLETE · LEVEL 3</span>
+      <span class="classified-line">DFIR METHODOLOGY APPLIED · VALIDATED</span>
+      <span class="classified-line">THREAT INTELLIGENCE ACTIVE · MONITORING</span>
+      <span class="classified-line">CONFIDENTIAL · DECISION-GRADE · SECURE</span>
+    </div>
+  </div>
+  <div class="hero-content">
+    <div class="hero-label"
+         data-en="Digital Intelligence & Risk Advisory"
+         data-fr="Digital Intelligence & Risk Advisory">Digital Intelligence & Risk Advisory</div>
+    <h1>
+      <span data-en="Reducing uncertainty" data-fr="Réduire l'incertitude">Réduire l'incertitude</span><br>
+      <span data-en="in " data-fr="dans des ">dans des </span><em data-en="complex environments." data-fr="environnements complexes.">environnements complexes.</em>
+    </h1>
+    <p class="hero-proposition"
+       data-en="We transform open-source data into verified and structured information to support critical decision-making in high-risk contexts."
+       data-fr="Nous transformons des données ouvertes en information vérifiée et structurée, afin de soutenir des décisions critiques dans des contextes à risque.">
+      Nous transformons des données ouvertes en information vérifiée et structurée, afin de soutenir des décisions critiques dans des contextes à risque.
+    </p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn-primary" data-en="Request confidential assessment" data-fr="Demande d'évaluation confidentielle">Demande d'évaluation confidentielle</a>
+      <a href="#services" class="btn-ghost" data-en="Discover services" data-fr="Découvrir les services">Découvrir les services</a>
+    </div>
+    <div class="hero-metrics">
+      <div class="metric">
+        <span class="metric-num">100%</span>
+        <span class="metric-label" data-en="Open-source intelligence" data-fr="Sources ouvertes">Sources ouvertes</span>
+      </div>
+      <div class="metric">
+        <span class="metric-num">48–72h</span>
+        <span class="metric-label" data-en="Decision-grade delivery" data-fr="Livraison décisionnelle">Livraison décisionnelle</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ STRIP ═══ -->
+<div class="strip">
+  <div class="strip-item"><span class="strip-dot"></span><span class="strip-text" data-en="SOC methodology" data-fr="Méthodologie SOC">Méthodologie SOC</span></div>
+  <div class="strip-item"><span class="strip-dot"></span><span class="strip-text" data-en="DFIR-trained analysis" data-fr="Analyse DFIR">Analyse DFIR</span></div>
+  <div class="strip-item"><span class="strip-dot"></span><span class="strip-text" data-en="Threat Intelligence applied" data-fr="Threat Intelligence appliquée">Threat Intelligence appliquée</span></div>
+  <div class="strip-item"><span class="strip-dot"></span><span class="strip-text" data-en="Absolute confidentiality" data-fr="Confidentialité absolue">Confidentialité absolue</span></div>
+  <div class="strip-item"><span class="strip-dot"></span><span class="strip-text">FR · EN · ES · AR</span></div>
+  <div class="strip-item"><span class="strip-dot"></span><span class="strip-text" data-en="No technical jargon" data-fr="Rapports sans jargon">Rapports sans jargon</span></div>
+</div>
+
+<!-- ═══ POSITIONING ═══ -->
+<div id="positioning">
+  <div class="pos-left reveal">
+    <div class="section-label" data-en="Our approach" data-fr="Notre approche">Notre approche</div>
+    <h2 data-en-html="Information<br>as a <em>decision driver.</em>" data-fr-html="L'information<br>comme <em>levier de décision.</em>">L'information<br>comme <em>levier de décision.</em></h2>
+    <p data-en="Investissement, partenariat, recrutement, expansion, réputation : chaque décision expose à un risque lorsque l'information est incomplète, incertaine ou biaisée. Chaque mission repose sur trois principes : Vérifier (fiabilité des sources et des données); Structurer (organisation claire de l'information); Analyser (lecture factuelle orientée décision). Nous n'ajoutons pas de complexité. Nous supprimons l'incertitude inutile."
+       data-fr="Investissement, partenariat, recrutement, expansion, réputation : chaque décision expose à un risque lorsque l'information est incomplète, incertaine ou biaisée. Chaque mission repose sur trois principes : Vérifier (fiabilité des sources et des données); Structurer (organisation claire de l'information); Analyser (lecture factuelle orientée décision). Nous n'ajoutons pas de complexité. Nous supprimons l'incertitude inutile.">
+      Investissement, partenariat, recrutement, expansion, réputation : chaque décision expose à un risque lorsque l'information est incomplète, incertaine ou biaisée. Chaque mission repose sur trois principes : Vérifier (fiabilité des sources et des données); Structurer (organisation claire de l'information); Analyser (lecture factuelle orientée décision). Nous n'ajoutons pas de complexité. Nous supprimons l'incertitude inutile.</p>
+    <div class="pos-quote" data-en="&ldquo; A clear framework. Rigorous methods. Discreet delivery. &rdquo;" data-fr="« Un cadre d'analyse clair. Des méthodes rigoureuses. Une restitution discrète. »">« Un cadre d'analyse clair. Des méthodes rigoureuses. Une restitution discrète. »</div>
+  </div>
+  <div class="pos-right reveal">
+    <div class="differentiator">
+      <div class="diff-icon">01</div>
+      <div class="diff-content">
+        <h4 data-en="Security-grade methodology" data-fr="Méthodologie sécurité opérationnelle">Méthodologie sécurité opérationnelle</h4>
+        <p data-en="Analysis methods drawn from SOC, DFIR and Threat Intelligence environments." data-fr="Méthodes d'analyse issues des environnements SOC, DFIR et Threat Intelligence.">Méthodes d'analyse issues des environnements SOC, DFIR et Threat Intelligence.</p>
+      </div>
+    </div>
+    <div class="differentiator">
+      <div class="diff-icon">03</div>
+      <div class="diff-content">
+        <h4 data-en="Readable, actionable deliverables" data-fr="Livrables lisibles et actionnables">Livrables lisibles et actionnables</h4>
+        <p data-en="Reports structured for decision-makers, not technical teams." data-fr="Les rapports sont structurés pour les décideurs, non pour les équipes techniques.">Les rapports sont structurés pour les décideurs, non pour les équipes techniques.</p>
+      </div>
+    </div>
+    <div class="differentiator">
+      <div class="diff-icon">04</div>
+      <div class="diff-content">
+        <h4 data-en="Confidentiality — systematic" data-fr="Confidentialité — systématique">Confidentialité — systématique</h4>
+        <p data-en="All engagements are subject to a confidentiality framework." data-fr="Chaque engagement est soumis à un cadre de confidentialité stricte.">Chaque engagement est soumis à un cadre de confidentialité stricte.</p>
+      </div>
+    </div>
+    <div class="differentiator">
+      <div class="diff-icon">05</div>
+      <div class="diff-content">
+        <h4 data-en="100% legal — open sources only" data-fr="100% légal — sources ouvertes uniquement">100% légal — sources ouvertes uniquement</h4>
+        <p data-en="All investigations conducted exclusively from publicly available sources." data-fr="Toutes les investigations conduites exclusivement à partir de sources publiques. Pas de surveillance, pas d'intrusion.">Toutes les investigations conduites exclusivement à partir de sources publiques. Pas de surveillance, pas d'intrusion.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ SERVICES ═══ -->
+<section id="services">
+  <div class="services-header reveal">
+    <div>
+      <h2 data-en-html="A complete<br><em>intelligence</em> arsenal." data-fr-html="Un arsenal complet<br>d'<em>intelligence</em> digitale.">Un arsenal complet<br>d'<em>intelligence</em> digitale.</h2>
+    </div>
+    <div></div>
+  </div>
+
+  <div class="services-grid">
+
+    <!-- S1 -->
+    <div class="service-card reveal service-1">
+      <div class="service-num">01 <span class="service-tag-type">Porte d'entrée</span></div>
+      <h3>Hygiène Numérique Personnelle</h3>
+      <p class="service-hook">Nous évaluons votre exposition numérique réelle en une session structurée de 2 heures.</p>
+      <p class="service-body">Analyse des appareils, comptes, systèmes d'authentification et usages numériques afin d'identifier les vulnérabilités évitables et les points d'exposition.</p>
+      <div class="service-deliverables">
+        <div class="deliverable">Identification claire des vulnérabilités</div>
+        <div class="deliverable">Actions correctives concrètes et priorisées</div>
+        <div class="deliverable">Recommandations de configuration sécurisée</div>
+        <div class="deliverable">Rapport structuré sans jargon</div>
+      </div>
+      <div class="service-footer">
+        <div class="service-tags">
+          <span class="tag">OPSEC</span>
+          <span class="tag">Audit mobile</span>
+          <span class="tag">2h session</span>
+        </div>
+        <a href="#contact" class="service-btn">Commander →</a>
+      </div>
+    </div>
+
+    <!-- S2 -->
+    <div class="service-card reveal service-2">
+      <div class="service-num">02 <span class="service-tag-type">Service principal</span></div>
+      <h3>Due Diligence Digitale</h3>
+      <p class="service-hook">Nous vérifions l'empreinte numérique d'un individu ou d'une entité avant toute décision.</p>
+      <p class="service-body">Analyse des incohérences, signaux faibles et zones d'incertitude.</p>
+      <div class="service-deliverables">
+        <div class="deliverable">Rapport d'aide à la décision</div>
+        <div class="deliverable">Vérification croisée des informations</div>
+        <div class="deliverable">Détection d'anomalies</div>
+        <div class="deliverable">Classification du niveau de risque</div>
+      </div>
+      <div class="service-footer">
+        <div class="service-tags">
+          <span class="tag">OSINT</span>
+          <span class="tag">DFIR</span>
+          <span class="tag">48–72h</span>
+        </div>
+        <a href="#contact" class="service-btn">Commander →</a>
+      </div>
+    </div>
+
+    <!-- S3 -->
+    <div class="service-card reveal service-3">
+      <div class="service-num">03 <span class="service-tag-type">Service principal</span></div>
+      <h3>Audit d'Empreinte Digitale</h3>
+      <p class="service-hook">Nous cartographions et analysons votre présence numérique publique.</p>
+      <p class="service-body">Évaluation des informations exposées et de leur impact potentiel.</p>
+      <div class="service-deliverables">
+        <div class="deliverable">Cartographie de l'exposition numérique</div>
+        <div class="deliverable">Identification des données sensibles</div>
+        <div class="deliverable">Évaluation des risques réputationnels</div>
+        <div class="deliverable">Plan de remédiation</div>
+      </div>
+      <div class="service-footer">
+        <div class="service-tags">
+          <span class="tag">OSINT</span>
+          <span class="tag">Attack surface</span>
+          <span class="tag">Remédiation</span>
+        </div>
+        <a href="#contact" class="service-btn">Commander →</a>
+      </div>
+    </div>
+
+    <!-- S4 -->
+    <div class="service-card reveal service-4">
+      <div class="service-num">04 <span class="service-tag-type">Récurrent</span></div>
+      <h3>Veille Réputationnelle</h3>
+      <p class="service-hook">Nous surveillons en continu votre environnement informationnel et votre réputation en ligne.</p>
+      <p class="service-body">Détection des signaux faibles avant escalade.</p>
+      <div class="service-deliverables">
+        <div class="deliverable">Surveillance continue des sources</div>
+        <div class="deliverable">Rapport mensuel d'intelligence</div>
+        <div class="deliverable">Détection des alertes</div>
+        <div class="deliverable">Recommandations proactives</div>
+      </div>
+      <div class="service-footer">
+        <div class="service-tags">
+          <span class="tag">Récurrent</span>
+          <span class="tag">Threat Intel</span>
+          <span class="tag">Alerte</span>
+        </div>
+        <a href="#contact" class="service-btn">Commander →</a>
+      </div>
+    </div>
+
+    <!-- S5 -->
+    <div class="service-card reveal service-5">
+      <div class="service-num">05 <span class="service-tag-type">Groupe</span></div>
+      <h3>Atelier Anti-Manipulation</h3>
+      <p class="service-hook">Formation aux techniques de manipulation dans les environnements numériques.</p>
+      <p class="service-body">Focus : phishing, ingénierie sociale, désinformation, deepfakes.</p>
+      <div class="service-deliverables">
+        <div class="deliverable">Études de cas réels</div>
+        <div class="deliverable">Entraînement décisionnel</div>
+        <div class="deliverable">Sensibilisation comportementale</div>
+        <div class="deliverable">Checklist opérationnelle</div>
+      </div>
+      <div class="service-footer">
+        <div class="service-tags">
+          <span class="tag">SOC TTPs</span>
+          <span class="tag">Social engineering</span>
+          <span class="tag">Workshop</span>
+        </div>
+        <a href="#contact" class="service-btn">Commander →</a>
+      </div>
+    </div>
+
+    <!-- S6 -->
+    <div class="service-card reveal service-6">
+      <div class="service-num">06 <span class="service-tag-type">Sur mesure</span></div>
+      <h3>OSINT Investigation</h3>
+      <p class="service-hook">Investigations structurées à partir de sources ouvertes.</p>
+      <p class="service-body">Analyse des relations et connexions invisibles.</p>
+      <div class="service-deliverables">
+        <div class="deliverable">Rapport d'intelligence structuré</div>
+        <div class="deliverable">Cartographie des réseaux</div>
+        <div class="deliverable">Résultats sourcés</div>
+        <div class="deliverable">Conclusions factuelles</div>
+      </div>
+      <div class="service-footer">
+        <div class="service-tags">
+          <span class="tag">OSINT</span>
+          <span class="tag">Réseaux</span>
+          <span class="tag">Sur mesure</span>
+        </div>
+        <a href="#contact" class="service-btn">Commander →</a>
+      </div>
+    </div>
+
+    <!-- S7 -->
+    <div class="service-card reveal service-7">
+      <div class="service-num">07 <span class="service-tag-type">Pré-engagement</span></div>
+      <h3>Vérification Documentaire</h3>
+      <p class="service-hook">Analyse d'authenticité et de cohérence des documents.</p>
+      <p class="service-body">Détection des anomalies et falsifications.</p>
+      <div class="service-deliverables">
+        <div class="deliverable">Analyse de cohérence</div>
+        <div class="deliverable">Vérification métadonnées</div>
+        <div class="deliverable">Recoupement sources</div>
+        <div class="deliverable">Classification du niveau de confiance</div>
+      </div>
+      <div class="service-footer">
+        <div class="service-tags">
+          <span class="tag">Forensics</span>
+          <span class="tag">Métadonnées</span>
+          <span class="tag">DFIR</span>
+        </div>
+        <a href="#contact" class="service-btn">Commander →</a>
+      </div>
+    </div>
+
+  </div><!-- /.services-grid -->
+
+  <!-- ── SERVICE DISCLAIMER ── -->
+  <div style="max-width:1300px; margin:2px auto 0; background:var(--bg3); border-top:1px solid var(--border); padding:1.8rem 3rem; display:flex; align-items:flex-start; gap:1.5rem;">
+    <span style="font-family:'Space Mono',monospace; font-size:0.5rem; letter-spacing:0.2em; color:var(--gold-dim); text-transform:uppercase; white-space:nowrap; padding-top:0.1rem; flex-shrink:0;" data-fr="Avis légal" data-en="Legal notice">Avis légal</span>
+    <p style="font-size:0.78rem; color:var(--muted); line-height:1.75; margin:0;"
+       data-fr="Les prestations de SANGOUR3i sont réalisées exclusivement à partir de sources publiquement accessibles, dans le strict respect du cadre légal en vigueur. Les analyses fournies constituent des outils d'aide à la décision et ne sauraient être assimilées à des conseils juridiques, financiers ou professionnels. SANGOUR3i n'effectue aucune opération d'intrusion, de surveillance illégale ou d'interception de communications. Le Client demeure seul responsable des décisions prises sur la base des livrables fournis. Voir nos <a href='terms.html' style='color:var(--gold-dim); text-decoration:none;'>CGV</a> complètes."
+       data-en="SANGOUR3i services are conducted exclusively from publicly available sources, in strict compliance with applicable law. Analyses provided are decision-support tools and do not constitute legal, financial, or professional advice. SANGOUR3i performs no intrusion, illegal surveillance, or interception of communications. The Client remains solely responsible for decisions made based on the deliverables provided. See our full <a href='terms.html' style='color:var(--gold-dim); text-decoration:none;'>Terms &amp; Conditions</a>.">Les prestations de SANGOUR3i sont réalisées exclusivement à partir de sources publiquement accessibles, dans le strict respect du cadre légal en vigueur. Les analyses fournies constituent des outils d'aide à la décision et ne sauraient être assimilées à des conseils juridiques, financiers ou professionnels. SANGOUR3i n'effectue aucune opération d'intrusion, de surveillance illégale ou d'interception de communications. Le Client demeure seul responsable des décisions prises sur la base des livrables fournis. Voir nos <a href='terms.html' style='color:var(--gold-dim); text-decoration:none;'>CGV</a> complètes.</p>
+  </div>
+
+</section><!-- /#services -->
+
+<!-- ═══ ABOUT ═══ -->
+<section id="about">
+  <div style="max-width:1300px; margin:0 auto; padding:7rem 4rem;">
+    <div class="section-label reveal" data-en="Who we are" data-fr="Qui sommes-nous">Qui sommes-nous</div>
+    <h2 class="reveal" data-en-html="Digital intelligence,<br><em>strategic</em> precision." data-fr-html="Intelligence digitale,<br>précision <em>stratégique.</em>">Intelligence digitale,<br>précision <em>stratégique.</em></h2>
+    <div class="about-grid">
+      <div class="about-visual reveal">
+        <div class="about-frame" style="aspect-ratio:unset; min-height:300px; display:flex; align-items:center; justify-content:center; flex-direction:column; gap:2rem;">
+          <div style="font-family:'Cormorant Garamond',serif; font-size:4rem; color:rgba(196,164,74,0.2); line-height:1;">⬡</div>
+          <div style="font-family:'Space Mono',monospace; font-size:0.5rem; letter-spacing:0.3em; color:var(--gold-dim); text-transform:uppercase; text-align:center;">SANGOUR3i<br>Intelligence Digitale Stratégique</div>
+          <div style="display:flex; flex-wrap:wrap; gap:0.5rem; justify-content:center; margin-top:1rem;">
+            <span class="cert active">100% Sources ouvertes</span>
+            <span class="cert active">SOC · DFIR · OSINT</span>
+          </div>
+        </div>
+      </div>
+      <div class="about-text reveal">
+        <p data-en="SANGOUR3i provides information analysis and structuring services to support decision-making in uncertain environments.
+
+We produce factual analyses based on open-source data to identify inconsistencies, weak signals, and risk areas where information is incomplete or difficult to interpret.
+
+Our work includes digital due diligence, digital footprint analysis, open-source investigations, information monitoring, and document verification.
+
+All analyses are conducted exclusively using publicly available data, through a methodology based on verification, cross-checking, and structuring.
+
+No intrusion. No surveillance. No speculation. Only verified, structured, and actionable information."
+           data-fr="SANGOUR3i est un service d'analyse et de structuration de l'information au service de la prise de décision en environnements incertains.
+
+Nous produisons des analyses factuelles à partir de sources ouvertes, afin d'identifier les incohérences, les signaux faibles et les zones de risque dans des contextes où l'information est incomplète ou difficile à interpréter.
+
+Nos interventions couvrent notamment la due diligence digitale, l'analyse d'empreinte numérique, les investigations en sources ouvertes, la veille informationnelle et la vérification documentaire.
+
+Toutes les analyses sont réalisées exclusivement à partir de données publiques, selon une méthodologie de vérification, de recoupement et de structuration.
+
+Aucune intrusion, aucune surveillance, aucune spéculation. Uniquement des informations vérifiées, organisées et directement exploitables.">SANGOUR3i est un service d'analyse et de structuration de l'information au service de la prise de décision en environnements incertains.
+
+Nous produisons des analyses factuelles à partir de sources ouvertes, afin d'identifier les incohérences, les signaux faibles et les zones de risque dans des contextes où l'information est incomplète ou difficile à interpréter.
+
+Nos interventions couvrent notamment la due diligence digitale, l'analyse d'empreinte numérique, les investigations en sources ouvertes, la veille informationnelle et la vérification documentaire.
+
+Toutes les analyses sont réalisées exclusivement à partir de données publiques, selon une méthodologie de vérification, de recoupement et de structuration.
+
+Aucune intrusion, aucune surveillance, aucune spéculation. Uniquement des informations vérifiées, organisées et directement exploitables.</p>
+        <div class="pos-quote" data-en="&ldquo; Discretion, precision, and speed — at the core of every analysis. &rdquo;" data-fr="« Discrétion, précision, rapidité — au cœur de chaque analyse. »">« Discrétion, précision, rapidité — au cœur de chaque analyse. »</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ PROMISE ═══ -->
+<section id="promise">
+  <div class="promise-inner">
+    <div class="promise-eyebrow reveal" data-en="What you always receive" data-fr="Ce que vous recevez — toujours">Ce que vous recevez — toujours</div>
+    <p class="promise-quote reveal" data-en="&ldquo; No data overload. No speculative analysis. Only verified information that supports decisions. &rdquo;"
+       data-fr="« Pas d'accumulation de données. Pas d'analyse spéculative. Uniquement une information vérifiée au service de la décision. »">« Pas d'accumulation de données.
+Pas d'analyse spéculative.
+Uniquement une information vérifiée au service de la décision. »</p>
+    <div class="promise-items">
+      <div class="promise-item reveal">
+        <span class="promise-num">01</span>
+        <h4 data-en="Clear report, no jargon" data-fr="Rapport clair, zéro jargon">Rapport clair, sans jargon</h4>
+        <p data-en="You read, you understand, you decide. No technical training required." data-fr="Vous lisez, vous comprenez, vous décidez. Aucune formation technique requise.">Vous lisez, vous comprenez, vous décidez. Aucune formation technique requise.</p>
+      </div>
+      <div class="promise-item reveal">
+        <span class="promise-num">02</span>
+        <h4 data-en="Absolute confidentiality" data-fr="Confidentialité absolue">Confidentialité absolue</h4>
+        <p data-en="Your identity, your missions, your targets — never disclosed. Contractual confidentiality." data-fr="Votre identité, vos missions, vos cibles — jamais évoquées. Confidentialité contractuelle, sans exception.">Votre identité, vos missions, vos cibles — jamais évoquées. Confidentialité contractuelle, sans exception.</p>
+      </div>
+      <div class="promise-item reveal">
+        <span class="promise-num">03</span>
+        <h4 data-en="100% legal — open sources" data-fr="100% légal — sources ouvertes">100% légal — sources ouvertes</h4>
+        <p data-en="All investigations from public sources, within the legal framework. No surveillance, no intrusion." data-fr="Toutes les investigations à partir de sources publiques, dans le cadre légal. Pas de surveillance, pas d'intrusion.">Toutes les investigations à partir de sources publiques, dans le cadre légal. Pas de surveillance.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ BLOG ═══ -->
+<section id="blog">
+  <div class="blog-header reveal">
+    <div>
+      <div class="section-label" data-en="Intelligence insights" data-fr="Intelligence & Analyse">Intelligence & Analyse</div>
+      <h2 data-en-html="Perspectives on<br><em>digital risk.</em>" data-fr-html="Perspectives sur<br>le <em>risque numérique.</em>">Perspectives sur<br>le <em>risque numérique.</em></h2>
+    </div>
+    <p class="blog-intro" data-en="Structured analysis, case studies, and applied insights on how information shapes risk, exposure, and decision-making."
+       data-fr="Analyses structurées, études de cas et retours d'expérience appliqués sur la manière dont l'information influence le risque, l'exposition et la prise de décision.">Analyses structurées, études de cas et retours d'expérience appliqués
+sur la manière dont l'information influence le risque, l'exposition et la prise de décision.</p>
+  </div>
+
+  <div class="blog-grid">
+    <!-- Featured -->
+    <div class="blog-card featured reveal">
+      <div>
+        <span class="blog-featured-badge" data-en="Featured analysis" data-fr="Analyse à la une">Analyse à la une</span>
+        <div class="blog-meta">
+          <span class="blog-date">Avril 2026</span>
+          <span class="blog-category">OSINT</span>
+        </div>
+        <h3 data-en="How a simple LinkedIn search can expose your entire network to a malicious actor"
+            data-fr="Comment une simple recherche LinkedIn peut exposer tout votre réseau à un acteur malveillant">Comment une simple recherche LinkedIn peut exposer tout votre réseau à un acteur malveillant</h3>
+        <p data-en="A step-by-step analysis of how open-source intelligence techniques can reconstruct your professional network, identify your decision-makers, and build a targeted phishing campaign — using only public information."
+           data-fr="Analyse pas à pas de la façon dont les techniques OSINT peuvent reconstruire votre réseau professionnel, identifier vos décideurs et construire une campagne de phishing ciblée — en utilisant uniquement des informations publiques.">Analyse pas à pas de la façon dont les techniques OSINT peuvent reconstruire votre réseau professionnel, identifier vos décideurs et construire une campagne de phishing ciblée — en utilisant uniquement des informations publiques.</p>
+        <span class="blog-read-more" data-en="Read analysis" data-fr="Lire l'analyse">Lire l'analyse</span>
+      </div>
+      <div style="background:var(--bg3); border:1px solid var(--border); display:flex; align-items:center; justify-content:center; min-height:280px;">
+        <div style="text-align:center; opacity:0.3;">
+          <div style="font-family:'Cormorant Garamond', serif; font-size:4rem; color:var(--gold);">⬡</div>
+          <div style="font-family:'Space Mono', monospace; font-size:0.5rem; letter-spacing:0.2em; color:var(--gold-dim); margin-top:1rem;">NETWORK MAPPING</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Article 2 -->
+    <div class="blog-card reveal">
+      <div class="blog-meta">
+        <span class="blog-date">Mars 2026</span>
+        <span class="blog-category">Due Diligence</span>
+      </div>
+      <h3 data-en="5 red flags that your due diligence missed" data-fr="5 signaux d'alerte que votre due diligence a manqués">5 signaux d'alerte que votre due diligence a manqués</h3>
+      <p data-en="The most dangerous risks are rarely in official documents." data-fr="Les risques les plus dangereux sont rarement dans les documents officiels. Voici les cinq signaux digitaux que la plupart des due diligences manquent.">Les risques les plus dangereux sont rarement dans les documents officiels. Voici les cinq signaux digitaux que la plupart des due diligences manquent.</p>
+      <span class="blog-read-more" data-en="Read article" data-fr="Lire l'article">Lire l'article</span>
+    </div>
+
+    <!-- Article 3 -->
+    <div class="blog-card reveal">
+      <div class="blog-meta">
+        <span class="blog-date">Février 2026</span>
+        <span class="blog-category">Threat Intel</span>
+      </div>
+      <h3 data-en="Deepfakes in business: the new face of executive fraud" data-fr="Deepfakes en entreprise : le nouveau visage de la fraude au dirigeant">Deepfakes en entreprise : le nouveau visage de la fraude au dirigeant</h3>
+      <p data-en="In 2025, several African companies lost significant sums following video calls with fake executives." data-fr="En 2025, plusieurs entreprises africaines ont perdu des sommes importantes suite à des appels vidéo avec de faux dirigeants. Quelles méthodes de détection ?">En 2025, plusieurs entreprises africaines ont perdu des sommes importantes suite à des appels vidéo avec de faux dirigeants. Quelles méthodes de détection ?</p>
+      <span class="blog-read-more" data-en="Read article" data-fr="Lire l'article">Lire l'article</span>
+    </div>
+
+    <!-- Article 4 -->
+    <div class="blog-card reveal">
+      <div class="blog-meta">
+        <span class="blog-date">Janvier 2026</span>
+        <span class="blog-category">OPSEC</span>
+      </div>
+      <h3 data-en="Digital hygiene checklist for executives in 2026" data-fr="Checklist hygiène numérique pour dirigeants en 2026">Checklist hygiène numérique pour dirigeants en 2026</h3>
+      <p data-en="A practical, non-technical guide to the 12 security reflexes that every executive should have in 2026." data-fr="Un guide pratique et non technique sur les 12 réflexes de sécurité que tout dirigeant devrait avoir en 2026. Simple et immédiatement actionnable.">Un guide pratique et non technique sur les 12 réflexes de sécurité que tout dirigeant devrait avoir en 2026. Simple et immédiatement actionnable.</p>
+      <span class="blog-read-more" data-en="Read guide" data-fr="Lire le guide">Lire le guide</span>
+    </div>
+  </div>
+
+  <div class="blog-cta reveal">
+    <a href="#" data-en="View all articles →" data-fr="Voir tous les articles →">Voir tous les articles →</a>
+  </div>
+</section>
+
+<!-- ═══ CONTACT ═══ -->
+<section id="contact">
+  <div class="contact-header reveal">
+    <div class="section-label" data-en="Secure contact" data-fr="Contact sécurisé">Contact sécurisé</div>
+    <h2 data-en-html="Start a<br><em>confidential</em> conversation." data-fr-html="Initiez une<br>conversation <em>confidentielle.</em>">Initiez une<br>conversation <em>confidentielle.</em></h2>
+    <p data-en="All communications are treated as confidential. No tracking. No marketing automation. A human response within 24 hours."
+       data-fr="Toutes les communications sont traitées comme confidentielles. Pas de tracking. Pas d'automatisation marketing. Une réponse humaine sous 24 heures.">Toutes les communications sont traitées comme confidentielles. Pas de tracking. Pas d'automatisation marketing. Une réponse humaine sous 24 heures.</p>
+  </div>
+
+  <div class="contact-grid">
+    <div class="contact-info-block reveal">
+      <h3 data-en="Direct channels" data-fr="Canaux directs">Canaux directs</h3>
+      <div class="cinfo-item">
+        <span class="cinfo-label">Email</span>
+        <span class="cinfo-value">contact@sangour3i.com</span>
+      </div>
+      <div class="cinfo-item">
+        <span class="cinfo-label" data-en="Response time" data-fr="Délai de réponse">Délai de réponse</span>
+        <span class="cinfo-value" data-en="Under 24 hours" data-fr="Sous 24 heures">Sous 24 heures</span>
+      </div>
+      <div class="contact-promise" data-en="&ldquo; Every inquiry is treated with absolute discretion. Your identity and your needs will not be shared, mentioned or used outside our direct relationship. &rdquo;"
+           data-fr="« Chaque demande est traitée avec une discrétion absolue. Votre identité et vos besoins ne seront pas partagés en dehors de notre relation directe. »">« Chaque demande est traitée avec une discrétion absolue. Votre identité et vos besoins ne seront pas partagés en dehors de notre relation directe. »</div>
+    </div>
+
+    <form class="contact-form reveal" onsubmit="handleSubmit(event)">
+      <div class="form-row">
+        <div class="form-field">
+          <label data-en="Name / Organisation" data-fr="Nom / Organisation">Nom / Organisation</label>
+          <input type="text" placeholder="Jean Dupont / Acme Corp" required>
+        </div>
+        <div class="form-field">
+          <label>Email</label>
+          <input type="email" placeholder="contact@exemple.com" required>
+        </div>
+      </div>
+      <div class="form-field">
+        <label data-en="Service" data-fr="Service">Service</label>
+        <select>
+          <option data-en="Digital Due Diligence" data-fr="Due Diligence Digitale">Due Diligence Digitale</option>
+          <option data-en="Digital Footprint Audit" data-fr="Audit d'Empreinte Digitale">Audit d'Empreinte Digitale</option>
+          <option data-en="Reputation Monitoring" data-fr="Veille Réputationnelle">Veille Réputationnelle</option>
+          <option data-en="OSINT Investigation" data-fr="Investigation OSINT">Investigation OSINT</option>
+          <option data-en="Anti-Manipulation Workshop" data-fr="Atelier Anti-Manipulation">Atelier Anti-Manipulation</option>
+          <option data-en="Document Verification" data-fr="Vérification Documentaire">Vérification Documentaire</option>
+          <option data-en="Digital Hygiene Audit" data-fr="Hygiène Numérique">Hygiène Numérique</option>
+          <option data-en="Other" data-fr="Autre">Autre</option>
+        </select>
+      </div>
+      <div class="form-field">
+        <label data-en="Brief context (confidential)" data-fr="Contexte succinct (confidentiel)">Contexte succinct (confidentiel)</label>
+        <textarea placeholder="Décrivez brièvement votre besoin..." required></textarea>
+      </div>
+      <button type="submit" class="form-submit" data-en="Send confidential request →" data-fr="Envoyer la demande confidentielle →">Envoyer la demande confidentielle →</button>
+      <p class="form-note" data-en="Encrypted transmission · Confidential treatment · Human response"
+         data-fr="Transmission chiffrée · Traitement confidentiel · Réponse humaine">Transmission chiffrée · Traitement confidentiel · Réponse humaine</p>
+    </form>
+  </div>
+</section>
+
+<!-- ═══ FOOTER ═══ -->
+<footer>
+  <div class="footer-logo-wrap">
+    <span class="footer-logo">SANGOUR3i</span>
+    <span class="footer-sub" data-en="Digital Intelligence · Discretion · Expertise" data-fr="Intelligence Digitale · Discrétion · Expertise">Intelligence Digitale · Discrétion · Expertise</span>
+  </div>
+  <ul class="footer-links">
+    <li><a href="#hero"     data-en="Home"     data-fr="Accueil">Accueil</a></li>
+    <li><a href="#services" data-en="Services" data-fr="Services">Services</a></li>
+    <li><a href="#about"    data-en="About"    data-fr="À propos">À propos</a></li>
+    <li><a href="#blog"     data-en="Blog"     data-fr="Blog">Blog</a></li>
+    <li><a href="#contact"  data-en="Contact"  data-fr="Contact">Contact</a></li>
+    <li><a href="terms.html"   data-en="Terms"   data-fr="CGV">CGV</a></li>
+    <li><a href="privacy.html" data-en="Privacy" data-fr="Confidentialité">Confidentialité</a></li>
+    <li><a href="cookies.html" data-en="Cookies" data-fr="Cookies">Cookies</a></li>
+  </ul>
+  <div class="footer-copy" data-en="© 2026 SANGOUR3i · All rights reserved · Confidential" data-fr="© 2026 SANGOUR3i · Tous droits réservés · Confidentiel">© 2026 SANGOUR3i · Tous droits réservés · Confidentiel</div>
+</footer>
+
+<script>
+/* ── REVEAL ── */
+const revealEls = document.querySelectorAll('.reveal');
+document.body.classList.add('js-animate');
+setTimeout(() => { revealEls.forEach(el => el.classList.add('visible')); }, 400);
+try {
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+  }, { threshold: 0, rootMargin: '0px 0px 0px 0px' });
+  revealEls.forEach(el => obs.observe(el));
+} catch(err) { revealEls.forEach(el => el.classList.add('visible')); }
+
+document.querySelectorAll('.service-card').forEach((c,i) => { c.style.transitionDelay = `${i * 0.07}s`; });
+
+/* ── FORM ── */
+function handleSubmit(e) {
+  e.preventDefault();
+  const btn = e.target.querySelector('.form-submit');
+  const lang = localStorage.getItem('lang') || 'fr';
+  btn.textContent = lang === 'en' ? 'Request sent ✓' : 'Demande envoyée ✓';
+  btn.style.background = '#2a6b3a';
+  setTimeout(() => {
+    btn.textContent = lang === 'en' ? 'Send confidential request →' : 'Envoyer la demande confidentielle →';
+    btn.style.background = '';
+    e.target.reset();
+  }, 3500);
+}
+
+/* ── I18N ── */
+function setLang(lang) {
+  document.querySelectorAll('[data-en]').forEach(el => {
+    const val = el.dataset[lang];
+    if (val !== undefined) el.textContent = val;
+  });
+  document.querySelectorAll('[data-en-html]').forEach(el => {
+    const val = lang === 'en' ? el.dataset.enHtml : el.dataset.frHtml;
+    if (val !== undefined) el.innerHTML = val;
+  });
+  document.querySelectorAll('select option[data-en]').forEach(opt => {
+    const val = opt.dataset[lang];
+    if (val !== undefined) opt.textContent = val;
+  });
+  document.title = lang === 'en' ? 'SANGOUR3i — Strategic Digital Intelligence' : 'SANGOUR3i — Intelligence Digitale Stratégique';
+  document.documentElement.lang = lang;
+  document.getElementById('lang-toggle').textContent = lang === 'en' ? 'FR' : 'EN';
+  localStorage.setItem('lang', lang);
+}
+
+function toggleLang() {
+  try {
+    const cur = localStorage.getItem('lang') || 'fr';
+    setLang(cur === 'fr' ? 'en' : 'fr');
+  } catch(e) {
+    const btn = document.getElementById('lang-toggle');
+    setLang(btn.textContent === 'EN' ? 'en' : 'fr');
+  }
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  const btn = document.getElementById('lang-toggle');
+  if (btn) btn.addEventListener('click', toggleLang);
+});
+
+(function init() {
+  try {
+    const saved = localStorage.getItem('lang');
+    const browser = navigator.language && navigator.language.startsWith('en') ? 'en' : 'fr';
+    setLang(saved || browser);
+  } catch(e) { setLang('fr'); }
+})();
+</script>
+</body>
+</html>

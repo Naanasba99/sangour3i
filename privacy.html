@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SANGOUR3i — Politique de Confidentialité / Privacy Policy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Space+Mono:wght@400;700&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#07080C;--bg2:#0D0F16;--bg3:#12151E;--gold:#C4A44A;--gold2:#DFC070;--gold-dim:#7A6530;--off:#E8E2D4;--muted:#6E6C66;--muted2:#9A9690;--border:rgba(196,164,74,0.14);--border2:rgba(196,164,74,0.28)}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--off);font-family:'Jost',sans-serif;font-weight:300;overflow-x:hidden;line-height:1.6}
+body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(196,164,74,0.025) 1px,transparent 1px),linear-gradient(90deg,rgba(196,164,74,0.025) 1px,transparent 1px);background-size:80px 80px;pointer-events:none;z-index:0}
+nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;justify-content:space-between;align-items:center;padding:1.4rem 4rem;background:rgba(7,8,12,0.92);backdrop-filter:blur(16px);border-bottom:1px solid var(--border)}
+.nav-logo{font-family:'Space Mono',monospace;font-size:0.78rem;letter-spacing:0.28em;color:var(--gold);text-decoration:none}
+.nav-right{display:flex;align-items:center;gap:1rem}
+#lang-toggle{font-family:'Space Mono',monospace;font-size:0.55rem;letter-spacing:0.2em;color:var(--muted);background:transparent;border:1px solid var(--border);padding:0.4rem 0.75rem;cursor:pointer;transition:all 0.3s}
+#lang-toggle:hover{color:var(--gold);border-color:var(--border2)}
+.nav-cta{font-family:'Space Mono',monospace;font-size:0.6rem;letter-spacing:0.15em;color:var(--gold);border:1px solid var(--gold);padding:0.55rem 1.3rem;text-decoration:none;transition:all 0.3s}
+.nav-cta:hover{background:var(--gold);color:var(--bg)}
+.nav-back{font-family:'Space Mono',monospace;font-size:0.55rem;letter-spacing:0.15em;color:var(--muted);text-decoration:none;transition:color 0.3s}
+.nav-back:hover{color:var(--gold)}
+.legal-hero{position:relative;z-index:1;padding:10rem 4rem 4rem;max-width:900px;margin:0 auto;border-bottom:1px solid var(--border)}
+.legal-label{font-family:'Space Mono',monospace;font-size:0.56rem;letter-spacing:0.35em;color:var(--gold);text-transform:uppercase;margin-bottom:1.5rem;display:flex;align-items:center;gap:0.8rem}
+.legal-label::before{content:'';display:block;width:28px;height:1px;background:var(--gold)}
+.legal-hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2.5rem,5vw,4rem);font-weight:300;line-height:1.1;margin-bottom:1rem}
+.legal-hero h1 em{font-style:italic;color:var(--gold)}
+.legal-meta{display:flex;gap:2rem;flex-wrap:wrap;margin-top:2rem}
+.legal-meta-item{display:flex;flex-direction:column;gap:0.3rem}
+.legal-meta-label{font-family:'Space Mono',monospace;font-size:0.46rem;letter-spacing:0.2em;color:var(--gold-dim);text-transform:uppercase}
+.legal-meta-value{font-size:0.85rem;color:var(--muted2)}
+.legal-toc{position:relative;z-index:1;padding:3rem 4rem;max-width:900px;margin:0 auto;background:var(--bg2);border-bottom:1px solid var(--border)}
+.toc-title{font-family:'Space Mono',monospace;font-size:0.52rem;letter-spacing:0.25em;color:var(--gold-dim);text-transform:uppercase;margin-bottom:1.2rem}
+.toc-list{list-style:none;display:flex;flex-direction:column;gap:0.4rem}
+.toc-list a{font-family:'Space Mono',monospace;font-size:0.52rem;letter-spacing:0.1em;color:var(--muted);text-decoration:none;display:flex;align-items:center;gap:0.8rem;transition:color 0.3s}
+.toc-list a::before{content:'→';color:var(--gold-dim);flex-shrink:0}
+.toc-list a:hover{color:var(--gold)}
+.legal-body{position:relative;z-index:1;max-width:900px;margin:0 auto;padding:4rem}
+.lang-block{display:none}
+.lang-block.active{display:block}
+.legal-section{margin-bottom:4rem;padding-bottom:4rem;border-bottom:1px solid var(--border)}
+.legal-section:last-child{border-bottom:none}
+.section-num{font-family:'Space Mono',monospace;font-size:0.48rem;letter-spacing:0.25em;color:var(--gold-dim);text-transform:uppercase;margin-bottom:0.6rem;display:block}
+.legal-section h2{font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:400;color:var(--off);margin-bottom:1.5rem;line-height:1.2}
+.legal-section h2 em{font-style:italic;color:var(--gold)}
+.legal-section p{font-size:0.9rem;color:var(--muted2);line-height:1.9;margin-bottom:1rem}
+.legal-section strong{color:var(--off);font-weight:500}
+.legal-section ul{list-style:none;display:flex;flex-direction:column;gap:0.5rem;margin:1rem 0}
+.legal-section ul li{font-size:0.88rem;color:var(--muted2);display:flex;align-items:flex-start;gap:0.8rem;line-height:1.7}
+.legal-section ul li::before{content:'—';color:var(--gold-dim);flex-shrink:0;margin-top:0.1rem}
+.legal-section h3{font-family:'Jost',sans-serif;font-size:0.95rem;font-weight:500;color:var(--off);margin:1.8rem 0 0.8rem;letter-spacing:0.02em}
+.highlight-box{background:var(--bg2);border:1px solid var(--border);border-left:2px solid var(--gold);padding:1.5rem 2rem;margin:1.5rem 0;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.05rem;color:var(--off);line-height:1.6}
+.rgpd-rights{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--border);margin:2rem 0}
+.rgpd-right{background:var(--bg2);padding:1.5rem;transition:background 0.3s}
+.rgpd-right:hover{background:var(--bg3)}
+.rgpd-right-name{font-family:'Space Mono',monospace;font-size:0.5rem;letter-spacing:0.15em;color:var(--gold);text-transform:uppercase;margin-bottom:0.5rem;display:block}
+.rgpd-right p{font-size:0.82rem;color:var(--muted2);line-height:1.6;margin:0}
+footer{position:relative;z-index:1;padding:2.5rem 4rem;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-logo{font-family:'Space Mono',monospace;font-size:0.72rem;letter-spacing:0.25em;color:var(--gold)}
+.footer-links{display:flex;gap:2rem;list-style:none}
+.footer-links a{font-family:'Space Mono',monospace;font-size:0.5rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color 0.3s}
+.footer-links a:hover{color:var(--gold)}
+.footer-copy{font-family:'Space Mono',monospace;font-size:0.48rem;letter-spacing:0.12em;color:var(--muted)}
+@media(max-width:900px){
+  nav{padding:1.2rem 1.5rem}
+  .legal-hero,.legal-toc,.legal-body{padding-left:1.5rem;padding-right:1.5rem}
+  .legal-hero{padding-top:8rem}
+  .rgpd-rights{grid-template-columns:1fr}
+  footer{padding:2rem 1.5rem;flex-direction:column;text-align:center}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-back">← Retour</a>
+  <a href="index.html" class="nav-logo">SANGOUR3i</a>
+  <div class="nav-right">
+    <button id="lang-toggle">EN</button>
+    <a href="index.html#contact" class="nav-cta" data-fr="Demande confidentielle" data-en="Confidential inquiry">Demande confidentielle</a>
+  </div>
+</nav>
+
+<div class="legal-hero">
+  <div class="legal-label">RGPD · GDPR</div>
+  <h1 class="lang-block active" id="title-fr">Politique de<br><em>Confidentialité</em></h1>
+  <h1 class="lang-block" id="title-en">Privacy<br><em>Policy</em></h1>
+  <div class="legal-meta">
+    <div class="legal-meta-item">
+      <span class="legal-meta-label">Version</span>
+      <span class="legal-meta-value">1.0 — Avril 2026</span>
+    </div>
+    <div class="legal-meta-item">
+      <span class="legal-meta-label" data-fr="Référentiel" data-en="Framework">Référentiel</span>
+      <span class="legal-meta-value">RGPD / GDPR (UE 2016/679)</span>
+    </div>
+    <div class="legal-meta-item">
+      <span class="legal-meta-label" data-fr="Responsable du traitement" data-en="Data controller">Responsable du traitement</span>
+      <span class="legal-meta-value">SANGOUR3i</span>
+    </div>
+  </div>
+</div>
+
+<div class="legal-toc">
+  <p class="toc-title" data-fr="Sommaire" data-en="Contents">Sommaire</p>
+  <ul class="toc-list lang-block active" id="toc-fr">
+    <li><a href="#p1-fr">1. Qui sommes-nous ?</a></li>
+    <li><a href="#p2-fr">2. Données collectées</a></li>
+    <li><a href="#p3-fr">3. Finalités et bases légales du traitement</a></li>
+    <li><a href="#p4-fr">4. Durée de conservation</a></li>
+    <li><a href="#p5-fr">5. Destinataires des données</a></li>
+    <li><a href="#p6-fr">6. Transferts hors UE</a></li>
+    <li><a href="#p7-fr">7. Vos droits RGPD</a></li>
+    <li><a href="#p8-fr">8. Sécurité</a></li>
+    <li><a href="#p9-fr">9. Contact et réclamations</a></li>
+  </ul>
+  <ul class="toc-list lang-block" id="toc-en">
+    <li><a href="#p1-en">1. Who we are</a></li>
+    <li><a href="#p2-en">2. Data collected</a></li>
+    <li><a href="#p3-en">3. Purposes and legal bases</a></li>
+    <li><a href="#p4-en">4. Retention periods</a></li>
+    <li><a href="#p5-en">5. Data recipients</a></li>
+    <li><a href="#p6-en">6. Transfers outside the EU</a></li>
+    <li><a href="#p7-en">7. Your GDPR rights</a></li>
+    <li><a href="#p8-en">8. Security</a></li>
+    <li><a href="#p9-en">9. Contact and complaints</a></li>
+  </ul>
+</div>
+
+<div class="legal-body">
+
+  <!-- ══ FRENCH ══ -->
+  <div class="lang-block active" id="body-fr">
+
+    <div class="legal-section" id="p1-fr">
+      <span class="section-num">Article 01</span>
+      <h2>Qui <em>sommes-nous ?</em></h2>
+      <p><strong>SANGOUR3i</strong> est un service d'intelligence digitale stratégique. En tant que responsable du traitement de vos données personnelles, nous nous engageons à les traiter dans le strict respect du Règlement Général sur la Protection des Données (RGPD — UE 2016/679) et de la loi Informatique et Libertés.</p>
+      <p>Contact : <strong>contact@sangour3i.com</strong></p>
+      <div class="highlight-box">« La protection de vos données personnelles est une priorité. Nous collectons le strict minimum nécessaire à la réalisation de nos services. »</div>
+    </div>
+
+    <div class="legal-section" id="p2-fr">
+      <span class="section-num">Article 02</span>
+      <h2>Données <em>collectées</em></h2>
+      <h3>Via le formulaire de contact</h3>
+      <ul>
+        <li>Nom ou dénomination sociale</li>
+        <li>Adresse email</li>
+        <li>Le message et le contexte de la demande</li>
+      </ul>
+      <h3>Via la navigation sur le site</h3>
+      <ul>
+        <li>Adresse IP (anonymisée)</li>
+        <li>Pages consultées et durée de visite (si analytique activée)</li>
+        <li>Type de navigateur et système d'exploitation</li>
+      </ul>
+      <h3>Dans le cadre des prestations</h3>
+      <ul>
+        <li>Informations nécessaires à la réalisation de la mission (nom du sujet, contexte, périmètre)</li>
+        <li>Données de facturation (nom, adresse, coordonnées bancaires)</li>
+      </ul>
+      <p>Nous ne collectons pas de données sensibles (santé, opinions politiques, religion, etc.) sauf si explicitement nécessaire et consenti pour une mission spécifique.</p>
+    </div>
+
+    <div class="legal-section" id="p3-fr">
+      <span class="section-num">Article 03</span>
+      <h2>Finalités et bases légales <em>du traitement</em></h2>
+      <ul>
+        <li><strong>Gestion des demandes de contact</strong> — Base légale : intérêt légitime / exécution d'un contrat</li>
+        <li><strong>Réalisation des prestations commandées</strong> — Base légale : exécution du contrat</li>
+        <li><strong>Facturation et comptabilité</strong> — Base légale : obligation légale</li>
+        <li><strong>Amélioration du site web</strong> — Base légale : consentement (cookies analytiques)</li>
+        <li><strong>Respect des obligations légales</strong> — Base légale : obligation légale</li>
+      </ul>
+      <p>Nous n'utilisons jamais vos données à des fins de prospection commerciale sans votre consentement préalable explicite.</p>
+    </div>
+
+    <div class="legal-section" id="p4-fr">
+      <span class="section-num">Article 04</span>
+      <h2>Durée <em>de conservation</em></h2>
+      <ul>
+        <li><strong>Données de contact</strong> : 3 ans à compter du dernier contact</li>
+        <li><strong>Données contractuelles et de facturation</strong> : 10 ans (obligation comptable légale)</li>
+        <li><strong>Rapports et livrables de mission</strong> : 90 jours après livraison, puis suppression définitive</li>
+        <li><strong>Données de navigation</strong> : 13 mois maximum</li>
+      </ul>
+      <p>À l'expiration de ces délais, les données sont supprimées de manière définitive et sécurisée.</p>
+    </div>
+
+    <div class="legal-section" id="p5-fr">
+      <span class="section-num">Article 05</span>
+      <h2>Destinataires <em>des données</em></h2>
+      <p>Vos données personnelles sont traitées exclusivement par SANGOUR3i et ne sont pas vendues, louées ni cédées à des tiers à des fins commerciales.</p>
+      <p>Elles peuvent être transmises à :</p>
+      <ul>
+        <li>Nos sous-traitants techniques (hébergement, messagerie chiffrée) — uniquement dans le cadre nécessaire et sous accord de confidentialité</li>
+        <li>Les autorités compétentes, en cas d'obligation légale</li>
+      </ul>
+      <p>Tout prestataire tiers est soumis à des garanties contractuelles de confidentialité et de sécurité.</p>
+    </div>
+
+    <div class="legal-section" id="p6-fr">
+      <span class="section-num">Article 06</span>
+      <h2>Transferts <em>hors UE</em></h2>
+      <p>Dans la mesure du possible, les données sont hébergées sur des serveurs situés dans l'Union Européenne. En cas de transfert hors UE (prestataires techniques), nous nous assurons que des garanties appropriées sont en place (clauses contractuelles types de la Commission européenne, pays reconnu adéquat, etc.).</p>
+    </div>
+
+    <div class="legal-section" id="p7-fr">
+      <span class="section-num">Article 07</span>
+      <h2>Vos droits <em>RGPD</em></h2>
+      <p>Conformément au RGPD, vous disposez des droits suivants sur vos données personnelles :</p>
+      <div class="rgpd-rights">
+        <div class="rgpd-right">
+          <span class="rgpd-right-name">Droit d'accès</span>
+          <p>Obtenir une copie des données personnelles vous concernant que nous détenons.</p>
+        </div>
+        <div class="rgpd-right">
+          <span class="rgpd-right-name">Droit de rectification</span>
+          <p>Corriger des données inexactes ou incomplètes vous concernant.</p>
+        </div>
+        <div class="rgpd-right">
+          <span class="rgpd-right-name">Droit à l'effacement</span>
+          <p>Demander la suppression de vos données dans les cas prévus par le RGPD.</p>
+        </div>
+        <div class="rgpd-right">
+          <span class="rgpd-right-name">Droit à la limitation</span>
+          <p>Suspendre le traitement de vos données dans certaines circonstances.</p>
+        </div>
+        <div class="rgpd-right">
+          <span class="rgpd-right-name">Droit d'opposition</span>
+          <p>Vous opposer à certains traitements fondés sur l'intérêt légitime.</p>
+        </div>
+        <div class="rgpd-right">
+          <span class="rgpd-right-name">Droit à la portabilité</span>
+          <p>Recevoir vos données dans un format structuré et lisible par machine.</p>
+        </div>
+      </div>
+      <p>Pour exercer vos droits : <strong>contact@sangour3i.com</strong> — Réponse sous 30 jours.</p>
+    </div>
+
+    <div class="legal-section" id="p8-fr">
+      <span class="section-num">Article 08</span>
+      <h2><em>Sécurité</em></h2>
+      <p>SANGOUR3i met en œuvre des mesures techniques et organisationnelles appropriées pour protéger vos données contre tout accès non autorisé, perte, altération ou divulgation :</p>
+      <ul>
+        <li>Chiffrement des communications (TLS/HTTPS)</li>
+        <li>Accès aux données limité aux personnes strictement nécessaires</li>
+        <li>Messagerie chiffrée pour les échanges sensibles</li>
+        <li>Suppression sécurisée des données après expiration des délais de conservation</li>
+      </ul>
+    </div>
+
+    <div class="legal-section" id="p9-fr">
+      <span class="section-num">Article 09</span>
+      <h2>Contact <em>et réclamations</em></h2>
+      <p>Pour toute question relative à la protection de vos données ou pour exercer vos droits :</p>
+      <p><strong>Email :</strong> contact@sangour3i.com</p>
+      <p>Si vous estimez que le traitement de vos données ne respecte pas le RGPD, vous avez le droit d'introduire une réclamation auprès de la <strong>CNIL</strong> (Commission Nationale de l'Informatique et des Libertés) : <em>www.cnil.fr</em></p>
+    </div>
+
+  </div><!-- /body-fr -->
+
+  <!-- ══ ENGLISH ══ -->
+  <div class="lang-block" id="body-en">
+
+    <div class="legal-section" id="p1-en">
+      <span class="section-num">Article 01</span>
+      <h2>Who <em>we are</em></h2>
+      <p><strong>SANGOUR3i</strong> is a strategic digital intelligence service. As the data controller for your personal data, we are committed to processing it in strict compliance with the General Data Protection Regulation (GDPR — EU 2016/679).</p>
+      <p>Contact: <strong>contact@sangour3i.com</strong></p>
+      <div class="highlight-box">"Protecting your personal data is a priority. We collect only the strict minimum necessary to deliver our services."</div>
+    </div>
+
+    <div class="legal-section" id="p2-en">
+      <span class="section-num">Article 02</span>
+      <h2>Data <em>collected</em></h2>
+      <h3>Via the contact form</h3>
+      <ul>
+        <li>Name or company name</li>
+        <li>Email address</li>
+        <li>Message and context of the request</li>
+      </ul>
+      <h3>Via website browsing</h3>
+      <ul>
+        <li>IP address (anonymized)</li>
+        <li>Pages visited and visit duration (if analytics enabled)</li>
+        <li>Browser type and operating system</li>
+      </ul>
+      <h3>In the context of services</h3>
+      <ul>
+        <li>Information necessary for the mission (subject name, context, scope)</li>
+        <li>Billing data (name, address, bank details)</li>
+      </ul>
+      <p>We do not collect sensitive data (health, political opinions, religion, etc.) unless explicitly necessary and consented for a specific mission.</p>
+    </div>
+
+    <div class="legal-section" id="p3-en">
+      <span class="section-num">Article 03</span>
+      <h2>Purposes and <em>legal bases</em></h2>
+      <ul>
+        <li><strong>Managing contact requests</strong> — Legal basis: legitimate interest / contract performance</li>
+        <li><strong>Performing ordered services</strong> — Legal basis: contract performance</li>
+        <li><strong>Invoicing and accounting</strong> — Legal basis: legal obligation</li>
+        <li><strong>Website improvement</strong> — Legal basis: consent (analytics cookies)</li>
+        <li><strong>Compliance with legal obligations</strong> — Legal basis: legal obligation</li>
+      </ul>
+      <p>We never use your data for commercial prospecting without your explicit prior consent.</p>
+    </div>
+
+    <div class="legal-section" id="p4-en">
+      <span class="section-num">Article 04</span>
+      <h2>Retention <em>periods</em></h2>
+      <ul>
+        <li><strong>Contact data</strong>: 3 years from last contact</li>
+        <li><strong>Contractual and billing data</strong>: 10 years (legal accounting obligation)</li>
+        <li><strong>Mission reports and deliverables</strong>: 90 days after delivery, then permanently deleted</li>
+        <li><strong>Browsing data</strong>: 13 months maximum</li>
+      </ul>
+      <p>Upon expiry of these periods, data is permanently and securely deleted.</p>
+    </div>
+
+    <div class="legal-section" id="p5-en">
+      <span class="section-num">Article 05</span>
+      <h2>Data <em>recipients</em></h2>
+      <p>Your personal data is processed exclusively by SANGOUR3i and is not sold, rented, or transferred to third parties for commercial purposes.</p>
+      <p>It may be shared with:</p>
+      <ul>
+        <li>Technical subcontractors (hosting, encrypted messaging) — only as strictly necessary and under confidentiality agreements</li>
+        <li>Competent authorities, where legally required</li>
+      </ul>
+    </div>
+
+    <div class="legal-section" id="p6-en">
+      <span class="section-num">Article 06</span>
+      <h2>Transfers <em>outside the EU</em></h2>
+      <p>Wherever possible, data is hosted on servers located within the European Union. In the event of transfers outside the EU (technical providers), we ensure appropriate safeguards are in place (European Commission standard contractual clauses, adequacy decisions, etc.).</p>
+    </div>
+
+    <div class="legal-section" id="p7-en">
+      <span class="section-num">Article 07</span>
+      <h2>Your <em>GDPR rights</em></h2>
+      <p>Under GDPR, you have the following rights over your personal data:</p>
+      <div class="rgpd-rights">
+        <div class="rgpd-right">
+          <span class="rgpd-right-name">Right of access</span>
+          <p>Obtain a copy of the personal data we hold about you.</p>
+        </div>
+        <div class="rgpd-right">
+          <span class="rgpd-right-name">Right to rectification</span>
+          <p>Correct inaccurate or incomplete data relating to you.</p>
+        </div>
+        <div class="rgpd-right">
+          <span class="rgpd-right-name">Right to erasure</span>
+          <p>Request deletion of your data in cases provided for by GDPR.</p>
+        </div>
+        <div class="rgpd-right">
+          <span class="rgpd-right-name">Right to restriction</span>
+          <p>Suspend processing of your data in certain circumstances.</p>
+        </div>
+        <div class="rgpd-right">
+          <span class="rgpd-right-name">Right to object</span>
+          <p>Object to certain processing based on legitimate interest.</p>
+        </div>
+        <div class="rgpd-right">
+          <span class="rgpd-right-name">Right to portability</span>
+          <p>Receive your data in a structured, machine-readable format.</p>
+        </div>
+      </div>
+      <p>To exercise your rights: <strong>contact@sangour3i.com</strong> — Response within 30 days.</p>
+    </div>
+
+    <div class="legal-section" id="p8-en">
+      <span class="section-num">Article 08</span>
+      <h2><em>Security</em></h2>
+      <p>SANGOUR3i implements appropriate technical and organisational measures to protect your data against unauthorized access, loss, alteration, or disclosure:</p>
+      <ul>
+        <li>Encrypted communications (TLS/HTTPS)</li>
+        <li>Data access limited to strictly necessary personnel</li>
+        <li>Encrypted messaging for sensitive exchanges</li>
+        <li>Secure deletion of data after retention periods expire</li>
+      </ul>
+    </div>
+
+    <div class="legal-section" id="p9-en">
+      <span class="section-num">Article 09</span>
+      <h2>Contact <em>and complaints</em></h2>
+      <p>For any questions about data protection or to exercise your rights:</p>
+      <p><strong>Email:</strong> contact@sangour3i.com</p>
+      <p>If you believe that the processing of your data does not comply with GDPR, you have the right to lodge a complaint with your national data protection authority (in France: <strong>CNIL</strong> — www.cnil.fr).</p>
+    </div>
+
+  </div><!-- /body-en -->
+
+</div><!-- /legal-body -->
+
+<footer>
+  <span class="footer-logo">SANGOUR3i</span>
+  <ul class="footer-links">
+    <li><a href="index.html" data-fr="Accueil" data-en="Home">Accueil</a></li>
+    <li><a href="terms.html" data-fr="CGV" data-en="Terms">CGV</a></li>
+    <li><a href="privacy.html" data-fr="Confidentialité" data-en="Privacy">Confidentialité</a></li>
+    <li><a href="cookies.html" data-fr="Cookies" data-en="Cookies">Cookies</a></li>
+    <li><a href="index.html#contact" data-fr="Contact" data-en="Contact">Contact</a></li>
+  </ul>
+  <div class="footer-copy" data-fr="© 2026 SANGOUR3i · Tous droits réservés" data-en="© 2026 SANGOUR3i · All rights reserved">© 2026 SANGOUR3i · Tous droits réservés</div>
+</footer>
+
+<script>
+let currentLang='fr';
+function setLang(lang){
+  currentLang=lang;
+  document.querySelectorAll('.lang-block').forEach(el=>el.classList.remove('active'));
+  document.querySelectorAll(`[id$="-${lang}"]`).forEach(el=>el.classList.add('active'));
+  document.querySelectorAll('[data-fr]').forEach(el=>{const v=el.dataset[lang];if(v)el.textContent=v;});
+  document.documentElement.lang=lang;
+  document.getElementById('lang-toggle').textContent=lang==='en'?'FR':'EN';
+  document.title=lang==='en'?'SANGOUR3i — Privacy Policy':'SANGOUR3i — Politique de Confidentialité';
+  try{localStorage.setItem('lang',lang);}catch(e){}
+}
+document.getElementById('lang-toggle').addEventListener('click',()=>setLang(currentLang==='fr'?'en':'fr'));
+(function(){try{const s=localStorage.getItem('lang');const b=navigator.language&&navigator.language.startsWith('en')?'en':'fr';setLang(s||b);}catch(e){setLang('fr');}})();
+</script>
+</body>
+</html>
