@@ -17,7 +17,9 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;justify-content
 .nav-logo{font-family:'Space Mono',monospace;font-size:0.78rem;letter-spacing:0.28em;color:var(--gold);text-decoration:none}
 .nav-back{font-family:'Space Mono',monospace;font-size:0.52rem;letter-spacing:0.15em;color:var(--muted);text-decoration:none;transition:color 0.3s}
 .nav-back:hover{color:var(--gold)}
-.nav-right{display:flex;gap:1rem;align-items:center}
+.nav-right{display:flex;gap:0.8rem;align-items:center}
+#lang-toggle{font-family:'Space Mono',monospace;font-size:0.52rem;letter-spacing:0.2em;color:var(--muted);background:transparent;border:1px solid var(--border);padding:0.4rem 0.75rem;cursor:pointer;transition:all 0.3s}
+#lang-toggle:hover{color:var(--gold);border-color:var(--border2)}
 .btn-dl{font-family:'Space Mono',monospace;font-size:0.52rem;letter-spacing:0.15em;background:var(--gold);color:var(--bg);padding:0.5rem 1.2rem;border:none;cursor:pointer;text-transform:uppercase;transition:background 0.3s}
 .btn-dl:hover{background:var(--gold2)}
 
@@ -131,10 +133,11 @@ footer{position:relative;z-index:1;padding:2rem 4rem;border-top:1px solid var(--
 <div class="watermark">SANGOUR3i · FICTIF · À TITRE ILLUSTRATIF</div>
 
 <nav>
-  <a href="index.html" class="nav-back">← Retour au site</a>
+  <a href="index.html" class="nav-back" data-fr="← Retour au site" data-en="← Back to site">← Retour au site</a>
   <a href="index.html" class="nav-logo">SANGOUR3i</a>
   <div class="nav-right">
-    <button class="btn-dl" onclick="window.print()">Télécharger PDF ↓</button>
+    <button id="lang-toggle">EN</button>
+    <button class="btn-dl" onclick="window.print()" data-fr="Télécharger PDF ↓" data-en="Download PDF ↓">Télécharger PDF ↓</button>
   </div>
 </nav>
 
@@ -142,51 +145,51 @@ footer{position:relative;z-index:1;padding:2rem 4rem;border-top:1px solid var(--
 <div class="report-header">
 
   <div class="report-classified-bar">
-    <span class="classified-text">⚠ Document fictif · Illustratif uniquement · Toute ressemblance avec des personnes réelles est fortuite</span>
+    <span class="classified-text" data-fr="⚠ Document fictif · Illustratif uniquement · Toute ressemblance avec des personnes réelles est fortuite" data-en="⚠ Fictitious document · Illustrative only · Any resemblance to real persons is coincidental">⚠ Document fictif · Illustratif uniquement · Toute ressemblance avec des personnes réelles est fortuite</span>
     <span class="report-ref">REF : SGI-2026-DEMO-001 · TLP:WHITE</span>
   </div>
 
   <div class="report-title-block">
-    <div class="report-type">Rapport de Due Diligence Digitale</div>
-    <div class="report-title">Analyse d'Empreinte Numérique<br><em>Entité fictive : NEXORA CAPITAL SAS</em></div>
-    <div class="report-subtitle">Vérification préalable à engagement commercial — Analyse OSINT complète</div>
+    <div class="report-type" data-fr="Rapport de Due Diligence Digitale" data-en="Digital Due Diligence Report">Rapport de Due Diligence Digitale</div>
+    <div class="report-title" data-fr-html="Analyse d'Empreinte Numérique<br><em>Entité fictive : NEXORA CAPITAL SAS</em>" data-en-html="Digital Footprint Analysis<br><em>Fictitious entity: NEXORA CAPITAL SAS</em>">Analyse d'Empreinte Numérique<br><em>Entité fictive : NEXORA CAPITAL SAS</em></div>
+    <div class="report-subtitle" data-fr="Vérification préalable à engagement commercial — Analyse OSINT complète" data-en="Pre-engagement commercial verification — Full OSINT analysis">Vérification préalable à engagement commercial — Analyse OSINT complète</div>
   </div>
 
   <div class="report-meta-grid">
     <div class="report-meta-item">
-      <div class="rmi-label">Date d'analyse</div>
-      <div class="rmi-value">14 Avril 2026</div>
+      <div class="rmi-label" data-fr="Date d'analyse" data-en="Analysis date">Date d'analyse</div>
+      <div class="rmi-value" data-fr="14 Avril 2026" data-en="April 14, 2026">14 Avril 2026</div>
     </div>
     <div class="report-meta-item">
-      <div class="rmi-label">Durée de traitement</div>
-      <div class="rmi-value">52 heures</div>
+      <div class="rmi-label" data-fr="Durée de traitement" data-en="Processing time">Durée de traitement</div>
+      <div class="rmi-value" data-fr="52 heures" data-en="52 hours">52 heures</div>
     </div>
     <div class="report-meta-item">
-      <div class="rmi-label">Sources consultées</div>
-      <div class="rmi-value">47 sources ouvertes</div>
+      <div class="rmi-label" data-fr="Sources consultées" data-en="Sources reviewed">Sources consultées</div>
+      <div class="rmi-value" data-fr="47 sources ouvertes" data-en="47 open sources">47 sources ouvertes</div>
     </div>
     <div class="report-meta-item">
-      <div class="rmi-label">Analyste</div>
-      <div class="rmi-value">SANGOUR3i · Équipe OSINT</div>
+      <div class="rmi-label" data-fr="Analyste" data-en="Analyst">Analyste</div>
+      <div class="rmi-value">SANGOUR3i · OSINT</div>
     </div>
   </div>
 
   <!-- SCORE GLOBAL -->
   <div class="score-block">
     <div class="score-item">
-      <span class="score-label">Score de risque global</span>
+      <span class="score-label" data-fr="Score de risque global" data-en="Overall risk score">Score de risque global</span>
       <span class="score-num elevated">67 / 100</span>
-      <span class="score-desc">Niveau d'alerte : ÉLEVÉ</span>
+      <span class="score-desc" data-fr="Niveau d'alerte : ÉLEVÉ" data-en="Alert level: HIGH">Niveau d'alerte : ÉLEVÉ</span>
     </div>
     <div class="score-item">
-      <span class="score-label">Cohérence informationnelle</span>
+      <span class="score-label" data-fr="Cohérence informationnelle" data-en="Informational consistency">Cohérence informationnelle</span>
       <span class="score-num critical">41 / 100</span>
-      <span class="score-desc">Incohérences majeures détectées</span>
+      <span class="score-desc" data-fr="Incohérences majeures détectées" data-en="Major inconsistencies detected">Incohérences majeures détectées</span>
     </div>
     <div class="score-item">
-      <span class="score-label">Fiabilité des sources déclarées</span>
+      <span class="score-label" data-fr="Fiabilité des sources déclarées" data-en="Declared sources reliability">Fiabilité des sources déclarées</span>
       <span class="score-num elevated">58 / 100</span>
-      <span class="score-desc">Vérification partielle possible</span>
+      <span class="score-desc" data-fr="Vérification partielle possible" data-en="Partial verification possible">Vérification partielle possible</span>
     </div>
   </div>
 
@@ -199,14 +202,14 @@ footer{position:relative;z-index:1;padding:2rem 4rem;border-top:1px solid var(--
   <div class="report-section">
     <div class="section-header">
       <span class="section-num">01</span>
-      <h2 class="section-title">Synthèse <em>exécutive</em></h2>
+      <h2 class="section-title" data-fr-html="Synthèse <em>exécutive</em>" data-en-html="Executive <em>summary</em>">Synthèse <em>exécutive</em></h2>
     </div>
-    <p>L'analyse de l'empreinte numérique de <strong>NEXORA CAPITAL SAS</strong> révèle un profil caractérisé par de significatives incohérences entre les informations déclarées et les données vérifiables en sources ouvertes.</p>
-    <p>Trois signaux faibles majeurs ont été identifiés : une divergence entre la date de création déclarée et les premiers enregistrements numériques vérifiables, une structure de domaines web suggérant une activité antérieure non déclarée, et des profils de dirigeants présentant des historiques professionnels partiellement invérifiables.</p>
+    <p data-fr="L'analyse de l'empreinte numérique de NEXORA CAPITAL SAS révèle un profil caractérisé par de significatives incohérences entre les informations déclarées et les données vérifiables en sources ouvertes." data-en="The digital footprint analysis of NEXORA CAPITAL SAS reveals a profile characterized by significant inconsistencies between declared information and verifiable open-source data.">L'analyse de l'empreinte numérique de <strong>NEXORA CAPITAL SAS</strong> révèle un profil caractérisé par de significatives incohérences entre les informations déclarées et les données vérifiables en sources ouvertes.</p>
+    <p data-fr="Trois signaux faibles majeurs ont été identifiés : une divergence entre la date de création déclarée et les premiers enregistrements numériques vérifiables, une structure de domaines web suggérant une activité antérieure non déclarée, et des profils de dirigeants présentant des historiques professionnels partiellement invérifiables." data-en="Three major weak signals were identified: a discrepancy between the declared creation date and verifiable early digital records, a domain structure suggesting undeclared prior activity, and executive profiles with partially unverifiable professional histories.">Trois signaux faibles majeurs ont été identifiés : une divergence entre la date de création déclarée et les premiers enregistrements numériques vérifiables, une structure de domaines web suggérant une activité antérieure non déclarée, et des profils de dirigeants présentant des historiques professionnels partiellement invérifiables.</p>
     <div class="conclusion-box">
-      <h4>Recommandation analytique</h4>
-      <p><strong>Niveau d'alerte : ÉLEVÉ.</strong> Les incohérences identifiées ne permettent pas de conclure à une activité frauduleuse mais justifient un approfondissement avant tout engagement contractuel ou financier.</p>
-      <p>L'engagement est déconseillé sans obtention et vérification de documents complémentaires, notamment les statuts originaux, les comptes certifiés et les justificatifs d'identité des dirigeants réels.</p>
+      <h4 data-fr="Recommandation analytique" data-en="Analytical recommendation">Recommandation analytique</h4>
+      <p data-fr="Niveau d'alerte : ÉLEVÉ. Les incohérences identifiées ne permettent pas de conclure à une activité frauduleuse mais justifient un approfondissement avant tout engagement contractuel ou financier." data-en="Alert level: HIGH. The inconsistencies identified do not allow a conclusion of fraudulent activity but justify further investigation before any contractual or financial commitment."><strong>Niveau d'alerte : ÉLEVÉ.</strong> Les incohérences identifiées ne permettent pas de conclure à une activité frauduleuse mais justifient un approfondissement avant tout engagement contractuel ou financier.</p>
+      <p data-fr="L'engagement est déconseillé sans obtention et vérification de documents complémentaires, notamment les statuts originaux, les comptes certifiés et les justificatifs d'identité des dirigeants réels." data-en="Engagement is not recommended without obtaining and verifying additional documents, including original articles of incorporation, certified accounts, and identity documents of actual directors.">L'engagement est déconseillé sans obtention et vérification de documents complémentaires, notamment les statuts originaux, les comptes certifiés et les justificatifs d'identité des dirigeants réels.</p>
     </div>
   </div>
 
@@ -214,50 +217,50 @@ footer{position:relative;z-index:1;padding:2rem 4rem;border-top:1px solid var(--
   <div class="report-section">
     <div class="section-header">
       <span class="section-num">02</span>
-      <h2 class="section-title">Signaux faibles <em>détectés</em></h2>
+      <h2 class="section-title" data-fr-html="Signaux faibles <em>détectés</em>" data-en-html="Detected <em>weak signals</em>">Signaux faibles <em>détectés</em></h2>
     </div>
-    <p>L'analyse systématique des sources ouvertes a permis d'identifier les signaux suivants, classifiés par niveau de criticité :</p>
+    <p data-fr="L'analyse systématique des sources ouvertes a permis d'identifier les signaux suivants, classifiés par niveau de criticité :" data-en="Systematic open-source analysis identified the following signals, classified by criticality level:">L'analyse systématique des sources ouvertes a permis d'identifier les signaux suivants, classifiés par niveau de criticité :</p>
 
     <div class="signal-list">
       <div class="signal-item">
         <span class="signal-icon">◈</span>
         <div class="signal-content">
-          <h5>Divergence de date de création</h5>
-          <p>La date de création déclarée (mars 2023) est incompatible avec l'enregistrement du domaine principal (juillet 2021) et les premiers contenus indexés (septembre 2021). L'entité présenterait donc une existence numérique antérieure de 18 mois à sa date déclarée.</p>
+          <h5 data-fr="Divergence de date de création" data-en="Creation date discrepancy">Divergence de date de création</h5>
+          <p data-fr="La date de création déclarée (mars 2023) est incompatible avec l'enregistrement du domaine principal (juillet 2021) et les premiers contenus indexés (septembre 2021). L'entité présenterait donc une existence numérique antérieure de 18 mois à sa date déclarée." data-en="The declared creation date (March 2023) is incompatible with the main domain registration (July 2021) and first indexed content (September 2021). The entity would therefore have a digital existence 18 months prior to its declared date.">La date de création déclarée (mars 2023) est incompatible avec l'enregistrement du domaine principal (juillet 2021) et les premiers contenus indexés (septembre 2021). L'entité présenterait donc une existence numérique antérieure de 18 mois à sa date déclarée.</p>
         </div>
-        <span class="signal-level sl-critical">CRITIQUE</span>
+        <span class="signal-level sl-critical" data-fr="CRITIQUE" data-en="CRITICAL">CRITIQUE</span>
       </div>
       <div class="signal-item">
         <span class="signal-icon">◈</span>
         <div class="signal-content">
-          <h5>Structure de domaines satellites</h5>
-          <p>4 domaines connexes enregistrés sous le même registrant WHOIS entre 2020 et 2022, présentant des contenus aujourd'hui supprimés mais partiellement accessibles via archives web. Contenu des archives : services financiers non réglementés destinés à un marché géographique différent du périmètre déclaré.</p>
+          <h5 data-fr="Structure de domaines satellites" data-en="Satellite domain structure">Structure de domaines satellites</h5>
+          <p data-fr="4 domaines connexes enregistrés sous le même registrant WHOIS entre 2020 et 2022, présentant des contenus aujourd'hui supprimés mais partiellement accessibles via archives web. Contenu des archives : services financiers non réglementés destinés à un marché géographique différent du périmètre déclaré." data-en="4 related domains registered under the same WHOIS registrant between 2020 and 2022, with content now deleted but partially accessible via web archives. Archive content: unregulated financial services targeting a geographic market different from the declared scope.">4 domaines connexes enregistrés sous le même registrant WHOIS entre 2020 et 2022, présentant des contenus aujourd'hui supprimés mais partiellement accessibles via archives web. Contenu des archives : services financiers non réglementés destinés à un marché géographique différent du périmètre déclaré.</p>
         </div>
-        <span class="signal-level sl-critical">CRITIQUE</span>
+        <span class="signal-level sl-critical" data-fr="CRITIQUE" data-en="CRITICAL">CRITIQUE</span>
       </div>
       <div class="signal-item">
         <span class="signal-icon">◈</span>
         <div class="signal-content">
-          <h5>Profil LinkedIn du dirigeant : historique partiel</h5>
-          <p>Le profil LinkedIn du dirigeant déclaré (M. A. Fontaine) présente une lacune de 3 ans (2018–2021) non expliquée. Aucune trace vérifiable de l'expérience antérieure déclarée dans le secteur bancaire n'a pu être confirmée via sources primaires.</p>
+          <h5 data-fr="Profil LinkedIn du dirigeant : historique partiel" data-en="Executive LinkedIn profile: partial history">Profil LinkedIn du dirigeant : historique partiel</h5>
+          <p data-fr="Le profil LinkedIn du dirigeant déclaré (M. A. Fontaine) présente une lacune de 3 ans (2018–2021) non expliquée. Aucune trace vérifiable de l'expérience antérieure déclarée dans le secteur bancaire n'a pu être confirmée via sources primaires." data-en="The LinkedIn profile of the declared director (M. A. Fontaine) presents an unexplained 3-year gap (2018–2021). No verifiable trace of the declared prior banking sector experience could be confirmed via primary sources.">Le profil LinkedIn du dirigeant déclaré (M. A. Fontaine) présente une lacune de 3 ans (2018–2021) non expliquée. Aucune trace vérifiable de l'expérience antérieure déclarée dans le secteur bancaire n'a pu être confirmée via sources primaires.</p>
         </div>
-        <span class="signal-level sl-elevated">ÉLEVÉ</span>
+        <span class="signal-level sl-elevated" data-fr="ÉLEVÉ" data-en="HIGH">ÉLEVÉ</span>
       </div>
       <div class="signal-item">
         <span class="signal-icon">◈</span>
         <div class="signal-content">
-          <h5>Adresse de siège : cohérence limitée</h5>
-          <p>L'adresse de siège déclarée correspond à un espace de codomiciliation. 7 autres entités y sont enregistrées dont 3 présentent des statuts juridiques incertains ou radiés. Absence de présence physique vérifiable.</p>
+          <h5 data-fr="Adresse de siège : cohérence limitée" data-en="Registered address: limited consistency">Adresse de siège : cohérence limitée</h5>
+          <p data-fr="L'adresse de siège déclarée correspond à un espace de codomiciliation. 7 autres entités y sont enregistrées dont 3 présentent des statuts juridiques incertains ou radiés. Absence de présence physique vérifiable." data-en="The declared registered address corresponds to a co-domiciliation space. 7 other entities are registered there, of which 3 have uncertain or struck-off legal status. No verifiable physical presence.">L'adresse de siège déclarée correspond à un espace de codomiciliation. 7 autres entités y sont enregistrées dont 3 présentent des statuts juridiques incertains ou radiés. Absence de présence physique vérifiable.</p>
         </div>
-        <span class="signal-level sl-elevated">ÉLEVÉ</span>
+        <span class="signal-level sl-elevated" data-fr="ÉLEVÉ" data-en="HIGH">ÉLEVÉ</span>
       </div>
       <div class="signal-item">
         <span class="signal-icon">◈</span>
         <div class="signal-content">
-          <h5>Mentions presse : 1 résultat ambigu</h5>
-          <p>Un article de presse économique régionale (2022) mentionne une entité de nom proche dans un contexte de litige commercial non abouti. La corrélation n'est pas confirmée mais ne peut être exclue.</p>
+          <h5 data-fr="Mentions presse : 1 résultat ambigu" data-en="Press mentions: 1 ambiguous result">Mentions presse : 1 résultat ambigu</h5>
+          <p data-fr="Un article de presse économique régionale (2022) mentionne une entité de nom proche dans un contexte de litige commercial non abouti. La corrélation n'est pas confirmée mais ne peut être exclue." data-en="A regional business press article (2022) mentions a similarly named entity in the context of an unresolved commercial dispute. The correlation is not confirmed but cannot be excluded.">Un article de presse économique régionale (2022) mentionne une entité de nom proche dans un contexte de litige commercial non abouti. La corrélation n'est pas confirmée mais ne peut être exclue.</p>
         </div>
-        <span class="signal-level sl-inconclusive">INCONCLUANT</span>
+        <span class="signal-level sl-inconclusive" data-fr="INCONCLUANT" data-en="INCONCLUSIVE">INCONCLUANT</span>
       </div>
     </div>
   </div>
@@ -266,55 +269,55 @@ footer{position:relative;z-index:1;padding:2rem 4rem;border-top:1px solid var(--
   <div class="report-section">
     <div class="section-header">
       <span class="section-num">03</span>
-      <h2 class="section-title">Vérification des <em>entités déclarées</em></h2>
+      <h2 class="section-title" data-fr-html="Vérification des <em>entités déclarées</em>" data-en-html="Verification of <em>declared entities</em>">Vérification des <em>entités déclarées</em></h2>
     </div>
-    <p>Le tableau suivant synthétise le niveau de vérification des informations déclarées par l'entité dans ses documents de présentation :</p>
+    <p data-fr="Le tableau suivant synthétise le niveau de vérification des informations déclarées par l'entité dans ses documents de présentation :" data-en="The table below summarizes the verification level of information declared by the entity in its presentation documents:">Le tableau suivant synthétise le niveau de vérification des informations déclarées par l'entité dans ses documents de présentation :</p>
 
     <table class="entity-table">
       <thead>
         <tr>
-          <th>Information déclarée</th>
-          <th>Source de vérification</th>
-          <th>Statut</th>
-          <th>Observation</th>
+          <th data-fr="Information déclarée" data-en="Declared information">Information déclarée</th>
+          <th data-fr="Source de vérification" data-en="Verification source">Source de vérification</th>
+          <th data-fr="Statut" data-en="Status">Statut</th>
+          <th data-fr="Observation" data-en="Note">Observation</th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <td>Création mars 2023</td>
+          <td data-fr="Création mars 2023" data-en="Creation March 2023">Création mars 2023</td>
           <td>Registre INPI / WHOIS</td>
-          <td class="status-inconsistent">INCOHÉRENT</td>
-          <td>Domaine enregistré juillet 2021</td>
+          <td class="status-inconsistent" data-fr="INCOHÉRENT" data-en="INCONSISTENT">INCOHÉRENT</td>
+          <td data-fr="Domaine enregistré juillet 2021" data-en="Domain registered July 2021">Domaine enregistré juillet 2021</td>
         </tr>
         <tr>
-          <td>Capital 50 000 €</td>
+          <td data-fr="Capital 50 000 €" data-en="Capital €50,000">Capital 50 000 €</td>
           <td>Infogreffe</td>
-          <td class="status-confirmed">CONFIRMÉ</td>
-          <td>Correspondance exacte</td>
+          <td class="status-confirmed" data-fr="CONFIRMÉ" data-en="CONFIRMED">CONFIRMÉ</td>
+          <td data-fr="Correspondance exacte" data-en="Exact match">Correspondance exacte</td>
         </tr>
         <tr>
-          <td>Siège Paris 8e</td>
+          <td data-fr="Siège Paris 8e" data-en="HQ Paris 8th">Siège Paris 8e</td>
           <td>Google Maps / Cadastre</td>
-          <td class="status-unverified">PARTIEL</td>
-          <td>Adresse de domiciliation</td>
+          <td class="status-unverified" data-fr="PARTIEL" data-en="PARTIAL">PARTIEL</td>
+          <td data-fr="Adresse de domiciliation" data-en="Co-domiciliation address">Adresse de domiciliation</td>
         </tr>
         <tr>
-          <td>Dirigeant A. Fontaine</td>
+          <td data-fr="Dirigeant A. Fontaine" data-en="Director A. Fontaine">Dirigeant A. Fontaine</td>
           <td>LinkedIn / Sources RH</td>
-          <td class="status-unverified">PARTIEL</td>
-          <td>Parcours 2018–2021 non vérifiable</td>
+          <td class="status-unverified" data-fr="PARTIEL" data-en="PARTIAL">PARTIEL</td>
+          <td data-fr="Parcours 2018–2021 non vérifiable" data-en="2018–2021 history unverifiable">Parcours 2018–2021 non vérifiable</td>
         </tr>
         <tr>
-          <td>Partenariat déclaré BNP</td>
-          <td>Communiqués officiels BNP</td>
-          <td class="status-inconsistent">NON TROUVÉ</td>
-          <td>Aucune mention en sources primaires</td>
+          <td data-fr="Partenariat déclaré BNP" data-en="Declared BNP partnership">Partenariat déclaré BNP</td>
+          <td data-fr="Communiqués officiels BNP" data-en="Official BNP press releases">Communiqués officiels BNP</td>
+          <td class="status-inconsistent" data-fr="NON TROUVÉ" data-en="NOT FOUND">NON TROUVÉ</td>
+          <td data-fr="Aucune mention en sources primaires" data-en="No mention in primary sources">Aucune mention en sources primaires</td>
         </tr>
         <tr>
-          <td>Certifications ISO déclarées</td>
-          <td>Registres certificateurs</td>
-          <td class="status-inconsistent">NON TROUVÉ</td>
-          <td>Certificat non retrouvé dans registres officiels</td>
+          <td data-fr="Certifications ISO déclarées" data-en="Declared ISO certifications">Certifications ISO déclarées</td>
+          <td data-fr="Registres certificateurs" data-en="Certification registries">Registres certificateurs</td>
+          <td class="status-inconsistent" data-fr="NON TROUVÉ" data-en="NOT FOUND">NON TROUVÉ</td>
+          <td data-fr="Certificat non retrouvé dans registres officiels" data-en="Certificate not found in official registries">Certificat non retrouvé dans registres officiels</td>
         </tr>
       </tbody>
     </table>
@@ -324,59 +327,98 @@ footer{position:relative;z-index:1;padding:2rem 4rem;border-top:1px solid var(--
   <div class="report-section">
     <div class="section-header">
       <span class="section-num">04</span>
-      <h2 class="section-title"><em>Recommandations</em> opérationnelles</h2>
+      <h2 class="section-title" data-fr-html="<em>Recommandations</em> opérationnelles" data-en-html="Operational <em>recommendations</em>"><em>Recommandations</em> opérationnelles</h2>
     </div>
-    <p>Sur la base de l'analyse conduite, les actions suivantes sont recommandées avant tout engagement :</p>
+    <p data-fr="Sur la base de l'analyse conduite, les actions suivantes sont recommandées avant tout engagement :" data-en="Based on the analysis conducted, the following actions are recommended before any engagement:">Sur la base de l'analyse conduite, les actions suivantes sont recommandées avant tout engagement :</p>
 
     <div class="reco-list">
       <div class="reco-item">
         <span class="reco-num">R-01</span>
-        Demander les statuts originaux notariés et les comptes certifiés des deux derniers exercices. Vérifier la cohérence des dates et des signatures.
+        <span data-fr="Demander les statuts originaux notariés et les comptes certifiés des deux derniers exercices. Vérifier la cohérence des dates et des signatures." data-en="Request the original notarized articles of incorporation and certified accounts for the last two financial years. Verify consistency of dates and signatures.">Demander les statuts originaux notariés et les comptes certifiés des deux derniers exercices. Vérifier la cohérence des dates et des signatures.</span>
       </div>
       <div class="reco-item">
         <span class="reco-num">R-02</span>
-        Exiger une explication documentée de la divergence entre la date de création déclarée et les enregistrements numériques antérieurs identifiés.
+        <span data-fr="Exiger une explication documentée de la divergence entre la date de création déclarée et les enregistrements numériques antérieurs identifiés." data-en="Require documented explanation of the discrepancy between the declared creation date and the earlier digital records identified.">Exiger une explication documentée de la divergence entre la date de création déclarée et les enregistrements numériques antérieurs identifiés.</span>
       </div>
       <div class="reco-item">
         <span class="reco-num">R-03</span>
-        Obtenir les justificatifs du partenariat déclaré avec BNP Paribas. En l'absence de preuve, considérer cette information comme non vérifiée.
+        <span data-fr="Obtenir les justificatifs du partenariat déclaré avec BNP Paribas. En l'absence de preuve, considérer cette information comme non vérifiée." data-en="Obtain supporting evidence for the declared BNP Paribas partnership. In the absence of proof, treat this information as unverified.">Obtenir les justificatifs du partenariat déclaré avec BNP Paribas. En l'absence de preuve, considérer cette information comme non vérifiée.</span>
       </div>
       <div class="reco-item">
         <span class="reco-num">R-04</span>
-        Conduire un entretien direct avec le dirigeant en demandant la clarification des 3 années d'expérience non vérifiables (2018–2021).
+        <span data-fr="Conduire un entretien direct avec le dirigeant en demandant la clarification des 3 années d'expérience non vérifiables (2018–2021)." data-en="Conduct a direct interview with the director requesting clarification of the 3 unverifiable years of experience (2018–2021).">Conduire un entretien direct avec le dirigeant en demandant la clarification des 3 années d'expérience non vérifiables (2018–2021).</span>
       </div>
       <div class="reco-item">
         <span class="reco-num">R-05</span>
-        Si l'engagement est maintenu malgré les incohérences : prévoir des clauses contractuelles de résiliation facilitée et limiter l'exposition financière initiale.
+        <span data-fr="Si l'engagement est maintenu malgré les incohérences : prévoir des clauses contractuelles de résiliation facilitée et limiter l'exposition financière initiale." data-en="If engagement proceeds despite the inconsistencies: include facilitated termination clauses in the contract and limit initial financial exposure.">Si l'engagement est maintenu malgré les incohérences : prévoir des clauses contractuelles de résiliation facilitée et limiter l'exposition financière initiale.</span>
       </div>
     </div>
 
     <div class="conclusion-box" style="margin-top:2rem;">
-      <h4>Conclusion analytique finale</h4>
-      <p>Ce rapport ne permet pas de conclure à une activité frauduleuse avérée. Il identifie un niveau d'incohérence informationnelle suffisamment significatif pour justifier une vigilance renforcée et des vérifications complémentaires avant engagement.</p>
-      <p>Score de risque global : <strong>67/100 — Niveau ÉLEVÉ.</strong> Décision finale à la discrétion du commanditaire sur la base des éléments complémentaires obtenus.</p>
+      <h4 data-fr="Conclusion analytique finale" data-en="Final analytical conclusion">Conclusion analytique finale</h4>
+      <p data-fr="Ce rapport ne permet pas de conclure à une activité frauduleuse avérée. Il identifie un niveau d'incohérence informationnelle suffisamment significatif pour justifier une vigilance renforcée et des vérifications complémentaires avant engagement." data-en="This report does not allow a conclusion of proven fraudulent activity. It identifies a level of informational inconsistency significant enough to justify heightened vigilance and additional verification before engagement.">Ce rapport ne permet pas de conclure à une activité frauduleuse avérée. Il identifie un niveau d'incohérence informationnelle suffisamment significatif pour justifier une vigilance renforcée et des vérifications complémentaires avant engagement.</p>
+      <p data-fr="Score de risque global : 67/100 — Niveau ÉLEVÉ. Décision finale à la discrétion du commanditaire sur la base des éléments complémentaires obtenus." data-en="Overall risk score: 67/100 — Level HIGH. Final decision at the client's discretion based on additional elements obtained.">Score de risque global : <strong>67/100 — Niveau ÉLEVÉ.</strong> Décision finale à la discrétion du commanditaire sur la base des éléments complémentaires obtenus.</p>
     </div>
   </div>
 
   <!-- DISCLAIMER -->
   <div class="report-disclaimer">
-    <span class="disclaimer-label">Avis important</span>
-    <p>Ce document est un exemple fictif produit à titre illustratif uniquement. Toute ressemblance avec des entités, personnes ou situations réelles est purement fortuite. Les analyses SANGOUR3i réelles sont conduites exclusivement à partir de sources publiques légalement accessibles, dans le strict respect du cadre légal en vigueur. Ce rapport ne constitue pas un conseil juridique, financier ou professionnel.</p>
+    <span class="disclaimer-label" data-fr="Avis important" data-en="Important notice">Avis important</span>
+    <p data-fr="Ce document est un exemple fictif produit à titre illustratif uniquement. Toute ressemblance avec des entités, personnes ou situations réelles est purement fortuite. Les analyses SANGOUR3i réelles sont conduites exclusivement à partir de sources publiques légalement accessibles, dans le strict respect du cadre légal en vigueur. Ce rapport ne constitue pas un conseil juridique, financier ou professionnel." data-en="This document is a fictitious example produced for illustrative purposes only. Any resemblance to real entities, persons or situations is purely coincidental. Actual SANGOUR3i analyses are conducted exclusively from legally accessible public sources, in strict compliance with applicable law. This report does not constitute legal, financial or professional advice.">Ce document est un exemple fictif produit à titre illustratif uniquement. Toute ressemblance avec des entités, personnes ou situations réelles est purement fortuite. Les analyses SANGOUR3i réelles sont conduites exclusivement à partir de sources publiques légalement accessibles, dans le strict respect du cadre légal en vigueur. Ce rapport ne constitue pas un conseil juridique, financier ou professionnel.</p>
   </div>
 
   <!-- CTA -->
   <div class="report-cta">
-    <h3>Besoin d'une analyse<br><em>sur votre situation réelle ?</em></h3>
-    <p>Ce rapport illustre notre méthodologie. Chaque mission réelle est conduite avec le même niveau de rigueur, adapté à votre périmètre spécifique, livré en 48–72 heures.</p>
-    <a href="index.html#contact" class="cta-btn">Demander une analyse →</a>
+    <h3 data-fr-html="Besoin d'une analyse<br><em>sur votre situation réelle ?</em>" data-en-html="Need an analysis<br><em>for your real situation?</em>">Besoin d'une analyse<br><em>sur votre situation réelle ?</em></h3>
+    <p data-fr="Ce rapport illustre notre méthodologie. Chaque mission réelle est conduite avec le même niveau de rigueur, adapté à votre périmètre spécifique, livré en 48–72 heures." data-en="This report illustrates our methodology. Every real mission is conducted with the same level of rigor, adapted to your specific scope, delivered within 48–72 hours.">Ce rapport illustre notre méthodologie. Chaque mission réelle est conduite avec le même niveau de rigueur, adapté à votre périmètre spécifique, livré en 48–72 heures.</p>
+    <a href="index.html#contact" class="cta-btn" data-fr="Demander une analyse →" data-en="Request an analysis →">Demander une analyse →</a>
   </div>
 
 </div>
 
 <footer>
   <span class="footer-logo">SANGOUR3i</span>
-  <span class="footer-copy">© 2026 SANGOUR3i · Document fictif à titre illustratif · Intelligence Digitale Stratégique</span>
+  <span class="footer-copy" data-fr="© 2026 SANGOUR3i · Document fictif à titre illustratif · Intelligence Digitale Stratégique" data-en="© 2026 SANGOUR3i · Fictitious document for illustrative purposes · Strategic Digital Intelligence">© 2026 SANGOUR3i · Document fictif à titre illustratif · Intelligence Digitale Stratégique</span>
 </footer>
 
+<script>
+let currentLang = 'fr';
+
+function setLang(lang) {
+  currentLang = lang;
+
+  // Texte simple
+  document.querySelectorAll('[data-fr]').forEach(el => {
+    const val = lang === 'en' ? el.getAttribute('data-en') : el.getAttribute('data-fr');
+    if (val !== null) el.textContent = val;
+  });
+
+  // HTML (gras, italique, etc.)
+  document.querySelectorAll('[data-fr-html]').forEach(el => {
+    const val = lang === 'en' ? el.getAttribute('data-en-html') : el.getAttribute('data-fr-html');
+    if (val !== null) el.innerHTML = val;
+  });
+
+  document.documentElement.lang = lang;
+  const btn = document.getElementById('lang-toggle');
+  if (btn) btn.textContent = lang === 'en' ? 'FR' : 'EN';
+  document.title = lang === 'en' ? 'SANGOUR3i — Sample OSINT Report' : 'SANGOUR3i — Exemple de Rapport OSINT';
+
+  try { localStorage.setItem('sangour3i_lang', lang); } catch(e) {}
+}
+
+document.getElementById('lang-toggle').addEventListener('click', () => {
+  setLang(currentLang === 'fr' ? 'en' : 'fr');
+});
+
+// Init — clé séparée pour éviter conflit avec le site principal
+(function(){
+  try {
+    const saved = localStorage.getItem('sangour3i_lang');
+    const browser = navigator.language && navigator.language.startsWith('en') ? 'en' : 'fr';
+    setLang(saved || browser);
+  } catch(e) { setLang('fr'); }
+})();
+</script>
 </body>
 </html>
