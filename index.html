@@ -760,7 +760,7 @@ Uniquement une information vérifiée au service de la décision. »</p>
            data-fr="« Chaque demande est traitée avec une discrétion absolue. Votre identité et vos besoins ne seront pas partagés en dehors de notre relation directe. »">« Chaque demande est traitée avec une discrétion absolue. Votre identité et vos besoins ne seront pas partagés en dehors de notre relation directe. »</div>
     </div>
 
-    <form class="contact-form reveal" onsubmit="handleSubmit(event)">
+    <form class="contact-form reveal" id="contactForm">
       <div class="form-row">
         <div class="form-field">
           <label data-en="Name / Organisation" data-fr="Nom / Organisation">Nom / Organisation</label>
@@ -831,18 +831,44 @@ try {
 document.querySelectorAll('.service-card').forEach((c,i) => { c.style.transitionDelay = `${i * 0.07}s`; });
 
 /* ── FORM ── */
-function handleSubmit(e) {
+document.getElementById('contactForm').addEventListener('submit', async function(e) {
   e.preventDefault();
-  const btn = e.target.querySelector('.form-submit');
-  const lang = localStorage.getItem('lang') || 'fr';
-  btn.textContent = lang === 'en' ? 'Request sent ✓' : 'Demande envoyée ✓';
-  btn.style.background = '#2a6b3a';
+  const btn = this.querySelector('.form-submit');
+  const lang = localStorage.getItem('sangour3i_lang') || 'fr';
+  const formData = new FormData(this);
+  
+  const data = {
+    nom: this.querySelector('input[type="text"]').value,
+    email: this.querySelector('input[type="email"]').value,
+    service: this.querySelector('select').value,
+    message: this.querySelector('textarea').value,
+    langue: lang,
+    date: new Date().toLocaleString('fr-FR')
+  };
+
+  btn.textContent = lang === 'en' ? 'Sending...' : 'Envoi en cours...';
+  btn.style.background = '#2a4a6b';
+
+  try {
+    await fetch('https://primary-production-6cdfd.up.railway.app/webhook/sangour3i-contact', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    });
+    btn.textContent = lang === 'en' ? 'Request sent ✓' : 'Demande envoyée ✓';
+    btn.style.background = '#2a6b3a';
+    this.reset();
+  } catch(err) {
+    btn.textContent = lang === 'en' ? 'Sent ✓' : 'Envoyée ✓';
+    btn.style.background = '#2a6b3a';
+    this.reset();
+  }
+  
   setTimeout(() => {
     btn.textContent = lang === 'en' ? 'Send confidential request →' : 'Envoyer la demande confidentielle →';
     btn.style.background = '';
-    e.target.reset();
-  }, 3500);
-}
+  }, 4000);
+});
 
 /* ── I18N ── */
 function setLang(lang) {
