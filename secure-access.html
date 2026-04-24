@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>SANGOUR3i — Accès Sécurisé</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Space+Mono:wght@400;700&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:       #07080C;
+  --bg2:      #0D0F16;
+  --bg3:      #12151E;
+  --gold:     #C4A44A;
+  --gold2:    #DFC070;
+  --gold-dim: #7A6530;
+  --off:      #E8E2D4;
+  --muted:    #6E6C66;
+  --muted2:   #9A9690;
+  --border:   rgba(196,164,74,0.14);
+  --border2:  rgba(196,164,74,0.28);
+}
+
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; height:100%; }
+
+body {
+  background: var(--bg);
+  color: var(--off);
+  font-family: 'Jost', sans-serif;
+  font-weight: 300;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+}
+
+/* Grid background */
+body::before {
+  content:'';
+  position:fixed; inset:0;
+  background-image:
+    linear-gradient(rgba(196,164,74,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(196,164,74,0.03) 1px, transparent 1px);
+  background-size: 60px 60px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Radial glow */
+body::after {
+  content:'';
+  position:fixed;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 800px; height: 800px;
+  background: radial-gradient(circle, rgba(196,164,74,0.06) 0%, transparent 65%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── SCAN ANIMATION ── */
+.scan-line {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(196,164,74,0.4), transparent);
+  animation: scan 4s linear infinite;
+  z-index: 1;
+  pointer-events: none;
+}
+@keyframes scan {
+  0%   { top: 0; opacity: 1; }
+  90%  { opacity: 0.3; }
+  100% { top: 100vh; opacity: 0; }
+}
+
+/* ── TOP BAR ── */
+.top-bar {
+  position: relative; z-index: 10;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 1.5rem 3rem;
+  border-bottom: 1px solid var(--border);
+  background: rgba(7,8,12,0.8);
+  backdrop-filter: blur(20px);
+}
+
+.tb-logo { font-family:'Space Mono', monospace; font-size:0.72rem; letter-spacing:0.28em; color:var(--gold); text-decoration:none; }
+.tb-right { display:flex; align-items:center; gap:1.2rem; }
+
+.restricted-badge {
+  font-family:'Space Mono', monospace; font-size:0.42rem; letter-spacing:0.22em;
+  color: #c4826a; border:1px solid rgba(196,130,106,0.3);
+  padding: 0.3rem 0.7rem; text-transform:uppercase;
+  animation: pulse-red 2.5s ease-in-out infinite;
+}
+@keyframes pulse-red {
+  0%,100% { opacity:1; } 50% { opacity:0.5; }
+}
+
+#lang-toggle {
+  font-family:'Space Mono', monospace; font-size:0.52rem; letter-spacing:0.2em;
+  color:var(--muted); background:transparent; border:1px solid var(--border);
+  padding:0.35rem 0.7rem; cursor:pointer; transition:all 0.3s;
+}
+#lang-toggle:hover { color:var(--gold); border-color:var(--border2); }
+
+/* ── MAIN ── */
+main {
+  position:relative; z-index:2;
+  flex:1; display:flex; flex-direction:column;
+  align-items:center; justify-content:center;
+  padding: 4rem 2rem;
+}
+
+/* ── ACCESS PANEL ── */
+.access-panel {
+  width: 100%; max-width: 640px;
+  display: flex; flex-direction: column; gap: 0;
+}
+
+/* Header */
+.panel-header {
+  border: 1px solid var(--border);
+  border-bottom: none;
+  background: var(--bg2);
+  padding: 2.5rem 3rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.panel-header::before {
+  content:'';
+  position:absolute; top:0; left:0; right:0; height:2px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+
+.panel-eyebrow {
+  font-family:'Space Mono', monospace; font-size:0.48rem; letter-spacing:0.3em;
+  color:var(--gold-dim); text-transform:uppercase; margin-bottom:1.5rem;
+  display:flex; align-items:center; gap:0.8rem;
+}
+.panel-eyebrow::before { content:''; width:20px; height:1px; background:var(--gold-dim); }
+
+.panel-title {
+  font-family:'Cormorant Garamond', serif;
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight:300; line-height:1.1; margin-bottom:1rem;
+}
+.panel-title em { font-style:italic; color:var(--gold); }
+
+.panel-desc {
+  font-size:0.88rem; color:var(--muted2); line-height:1.85;
+  max-width:480px;
+}
+
+/* Ref bar */
+.ref-bar {
+  background:var(--bg3); border:1px solid var(--border); border-top:none; border-bottom:none;
+  padding:0.7rem 3rem;
+  display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.5rem;
+}
+.ref-item { font-family:'Space Mono', monospace; font-size:0.42rem; letter-spacing:0.18em; color:var(--muted); }
+.ref-item span { color:var(--gold-dim); }
+
+/* Actions */
+.panel-actions {
+  border:1px solid var(--border); border-top:none;
+  background:var(--bg2);
+  display:grid; grid-template-columns:1fr 1fr; gap:1px; background:linear-gradient(var(--border),var(--border));
+}
+
+.action-card {
+  background:var(--bg2); padding:2.5rem; cursor:pointer;
+  display:flex; flex-direction:column; gap:1rem;
+  transition:background 0.3s; text-decoration:none; color:inherit;
+  position:relative; overflow:hidden;
+}
+.action-card::after {
+  content:''; position:absolute; bottom:0; left:0; right:0; height:2px;
+  background:linear-gradient(90deg, transparent, var(--gold), transparent);
+  transform:scaleX(0); transform-origin:center; transition:transform 0.4s;
+}
+.action-card:hover { background:var(--bg3); }
+.action-card:hover::after { transform:scaleX(1); }
+
+.action-icon {
+  font-family:'Space Mono', monospace; font-size:0.44rem; letter-spacing:0.18em;
+  color:var(--gold); border:1px solid var(--border2); padding:0.25rem 0.6rem;
+  display:inline-block; text-transform:uppercase; align-self:flex-start;
+}
+.action-title {
+  font-family:'Cormorant Garamond', serif; font-size:1.4rem; font-weight:400; color:var(--off);
+  line-height:1.2;
+}
+.action-desc { font-size:0.8rem; color:var(--muted2); line-height:1.7; }
+.action-cta {
+  font-family:'Space Mono', monospace; font-size:0.48rem; letter-spacing:0.15em;
+  color:var(--gold); text-transform:uppercase; display:flex; align-items:center; gap:0.5rem;
+  margin-top:auto;
+}
+.action-cta::after { content:'→'; transition:transform 0.3s; }
+.action-card:hover .action-cta::after { transform:translateX(4px); }
+
+.action-card.primary { background:rgba(196,164,74,0.06); }
+.action-card.primary:hover { background:rgba(196,164,74,0.1); }
+.action-card.primary .action-title { color:var(--gold2); }
+
+/* Commitments */
+.panel-commitments {
+  border:1px solid var(--border); border-top:none;
+  background:var(--bg3);
+  padding:1.5rem 3rem;
+  display:flex; gap:2.5rem; flex-wrap:wrap; align-items:center; justify-content:center;
+}
+.commit-item {
+  font-family:'Space Mono', monospace; font-size:0.44rem; letter-spacing:0.15em;
+  color:var(--muted); display:flex; align-items:center; gap:0.5rem; text-transform:uppercase;
+}
+.commit-item::before { content:'✓'; color:var(--gold-dim); font-size:0.5rem; }
+
+/* Notice */
+.access-notice {
+  margin-top:2rem; text-align:center;
+  font-family:'Space Mono', monospace; font-size:0.44rem; letter-spacing:0.15em;
+  color:var(--muted); line-height:1.8;
+}
+.access-notice strong { color:var(--gold-dim); font-weight:400; }
+
+/* ── FOOTER ── */
+footer {
+  position:relative; z-index:2;
+  padding:1.2rem 3rem;
+  border-top:1px solid var(--border);
+  display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem;
+  background:rgba(7,8,12,0.6); backdrop-filter:blur(10px);
+}
+.footer-logo { font-family:'Space Mono', monospace; font-size:0.62rem; letter-spacing:0.25em; color:var(--gold); }
+.footer-copy { font-family:'Space Mono', monospace; font-size:0.42rem; letter-spacing:0.12em; color:var(--muted); }
+
+/* ── ANIMATIONS ENTRÉE ── */
+.access-panel { opacity:0; transform:translateY(24px); animation:fadeUp 0.9s 0.2s forwards; }
+@keyframes fadeUp { to { opacity:1; transform:translateY(0); } }
+
+/* ── MOBILE ── */
+@media(max-width:640px) {
+  .top-bar { padding:1.2rem 1.5rem; }
+  .panel-header { padding:2rem 1.5rem; }
+  .ref-bar { padding:0.7rem 1.5rem; }
+  .panel-actions { grid-template-columns:1fr; }
+  .panel-commitments { padding:1.2rem 1.5rem; gap:1.2rem; }
+  footer { padding:1.2rem 1.5rem; flex-direction:column; text-align:center; }
+  .access-notice { padding:0 1rem; }
+}
+</style>
+</head>
+<body>
+
+<div class="scan-line"></div>
+
+<!-- TOP BAR -->
+<div class="top-bar">
+  <a href="index.html" class="tb-logo">SANGOUR3i</a>
+  <div class="tb-right">
+    <span class="restricted-badge" data-fr="Accès restreint" data-en="Restricted access">Accès restreint</span>
+    <button id="lang-toggle">EN</button>
+  </div>
+</div>
+
+<!-- MAIN -->
+<main>
+  <div class="access-panel">
+
+    <!-- HEADER -->
+    <div class="panel-header">
+      <div class="panel-eyebrow" data-fr="Point d'entrée sécurisé · Non référencé" data-en="Secure entry point · Not publicly indexed">Point d'entrée sécurisé · Non référencé</div>
+      <h1 class="panel-title" data-fr-html="Initiez une analyse<br><em>confidentielle.</em>" data-en-html="Initiate a<br><em>confidential analysis.</em>">Initiez une analyse<br><em>confidentielle.</em></h1>
+      <p class="panel-desc"
+         data-fr="Ce point d'accès est réservé aux demandes ciblées. Nous transformons des données ouvertes en informations structurées pour réduire l'incertitude opérationnelle dans des contextes à enjeu."
+         data-en="This access point is reserved for targeted requests. We transform open-source data into structured intelligence to reduce operational uncertainty in high-stakes contexts.">Ce point d'accès est réservé aux demandes ciblées. Nous transformons des données ouvertes en informations structurées pour réduire l'incertitude opérationnelle dans des contextes à enjeu.</p>
+    </div>
+
+    <!-- REF BAR -->
+    <div class="ref-bar">
+      <span class="ref-item">REF <span>SGI-ENTRY-2026</span></span>
+      <span class="ref-item">TLP <span>AMBER</span></span>
+      <span class="ref-item">STATUS <span data-fr="ACTIF" data-en="ACTIVE">ACTIF</span></span>
+      <span class="ref-item">ACCESS <span data-fr="CONTRÔLÉ" data-en="CONTROLLED">CONTRÔLÉ</span></span>
+    </div>
+
+    <!-- ACTIONS -->
+    <div class="panel-actions">
+
+      <!-- ACTION 1 : Audit rapide -->
+      <a href="index.html#contact" class="action-card primary">
+        <span class="action-icon" data-fr="Analyse · Rapide" data-en="Analysis · Fast">Analyse · Rapide</span>
+        <div class="action-title" data-fr-html="Évaluation initiale<br>d'exposition" data-en-html="Initial exposure<br>assessment">Évaluation initiale<br>d'exposition</div>
+        <p class="action-desc"
+           data-fr="Première analyse de votre surface d'exposition numérique. Signaux faibles, incohérences, zones de risque — en 48 à 72 heures."
+           data-en="First analysis of your digital exposure surface. Weak signals, inconsistencies, risk zones — within 48 to 72 hours.">Première analyse de votre surface d'exposition numérique. Signaux faibles, incohérences, zones de risque — en 48 à 72 heures.</p>
+        <span class="action-cta" data-fr="Initier l'analyse" data-en="Initiate analysis">Initier l'analyse</span>
+      </a>
+
+      <!-- ACTION 2 : Contact confidentiel -->
+      <a href="index.html#contact" class="action-card">
+        <span class="action-icon" data-fr="Contact · Confidentiel" data-en="Contact · Confidential">Contact · Confidentiel</span>
+        <div class="action-title" data-fr-html="Demande<br>sur mesure" data-en-html="Custom<br>request">Demande<br>sur mesure</div>
+        <p class="action-desc"
+           data-fr="Pour un besoin spécifique, sensible ou complexe nécessitant une approche adaptée. Réponse humaine sous 24 heures."
+           data-en="For a specific, sensitive, or complex need requiring a tailored approach. Human response within 24 hours.">Pour un besoin spécifique, sensible ou complexe nécessitant une approche adaptée. Réponse humaine sous 24 heures.</p>
+        <span class="action-cta" data-fr="Accès direct" data-en="Direct access">Accès direct</span>
+      </a>
+
+    </div>
+
+    <!-- COMMITMENTS -->
+    <div class="panel-commitments">
+      <span class="commit-item" data-fr="Aucun tracking" data-en="No tracking">Aucun tracking</span>
+      <span class="commit-item" data-fr="Traitement confidentiel" data-en="Confidential handling">Traitement confidentiel</span>
+      <span class="commit-item" data-fr="Sources ouvertes uniquement" data-en="Open sources only">Sources ouvertes uniquement</span>
+      <span class="commit-item" data-fr="100% légal" data-en="100% legal">100% légal</span>
+    </div>
+
+    <!-- NOTICE -->
+    <p class="access-notice">
+      <span data-fr="Ce point d'entrée n'est pas référencé publiquement." data-en="This entry point is not publicly indexed.">Ce point d'entrée n'est pas référencé publiquement.</span><br>
+      <strong data-fr="Il est destiné aux demandes nécessitant un traitement confidentiel." data-en="It is intended for requests requiring confidential handling.">Il est destiné aux demandes nécessitant un traitement confidentiel.</strong>
+    </p>
+
+  </div>
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-logo">SANGOUR3i</span>
+  <span class="footer-copy" data-fr="Intelligence Digitale Stratégique · Accès non public · © 2026" data-en="Strategic Digital Intelligence · Non-public access · © 2026">Intelligence Digitale Stratégique · Accès non public · © 2026</span>
+</footer>
+
+<script>
+let currentLang = 'fr';
+
+function setLang(lang) {
+  currentLang = lang;
+  document.querySelectorAll('[data-fr]').forEach(el => {
+    const val = lang === 'en' ? el.getAttribute('data-en') : el.getAttribute('data-fr');
+    if (val !== null) el.textContent = val;
+  });
+  document.querySelectorAll('[data-fr-html]').forEach(el => {
+    const val = lang === 'en' ? el.getAttribute('data-en-html') : el.getAttribute('data-fr-html');
+    if (val !== null) el.innerHTML = val;
+  });
+  document.documentElement.lang = lang;
+  document.getElementById('lang-toggle').textContent = lang === 'en' ? 'FR' : 'EN';
+  document.title = lang === 'en' ? 'SANGOUR3i — Secure Access' : 'SANGOUR3i — Accès Sécurisé';
+  try { localStorage.setItem('sangour3i_lang', lang); } catch(e) {}
+}
+
+document.getElementById('lang-toggle').addEventListener('click', () => {
+  setLang(currentLang === 'fr' ? 'en' : 'fr');
+});
+
+(function(){
+  try {
+    const saved = localStorage.getItem('sangour3i_lang');
+    const browser = navigator.language && navigator.language.startsWith('en') ? 'en' : 'fr';
+    setLang(saved || browser);
+  } catch(e) { setLang('fr'); }
+})();
+</script>
+</body>
+</html>
