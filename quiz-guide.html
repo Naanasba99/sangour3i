@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SANGOUR3i — Accès Guide Premium</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Space+Mono:wght@400;700&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#07080C;--bg2:#0D0F16;--bg3:#12151E;
+  --gold:#C4A44A;--gold2:#DFC070;--gold-dim:#7A6530;
+  --off:#E8E2D4;--muted:#6E6C66;--muted2:#9A9690;
+  --border:rgba(196,164,74,0.14);--border2:rgba(196,164,74,0.28);
+  --green:#2a6b3a;--red-soft:rgba(139,32,32,0.15);
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--off);font-family:'Jost',sans-serif;font-weight:300;line-height:1.6;overflow-x:hidden;min-height:100vh}
+body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(196,164,74,0.025) 1px,transparent 1px),linear-gradient(90deg,rgba(196,164,74,0.025) 1px,transparent 1px);background-size:80px 80px;pointer-events:none;z-index:0}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;justify-content:space-between;align-items:center;padding:1.2rem 4rem;background:rgba(7,8,12,0.95);backdrop-filter:blur(16px);border-bottom:1px solid var(--border)}
+.nav-logo{font-family:'Space Mono',monospace;font-size:0.78rem;letter-spacing:0.28em;color:var(--gold);text-decoration:none}
+.nav-back{font-family:'Space Mono',monospace;font-size:0.52rem;letter-spacing:0.15em;color:var(--muted);text-decoration:none;transition:color 0.3s}
+.nav-back:hover{color:var(--gold)}
+.nav-right{display:flex;gap:1rem;align-items:center}
+#lang-toggle{font-family:'Space Mono',monospace;font-size:0.52rem;letter-spacing:0.2em;color:var(--muted);background:transparent;border:1px solid var(--border);padding:0.4rem 0.75rem;cursor:pointer;transition:all 0.3s}
+#lang-toggle:hover{color:var(--gold);border-color:var(--border2)}
+
+/* ══ QUIZ SECTION ══ */
+#quiz-section{position:relative;z-index:1;padding:8rem 4rem 4rem;max-width:760px;margin:0 auto}
+
+.quiz-header{margin-bottom:3rem}
+.quiz-label{font-family:'Space Mono',monospace;font-size:0.52rem;letter-spacing:0.3em;color:var(--gold);text-transform:uppercase;margin-bottom:1rem;display:flex;align-items:center;gap:0.8rem}
+.quiz-label::before{content:'';display:block;width:24px;height:1px;background:var(--gold)}
+.quiz-header h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,4vw,3rem);font-weight:300;line-height:1.1;margin-bottom:1rem}
+.quiz-header h1 em{font-style:italic;color:var(--gold)}
+.quiz-header p{font-size:0.88rem;color:var(--muted2);line-height:1.8;max-width:540px}
+
+/* Progress */
+.quiz-progress{display:flex;align-items:center;gap:1.5rem;margin-bottom:2.5rem;padding:1rem 1.5rem;background:var(--bg2);border:1px solid var(--border)}
+.qp-label{font-family:'Space Mono',monospace;font-size:0.46rem;letter-spacing:0.2em;color:var(--muted);white-space:nowrap}
+.qp-bar{flex:1;height:2px;background:var(--border)}
+.qp-fill{height:100%;background:var(--gold);transition:width 0.5s ease;width:0%}
+.qp-count{font-family:'Space Mono',monospace;font-size:0.46rem;letter-spacing:0.1em;color:var(--gold);white-space:nowrap}
+
+/* Question card */
+.question-card{background:var(--bg2);border:1px solid var(--border);padding:2.5rem;margin-bottom:1.5rem;display:none;position:relative;overflow:hidden}
+.question-card.active{display:block;animation:slideIn 0.4s ease}
+.question-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+@keyframes slideIn{from{opacity:0;transform:translateX(20px)}to{opacity:1;transform:translateX(0)}}
+
+.q-num{font-family:'Space Mono',monospace;font-size:0.46rem;letter-spacing:0.22em;color:var(--gold-dim);margin-bottom:1rem;display:block}
+.q-text{font-family:'Cormorant Garamond',serif;font-size:1.35rem;font-weight:400;color:var(--off);line-height:1.4;margin-bottom:2rem}
+
+.options{display:flex;flex-direction:column;gap:0.7rem}
+.option{display:flex;align-items:flex-start;gap:1rem;padding:1rem 1.2rem;background:var(--bg3);border:1px solid var(--border);cursor:pointer;transition:all 0.25s;user-select:none}
+.option:hover{border-color:var(--border2);background:var(--bg2)}
+.option.selected{border-color:var(--gold);background:rgba(196,164,74,0.06)}
+.option.correct{border-color:#6aad7a;background:rgba(106,173,122,0.08)}
+.option.wrong{border-color:#c4826a;background:rgba(196,130,106,0.08)}
+.option-letter{font-family:'Space Mono',monospace;font-size:0.5rem;letter-spacing:0.1em;color:var(--gold-dim);flex-shrink:0;margin-top:0.15rem;width:16px}
+.option-text{font-size:0.85rem;color:var(--muted2);line-height:1.6}
+.option.selected .option-text{color:var(--off)}
+
+.q-feedback{margin-top:1.2rem;padding:1rem 1.2rem;background:var(--bg3);border-left:2px solid var(--gold);font-size:0.82rem;color:var(--muted2);line-height:1.7;display:none}
+.q-feedback.visible{display:block;animation:fadeIn 0.3s ease}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+
+.btn-next{margin-top:1.5rem;font-family:'Space Mono',monospace;font-size:0.55rem;letter-spacing:0.18em;text-transform:uppercase;background:var(--gold);color:var(--bg);border:none;padding:0.9rem 2rem;cursor:pointer;transition:background 0.3s;display:none}
+.btn-next:hover{background:var(--gold2)}
+.btn-next.visible{display:inline-block}
+
+/* ══ RESULT SECTION ══ */
+#result-section{position:relative;z-index:1;padding:8rem 4rem 4rem;max-width:760px;margin:0 auto;display:none}
+
+.result-box{background:var(--bg2);border:1px solid var(--border);padding:3.5rem;text-align:center;position:relative;overflow:hidden}
+.result-box::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+
+.result-score{font-family:'Cormorant Garamond',serif;font-size:5rem;font-weight:300;color:var(--gold);line-height:1;margin-bottom:0.5rem;display:block}
+.result-label{font-family:'Space Mono',monospace;font-size:0.5rem;letter-spacing:0.25em;color:var(--muted);text-transform:uppercase;margin-bottom:2rem;display:block}
+.result-title{font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:400;margin-bottom:1rem;line-height:1.2}
+.result-title em{font-style:italic;color:var(--gold)}
+.result-desc{font-size:0.88rem;color:var(--muted2);line-height:1.8;max-width:480px;margin:0 auto 2.5rem}
+
+/* Success unlock */
+.unlock-box{background:rgba(196,164,74,0.06);border:1px solid var(--border2);padding:2.5rem;margin-top:2rem;text-align:left}
+.unlock-title{font-family:'Space Mono',monospace;font-size:0.5rem;letter-spacing:0.25em;color:var(--gold);text-transform:uppercase;margin-bottom:1.5rem;display:flex;align-items:center;gap:0.8rem}
+.unlock-title::before{content:'✓';color:var(--gold)}
+.unlock-guide-title{font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:400;margin-bottom:0.5rem}
+.unlock-guide-desc{font-size:0.82rem;color:var(--muted2);line-height:1.7;margin-bottom:2rem}
+.unlock-features{display:flex;flex-direction:column;gap:0.5rem;margin-bottom:2rem}
+.unlock-feature{font-size:0.82rem;color:var(--muted2);display:flex;align-items:center;gap:0.8rem}
+.unlock-feature::before{content:'—';color:var(--gold-dim);flex-shrink:0}
+.btn-access{display:inline-block;background:var(--gold);color:var(--bg);font-family:'Space Mono',monospace;font-size:0.6rem;letter-spacing:0.18em;text-transform:uppercase;padding:1rem 2.5rem;text-decoration:none;transition:background 0.3s;border:none;cursor:pointer}
+.btn-access:hover{background:var(--gold2)}
+
+/* Retry */
+.retry-box{margin-top:2rem}
+.btn-retry{font-family:'Space Mono',monospace;font-size:0.55rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);border:1px solid var(--border);background:transparent;padding:0.8rem 1.8rem;cursor:pointer;transition:all 0.3s}
+.btn-retry:hover{color:var(--gold);border-color:var(--border2)}
+
+/* ══ GUIDE PREMIUM SECTION ══ */
+#guide-section{position:relative;z-index:1;display:none}
+
+.guide-hero{padding:8rem 4rem 4rem;max-width:900px;margin:0 auto;border-bottom:1px solid var(--border)}
+.guide-badge{font-family:'Space Mono',monospace;font-size:0.44rem;letter-spacing:0.25em;color:var(--gold);border:1px solid var(--border2);padding:0.25rem 0.7rem;display:inline-block;margin-bottom:1.5rem;text-transform:uppercase}
+.guide-hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2.2rem,5vw,3.5rem);font-weight:300;line-height:1.1;margin-bottom:1rem}
+.guide-hero h1 em{font-style:italic;color:var(--gold)}
+.guide-hero p{font-size:0.9rem;color:var(--muted2);line-height:1.85;max-width:600px;margin-bottom:2rem}
+.guide-meta{display:flex;gap:2rem;flex-wrap:wrap}
+.gm-item{display:flex;flex-direction:column;gap:0.2rem}
+.gm-label{font-family:'Space Mono',monospace;font-size:0.42rem;letter-spacing:0.2em;color:var(--gold-dim);text-transform:uppercase}
+.gm-value{font-size:0.82rem;color:var(--muted2)}
+
+.guide-body{max-width:900px;margin:0 auto;padding:4rem}
+
+/* Guide sections */
+.guide-section{margin-bottom:4rem;padding-bottom:4rem;border-bottom:1px solid var(--border)}
+.guide-section:last-child{border-bottom:none}
+.gs-num{font-family:'Space Mono',monospace;font-size:0.46rem;letter-spacing:0.25em;color:var(--gold-dim);display:block;margin-bottom:0.6rem}
+.guide-section h2{font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:400;margin-bottom:1.5rem;line-height:1.2}
+.guide-section h2 em{font-style:italic;color:var(--gold)}
+.guide-section p{font-size:0.9rem;color:var(--muted2);line-height:1.9;margin-bottom:1rem}
+.guide-section strong{color:var(--off);font-weight:500}
+.guide-section h3{font-family:'Jost',sans-serif;font-size:0.9rem;font-weight:500;color:var(--off);margin:1.8rem 0 0.8rem;letter-spacing:0.03em}
+
+/* Risk table */
+.risk-table{width:100%;border-collapse:collapse;margin:1.5rem 0;background:var(--bg2)}
+.risk-table th{font-family:'Space Mono',monospace;font-size:0.44rem;letter-spacing:0.18em;color:var(--gold-dim);text-transform:uppercase;padding:0.9rem 1.2rem;text-align:left;border-bottom:1px solid var(--border2);background:var(--bg3)}
+.risk-table td{font-size:0.83rem;color:var(--muted2);padding:0.9rem 1.2rem;border-bottom:1px solid var(--border);line-height:1.6;vertical-align:top}
+.risk-table tr:last-child td{border-bottom:none}
+.risk-table tr:hover td{background:var(--bg3)}
+
+/* Steps */
+.steps-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--border);margin:2rem 0}
+.step-item{background:var(--bg2);padding:1.5rem 1rem;text-align:center}
+.step-num{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:300;color:var(--gold);display:block;line-height:1;margin-bottom:0.5rem}
+.step-name{font-family:'Space Mono',monospace;font-size:0.44rem;letter-spacing:0.1em;color:var(--muted2);text-transform:uppercase}
+
+/* Analysis grid */
+.analysis-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin:1.5rem 0}
+.analysis-card{background:var(--bg2);border:1px solid var(--border);padding:1.5rem}
+.ac-title{font-family:'Space Mono',monospace;font-size:0.46rem;letter-spacing:0.18em;color:var(--gold);text-transform:uppercase;margin-bottom:0.8rem;display:block}
+.ac-content{font-size:0.82rem;color:var(--muted2);line-height:1.7}
+
+/* Operational grid */
+.op-grid{width:100%;border-collapse:collapse;margin:1.5rem 0;background:var(--bg2)}
+.op-grid th{font-family:'Space Mono',monospace;font-size:0.42rem;letter-spacing:0.15em;color:var(--gold-dim);text-transform:uppercase;padding:0.8rem 1rem;text-align:left;border-bottom:1px solid var(--border2);background:var(--bg3)}
+.op-grid td{font-size:0.8rem;color:var(--muted2);padding:0.9rem 1rem;border-bottom:1px solid var(--border);line-height:1.5}
+.op-grid tr:last-child td{border-bottom:none}
+.badge-low{color:#6aad7a;font-family:'Space Mono',monospace;font-size:0.44rem;letter-spacing:0.1em}
+.badge-mid{color:var(--gold);font-family:'Space Mono',monospace;font-size:0.44rem;letter-spacing:0.1em}
+.badge-high{color:#c4826a;font-family:'Space Mono',monospace;font-size:0.44rem;letter-spacing:0.1em}
+
+/* Bias cards */
+.bias-list{display:flex;flex-direction:column;gap:0.8rem;margin:1.5rem 0}
+.bias-item{display:grid;grid-template-columns:140px 1fr;gap:1.5rem;align-items:start;padding:1.2rem 1.5rem;background:var(--bg2);border:1px solid var(--border)}
+.bias-name{font-family:'Jost',sans-serif;font-size:0.82rem;font-weight:500;color:var(--off)}
+.bias-desc{font-size:0.82rem;color:var(--muted2);line-height:1.6}
+
+/* Case studies */
+.case-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);margin:1.5rem 0}
+.case-card{background:var(--bg2);padding:2rem}
+.case-num{font-family:'Space Mono',monospace;font-size:0.44rem;letter-spacing:0.2em;color:var(--gold-dim);display:block;margin-bottom:0.6rem}
+.case-title{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:400;color:var(--off);margin-bottom:1rem}
+.case-row{display:flex;gap:0.8rem;margin-bottom:0.5rem;font-size:0.8rem;line-height:1.5}
+.case-row-label{font-family:'Space Mono',monospace;font-size:0.42rem;letter-spacing:0.12em;color:var(--gold-dim);text-transform:uppercase;flex-shrink:0;padding-top:0.1rem;min-width:70px}
+.case-row-text{color:var(--muted2)}
+.case-conclusion{margin-top:1rem;padding:0.8rem 1rem;background:var(--bg3);font-size:0.8rem;color:var(--muted2);border-left:2px solid var(--gold)}
+
+/* Highlight box */
+.highlight-box{background:var(--bg2);border:1px solid var(--border);border-left:2px solid var(--gold);padding:1.8rem 2rem;margin:1.5rem 0;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.1rem;color:var(--off);line-height:1.6}
+
+/* CTA finale */
+.guide-cta{background:var(--bg2);border:1px solid var(--border);padding:3rem;text-align:center;margin-top:3rem}
+.guide-cta h3{font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:400;margin-bottom:1rem}
+.guide-cta h3 em{font-style:italic;color:var(--gold)}
+.guide-cta p{font-size:0.88rem;color:var(--muted2);line-height:1.8;max-width:480px;margin:0 auto 2rem}
+.cta-btn{display:inline-block;background:var(--gold);color:var(--bg);font-family:'Space Mono',monospace;font-size:0.6rem;letter-spacing:0.18em;text-transform:uppercase;padding:1rem 2.5rem;text-decoration:none;transition:background 0.3s}
+.cta-btn:hover{background:var(--gold2)}
+
+footer{position:relative;z-index:1;padding:2rem 4rem;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-logo{font-family:'Space Mono',monospace;font-size:0.65rem;letter-spacing:0.25em;color:var(--gold)}
+.footer-copy{font-family:'Space Mono',monospace;font-size:0.44rem;letter-spacing:0.12em;color:var(--muted)}
+
+@media(max-width:768px){
+  nav{padding:1.2rem 1.5rem}
+  #quiz-section,#result-section{padding:7rem 1.5rem 3rem}
+  .guide-hero{padding:7rem 1.5rem 3rem}
+  .guide-body{padding:2rem 1.5rem}
+  .steps-grid{grid-template-columns:repeat(3,1fr)}
+  .analysis-grid,.case-grid{grid-template-columns:1fr}
+  .bias-item{grid-template-columns:1fr}
+  footer{padding:1.5rem;flex-direction:column;text-align:center}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="guide-hygiene.html" class="nav-back" data-fr="← Guide de base" data-en="← Basic guide">← Guide de base</a>
+  <a href="index.html" class="nav-logo">SANGOUR3i</a>
+  <div class="nav-right">
+    <button id="lang-toggle">EN</button>
+  </div>
+</nav>
+
+<!-- ══════════════════════════════════════
+     QUIZ SECTION
+══════════════════════════════════════ -->
+<div id="quiz-section">
+
+  <div class="quiz-header">
+    <div class="quiz-label" data-fr="Accès Guide Premium" data-en="Premium Guide Access">Accès Guide Premium</div>
+    <h1 data-fr-html="5 questions pour<br>débloquer votre <em>accès.</em>" data-en-html="5 questions to<br>unlock your <em>access.</em>">5 questions pour<br>débloquer votre <em>accès.</em></h1>
+    <p data-fr="Répondez correctement à 4 questions sur 5 pour accéder au guide complet. Les questions portent sur les fondamentaux de l'analyse d'information et de la prise de décision en environnement incertain." data-en="Answer 4 out of 5 questions correctly to access the full guide. Questions cover the fundamentals of information analysis and decision-making in uncertain environments.">Répondez correctement à 4 questions sur 5 pour accéder au guide complet. Les questions portent sur les fondamentaux de l'analyse d'information et de la prise de décision en environnement incertain.</p>
+  </div>
+
+  <div class="quiz-progress">
+    <span class="qp-label" data-fr="Progression" data-en="Progress">Progression</span>
+    <div class="qp-bar"><div class="qp-fill" id="qpFill"></div></div>
+    <span class="qp-count" id="qpCount">0 / 5</span>
+  </div>
+
+  <!-- Q1 -->
+  <div class="question-card active" id="q1">
+    <span class="q-num" data-fr="Question 01 / 05" data-en="Question 01 / 05">Question 01 / 05</span>
+    <p class="q-text" data-fr="Dans quel cas le risque informationnel est-il le plus élevé ?" data-en="In which case is informational risk the highest?">Dans quel cas le risque informationnel est-il le plus élevé ?</p>
+    <div class="options">
+      <div class="option" onclick="selectOption(this, 'q1', 0)"><span class="option-letter">A</span><span class="option-text" data-fr="Quand l'information est fausse et identifiée comme telle" data-en="When information is false and identified as such">Quand l'information est fausse et identifiée comme telle</span></div>
+      <div class="option" onclick="selectOption(this, 'q1', 1)"><span class="option-letter">B</span><span class="option-text" data-fr="Quand l'information est incomplète et présentée comme totale" data-en="When information is incomplete but presented as complete">Quand l'information est incomplète et présentée comme totale</span></div>
+      <div class="option" onclick="selectOption(this, 'q1', 2)"><span class="option-letter">C</span><span class="option-text" data-fr="Quand l'information est ancienne mais connue" data-en="When information is old but known">Quand l'information est ancienne mais connue</span></div>
+      <div class="option" onclick="selectOption(this, 'q1', 3)"><span class="option-letter">D</span><span class="option-text" data-fr="Quand l'information provient d'une seule source fiable" data-en="When information comes from a single reliable source">Quand l'information provient d'une seule source fiable</span></div>
+    </div>
+    <div class="q-feedback" id="f1" data-fr="Une information incomplète présentée comme totale est particulièrement dangereuse car elle donne une illusion de certitude. L'erreur identifiée est gérée — l'angle mort ne l'est pas." data-en="Incomplete information presented as complete is especially dangerous because it creates an illusion of certainty. An identified error is managed — a blind spot is not.">Une information incomplète présentée comme totale est particulièrement dangereuse car elle donne une illusion de certitude. L'erreur identifiée est gérée — l'angle mort ne l'est pas.</div>
+    <button class="btn-next" onclick="nextQuestion(2)" data-fr="Question suivante →" data-en="Next question →">Question suivante →</button>
+  </div>
+
+  <!-- Q2 -->
+  <div class="question-card" id="q2">
+    <span class="q-num" data-fr="Question 02 / 05" data-en="Question 02 / 05">Question 02 / 05</span>
+    <p class="q-text" data-fr="Quelle est la première étape d'une analyse structurée de l'information ?" data-en="What is the first step of a structured information analysis?">Quelle est la première étape d'une analyse structurée de l'information ?</p>
+    <div class="options">
+      <div class="option" onclick="selectOption(this, 'q2', 0)"><span class="option-letter">A</span><span class="option-text" data-fr="Analyser les incohérences" data-en="Analyze inconsistencies">Analyser les incohérences</span></div>
+      <div class="option" onclick="selectOption(this, 'q2', 1)"><span class="option-letter">B</span><span class="option-text" data-fr="Évaluer le niveau de risque" data-en="Evaluate the risk level">Évaluer le niveau de risque</span></div>
+      <div class="option" onclick="selectOption(this, 'q2', 2)"><span class="option-letter">C</span><span class="option-text" data-fr="Collecter sans biais de sélection" data-en="Collect without selection bias">Collecter sans biais de sélection</span></div>
+      <div class="option" onclick="selectOption(this, 'q2', 3)"><span class="option-letter">D</span><span class="option-text" data-fr="Structurer les données disponibles" data-en="Structure available data">Structurer les données disponibles</span></div>
+    </div>
+    <div class="q-feedback" id="f2" data-fr="La collecte est la première étape — et la plus critique. Un biais de sélection à ce stade contamine toute l'analyse qui suit. On ne peut analyser que ce qu'on a d'abord collecté." data-en="Collection is the first step — and the most critical. A selection bias at this stage contaminates all subsequent analysis. You can only analyze what you first collected.">La collecte est la première étape — et la plus critique. Un biais de sélection à ce stade contamine toute l'analyse qui suit. On ne peut analyser que ce qu'on a d'abord collecté.</div>
+    <button class="btn-next" onclick="nextQuestion(3)" data-fr="Question suivante →" data-en="Next question →">Question suivante →</button>
+  </div>
+
+  <!-- Q3 -->
+  <div class="question-card" id="q3">
+    <span class="q-num" data-fr="Question 03 / 05" data-en="Question 03 / 05">Question 03 / 05</span>
+    <p class="q-text" data-fr="Qu'est-ce qu'un signal faible dans le contexte de l'analyse d'information ?" data-en="What is a weak signal in the context of information analysis?">Qu'est-ce qu'un signal faible dans le contexte de l'analyse d'information ?</p>
+    <div class="options">
+      <div class="option" onclick="selectOption(this, 'q3', 0)"><span class="option-letter">A</span><span class="option-letter">A</span><span class="option-text" data-fr="Une information confirmée par plusieurs sources" data-en="Information confirmed by multiple sources">Une information confirmée par plusieurs sources</span></div>
+      <div class="option" onclick="selectOption(this, 'q3', 1)"><span class="option-letter">B</span><span class="option-text" data-fr="Un indice discret qui, combiné à d'autres, révèle un risque non visible" data-en="A subtle indicator that, combined with others, reveals a non-visible risk">Un indice discret qui, combiné à d'autres, révèle un risque non visible</span></div>
+      <div class="option" onclick="selectOption(this, 'q3', 2)"><span class="option-letter">C</span><span class="option-text" data-fr="Une source d'information peu fiable" data-en="An unreliable information source">Une source d'information peu fiable</span></div>
+      <div class="option" onclick="selectOption(this, 'q3', 3)"><span class="option-letter">D</span><span class="option-text" data-fr="Un document dont l'authenticité est douteuse" data-en="A document whose authenticity is doubtful">Un document dont l'authenticité est douteuse</span></div>
+    </div>
+    <div class="q-feedback" id="f3" data-fr="Un signal faible est un indice discret, souvent ignoré isolément, mais révélateur d'un risque réel lorsqu'il est combiné à d'autres éléments. Les signaux faibles sont au cœur de l'analyse OSINT." data-en="A weak signal is a subtle clue, often ignored in isolation, but revealing a real risk when combined with other elements. Weak signals are at the heart of OSINT analysis.">Un signal faible est un indice discret, souvent ignoré isolément, mais révélateur d'un risque réel lorsqu'il est combiné à d'autres éléments. Les signaux faibles sont au cœur de l'analyse OSINT.</div>
+    <button class="btn-next" onclick="nextQuestion(4)" data-fr="Question suivante →" data-en="Next question →">Question suivante →</button>
+  </div>
+
+  <!-- Q4 -->
+  <div class="question-card" id="q4">
+    <span class="q-num" data-fr="Question 04 / 05" data-en="Question 04 / 05">Question 04 / 05</span>
+    <p class="q-text" data-fr="Le biais de confirmation consiste à :" data-en="Confirmation bias consists of:">Le biais de confirmation consiste à :</p>
+    <div class="options">
+      <div class="option" onclick="selectOption(this, 'q4', 0)"><span class="option-letter">A</span><span class="option-text" data-fr="Vérifier systématiquement toutes les sources" data-en="Systematically verifying all sources">Vérifier systématiquement toutes les sources</span></div>
+      <div class="option" onclick="selectOption(this, 'q4', 1)"><span class="option-letter">B</span><span class="option-text" data-fr="Chercher uniquement les informations qui confirment une hypothèse préexistante" data-en="Seeking only information that confirms a pre-existing hypothesis">Chercher uniquement les informations qui confirment une hypothèse préexistante</span></div>
+      <div class="option" onclick="selectOption(this, 'q4', 2)"><span class="option-letter">C</span><span class="option-text" data-fr="Confirmer une information auprès d'un expert" data-en="Confirming information with an expert">Confirmer une information auprès d'un expert</span></div>
+      <div class="option" onclick="selectOption(this, 'q4', 3)"><span class="option-letter">D</span><span class="option-text" data-fr="Recouper plusieurs sources avant de conclure" data-en="Cross-referencing multiple sources before concluding">Recouper plusieurs sources avant de conclure</span></div>
+    </div>
+    <div class="q-feedback" id="f4" data-fr="Le biais de confirmation est l'un des plus dangereux en analyse : on cherche ce qui confirme, on ignore ce qui contredit. Résultat : les signaux d'alerte les plus critiques sont invisibles." data-en="Confirmation bias is one of the most dangerous in analysis: we seek what confirms, we ignore what contradicts. Result: the most critical warning signals remain invisible.">Le biais de confirmation est l'un des plus dangereux en analyse : on cherche ce qui confirme, on ignore ce qui contredit. Résultat : les signaux d'alerte les plus critiques sont invisibles.</div>
+    <button class="btn-next" onclick="nextQuestion(5)" data-fr="Question suivante →" data-en="Next question →">Question suivante →</button>
+  </div>
+
+  <!-- Q5 -->
+  <div class="question-card" id="q5">
+    <span class="q-num" data-fr="Question 05 / 05" data-en="Question 05 / 05">Question 05 / 05</span>
+    <p class="q-text" data-fr="Quel est l'objectif principal d'une analyse basée sur des sources ouvertes ?" data-en="What is the main objective of an open-source based analysis?">Quel est l'objectif principal d'une analyse basée sur des sources ouvertes ?</p>
+    <div class="options">
+      <div class="option" onclick="selectOption(this, 'q5', 0)"><span class="option-letter">A</span><span class="option-text" data-fr="Obtenir une certitude absolue sur une situation" data-en="Obtain absolute certainty about a situation">Obtenir une certitude absolue sur une situation</span></div>
+      <div class="option" onclick="selectOption(this, 'q5', 1)"><span class="option-letter">B</span><span class="option-text" data-fr="Accéder à des données confidentielles non publiées" data-en="Access unpublished confidential data">Accéder à des données confidentielles non publiées</span></div>
+      <div class="option" onclick="selectOption(this, 'q5', 2)"><span class="option-letter">C</span><span class="option-text" data-fr="Réduire l'incertitude de manière structurée pour éclairer une décision" data-en="Reduce uncertainty in a structured way to inform a decision">Réduire l'incertitude de manière structurée pour éclairer une décision</span></div>
+      <div class="option" onclick="selectOption(this, 'q5', 3)"><span class="option-letter">D</span><span class="option-text" data-fr="Remplacer une analyse juridique ou financière professionnelle" data-en="Replace a professional legal or financial analysis">Remplacer une analyse juridique ou financière professionnelle</span></div>
+    </div>
+    <div class="q-feedback" id="f5" data-fr="L'objectif n'est pas la certitude — impossible à atteindre. C'est de réduire l'incertitude de manière structurée. Une décision éclairée n'est pas une décision certaine, c'est une décision informée." data-en="The objective is not certainty — impossible to achieve. It is to reduce uncertainty in a structured way. An informed decision is not a certain decision, it is an informed one.">L'objectif n'est pas la certitude — impossible à atteindre. C'est de réduire l'incertitude de manière structurée. Une décision éclairée n'est pas une décision certaine, c'est une décision informée.</div>
+    <button class="btn-next" onclick="showResult()" data-fr="Voir les résultats →" data-en="See results →">Voir les résultats →</button>
+  </div>
+
+</div><!-- /#quiz-section -->
+
+<!-- ══════════════════════════════════════
+     RESULT SECTION
+══════════════════════════════════════ -->
+<div id="result-section">
+  <div class="result-box">
+    <span class="result-score" id="resultScore">0/5</span>
+    <span class="result-label" id="resultLabel" data-fr="Score de réussite" data-en="Success score">Score de réussite</span>
+    <h2 class="result-title" id="resultTitle"></h2>
+    <p class="result-desc" id="resultDesc"></p>
+
+    <!-- SUCCESS -->
+    <div id="unlock-content" style="display:none;">
+      <div class="unlock-box">
+        <div class="unlock-title" data-fr="Accès débloqué — Guide Premium" data-en="Access unlocked — Premium Guide">Accès débloqué — Guide Premium</div>
+        <div class="unlock-guide-title" data-fr-html="Décider avec une<br><em>information imparfaite</em>" data-en-html="Deciding with<br><em>imperfect information</em>">Décider avec une<br><em>information imparfaite</em></div>
+        <p class="unlock-guide-desc" data-fr="Méthode structurée d'analyse d'information pour des décisions éclairées en environnements incertains. Grille opérationnelle, cas pratiques, erreurs avancées." data-en="Structured information analysis methodology for informed decisions in uncertain environments. Operational grid, practical cases, advanced errors.">Méthode structurée d'analyse d'information pour des décisions éclairées en environnements incertains. Grille opérationnelle, cas pratiques, erreurs avancées.</p>
+        <div class="unlock-features">
+          <div class="unlock-feature" data-fr="Méthode en 5 étapes : Collecter → Vérifier → Structurer → Analyser → Évaluer" data-en="5-step method: Collect → Verify → Structure → Analyze → Evaluate">Méthode en 5 étapes : Collecter → Vérifier → Structurer → Analyser → Évaluer</div>
+          <div class="unlock-feature" data-fr="Grille d'analyse opérationnelle complète" data-en="Complete operational analysis grid">Grille d'analyse opérationnelle complète</div>
+          <div class="unlock-feature" data-fr="Cas pratiques : profil crédible & document officiel" data-en="Practical cases: credible profile & official document">Cas pratiques : profil crédible & document officiel</div>
+          <div class="unlock-feature" data-fr="Erreurs avancées à éviter absolument" data-en="Advanced errors to absolutely avoid">Erreurs avancées à éviter absolument</div>
+        </div>
+        <button class="btn-access" onclick="showGuide()" data-fr="Accéder au guide complet →" data-en="Access full guide →">Accéder au guide complet →</button>
+      </div>
+    </div>
+
+    <!-- RETRY -->
+    <div id="retry-content" style="display:none;">
+      <div class="retry-box">
+        <button class="btn-retry" onclick="resetQuiz()" data-fr="← Recommencer le quiz" data-en="← Retake the quiz">← Recommencer le quiz</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     GUIDE PREMIUM SECTION
+══════════════════════════════════════ -->
+<div id="guide-section">
+
+  <div class="guide-hero">
+    <div class="guide-badge" data-fr="Guide Premium · Accès débloqué" data-en="Premium Guide · Access unlocked">Guide Premium · Accès débloqué</div>
+    <h1 data-fr-html="Décider avec une<br><em>information imparfaite</em>" data-en-html="Deciding with<br><em>imperfect information</em>">Décider avec une<br><em>information imparfaite</em></h1>
+    <p data-fr="Toute décision repose sur une information imparfaite. Le risque ne provient pas uniquement de ce qui est faux — il provient de ce qui est incomplet, mal interprété ou non vérifié. Ce guide propose une méthode structurée pour analyser, vérifier et décider." data-en="Every decision is based on imperfect information. Risk does not come only from what is false — it comes from what is incomplete, misinterpreted, or unverified. This guide provides a structured method to analyze, verify, and decide.">Toute décision repose sur une information imparfaite. Le risque ne provient pas uniquement de ce qui est faux — il provient de ce qui est incomplet, mal interprété ou non vérifié. Ce guide propose une méthode structurée pour analyser, vérifier et décider.</p>
+    <div class="guide-meta">
+      <div class="gm-item"><span class="gm-label" data-fr="Source" data-en="Source">Source</span><span class="gm-value">SANGOUR3i</span></div>
+      <div class="gm-item"><span class="gm-label" data-fr="Édition" data-en="Edition">Édition</span><span class="gm-value">2026</span></div>
+      <div class="gm-item"><span class="gm-label" data-fr="Sections" data-en="Sections">Sections</span><span class="gm-value" data-fr="10 sections · Méthode complète" data-en="10 sections · Full method">10 sections · Méthode complète</span></div>
+      <div class="gm-item"><span class="gm-label" data-fr="Accès" data-en="Access">Accès</span><span class="gm-value" data-fr="Restreint · Quiz validé" data-en="Restricted · Quiz validated">Restreint · Quiz validé</span></div>
+    </div>
+  </div>
+
+  <div class="guide-body">
+
+    <!-- S1 -->
+    <div class="guide-section">
+      <span class="gs-num">01</span>
+      <h2 data-fr-html="Comprendre le risque <em>informationnel</em>" data-en-html="Understanding <em>informational risk</em>">Comprendre le risque <em>informationnel</em></h2>
+      <p data-fr="Avant toute analyse, il est essentiel de distinguer les différentes formes de risque. Dans la majorité des cas, le risque provient d'une combinaison de ces facteurs — rarement d'un seul." data-en="Before any analysis, it is essential to distinguish the different forms of risk. In most cases, risk comes from a combination of these factors — rarely from just one.">Avant toute analyse, il est essentiel de distinguer les différentes formes de risque. Dans la majorité des cas, le risque provient d'une combinaison de ces facteurs — rarement d'un seul.</p>
+      <table class="risk-table">
+        <thead><tr>
+          <th data-fr="Type de risque" data-en="Risk type">Type de risque</th>
+          <th data-fr="Définition" data-en="Definition">Définition</th>
+          <th data-fr="Danger" data-en="Danger">Danger</th>
+        </tr></thead>
+        <tbody>
+          <tr><td data-fr="Information fausse" data-en="False information">Information fausse</td><td data-fr="Donnée incorrecte, falsifiée ou mensongère" data-en="Incorrect, falsified or misleading data">Donnée incorrecte, falsifiée ou mensongère</td><td data-fr="Identifiable si on vérifie" data-en="Identifiable if verified">Identifiable si on vérifie</td></tr>
+          <tr><td data-fr="Information incomplète" data-en="Incomplete information">Information incomplète</td><td data-fr="Données partielles créant une vision biaisée" data-en="Partial data creating a biased view">Données partielles créant une vision biaisée</td><td data-fr="Crée une illusion de certitude" data-en="Creates an illusion of certainty">Crée une illusion de certitude</td></tr>
+          <tr><td data-fr="Information manipulée" data-en="Manipulated information">Information manipulée</td><td data-fr="Présentée pour influencer la perception" data-en="Presented to influence perception">Présentée pour influencer la perception</td><td data-fr="Difficile à détecter sans recoupement" data-en="Difficult to detect without cross-referencing">Difficile à détecter sans recoupement</td></tr>
+          <tr><td data-fr="Information mal interprétée" data-en="Misinterpreted information">Information mal interprétée</td><td data-fr="Lecture erronée d'une information correcte" data-en="Incorrect reading of correct information">Lecture erronée d'une information correcte</td><td data-fr="La source est fiable, l'analyse ne l'est pas" data-en="Source is reliable, analysis is not">La source est fiable, l'analyse ne l'est pas</td></tr>
+        </tbody>
+      </table>
+      <div class="highlight-box" data-fr="« L'objectif n'est pas d'obtenir une certitude absolue, mais de réduire l'incertitude de manière structurée. »" data-en="« The objective is not to obtain absolute certainty, but to reduce uncertainty in a structured way. »">« L'objectif n'est pas d'obtenir une certitude absolue, mais de réduire l'incertitude de manière structurée. »</div>
+    </div>
+
+    <!-- S2 -->
+    <div class="guide-section">
+      <span class="gs-num">02</span>
+      <h2 data-fr-html="Méthode d'analyse <em>en 5 étapes</em>" data-en-html="Analysis method <em>in 5 steps</em>">Méthode d'analyse <em>en 5 étapes</em></h2>
+      <p data-fr="La méthode repose sur une séquence stricte. Chaque étape conditionne la suivante. Sauter une étape ne fait pas gagner du temps — cela crée des angles morts." data-en="The method is based on a strict sequence. Each step conditions the next. Skipping a step does not save time — it creates blind spots.">La méthode repose sur une séquence stricte. Chaque étape conditionne la suivante. Sauter une étape ne fait pas gagner du temps — cela crée des angles morts.</p>
+      <div class="steps-grid">
+        <div class="step-item"><span class="step-num">01</span><span class="step-name" data-fr="Collecter" data-en="Collect">Collecter</span></div>
+        <div class="step-item"><span class="step-num">02</span><span class="step-name" data-fr="Vérifier" data-en="Verify">Vérifier</span></div>
+        <div class="step-item"><span class="step-num">03</span><span class="step-name" data-fr="Structurer" data-en="Structure">Structurer</span></div>
+        <div class="step-item"><span class="step-num">04</span><span class="step-name" data-fr="Analyser" data-en="Analyze">Analyser</span></div>
+        <div class="step-item"><span class="step-num">05</span><span class="step-name" data-fr="Évaluer" data-en="Evaluate">Évaluer</span></div>
+      </div>
+      <div class="analysis-grid">
+        <div class="analysis-card">
+          <span class="ac-title" data-fr="01 · Collecter" data-en="01 · Collect">01 · Collecter</span>
+          <p class="ac-content" data-fr="Rassembler l'information disponible sans biais de sélection. Profils publics, registres officiels, contenus publiés, traces d'activité. Ne pas se limiter à une seule source." data-en="Gather available information without selection bias. Public profiles, official registries, published content, activity traces. Do not limit yourself to a single source.">Rassembler l'information disponible sans biais de sélection. Profils publics, registres officiels, contenus publiés, traces d'activité. Ne pas se limiter à une seule source.</p>
+        </div>
+        <div class="analysis-card">
+          <span class="ac-title" data-fr="02 · Vérifier" data-en="02 · Verify">02 · Vérifier</span>
+          <p class="ac-content" data-fr="La source est-elle identifiable ? L'information est-elle confirmée ailleurs ? Existe-t-il des contradictions ? Méthode : recoupement multi-sources, comparaison des dates et des faits." data-en="Is the source identifiable? Is the information confirmed elsewhere? Are there contradictions? Method: multi-source cross-referencing, comparison of dates and facts.">La source est-elle identifiable ? L'information est-elle confirmée ailleurs ? Existe-t-il des contradictions ? Méthode : recoupement multi-sources.</p>
+        </div>
+        <div class="analysis-card">
+          <span class="ac-title" data-fr="03 · Structurer" data-en="03 · Structure">03 · Structurer</span>
+          <p class="ac-content" data-fr="Organiser l'information en trois catégories : informations confirmées / informations incertaines / informations absentes. Sans structuration, l'information reste inutilisable." data-en="Organize information into three categories: confirmed information / uncertain information / absent information. Without structure, information remains unusable.">Organiser l'information en trois catégories : confirmées / incertaines / absentes. Sans structuration, l'information reste inutilisable.</p>
+        </div>
+        <div class="analysis-card">
+          <span class="ac-title" data-fr="04 · Analyser" data-en="04 · Analyze">04 · Analyser</span>
+          <p class="ac-content" data-fr="Identifier les incohérences, repérer les anomalies, détecter les signaux faibles. Certaines zones semblent-elles trop propres ? Y a-t-il des ruptures dans les données ?" data-en="Identify inconsistencies, spot anomalies, detect weak signals. Do some areas seem too clean? Are there breaks in the data?">Identifier les incohérences, repérer les anomalies, détecter les signaux faibles. Certaines zones semblent-elles trop propres ?</p>
+        </div>
+      </div>
+      <div class="analysis-card" style="margin-top:1.5rem;">
+        <span class="ac-title" data-fr="05 · Évaluer le risque" data-en="05 · Evaluate risk">05 · Évaluer le risque</span>
+        <p class="ac-content" data-fr="Transformer l'analyse en décision éclairée. Faible : information cohérente et vérifiée. Modéré : zones d'incertitude identifiées. Élevé : incohérences significatives. Le risque dépend de l'importance de la décision et de l'impact potentiel." data-en="Transform analysis into an informed decision. Low: coherent and verified information. Moderate: identified uncertainty zones. High: significant inconsistencies. Risk depends on decision importance and potential impact.">Transformer l'analyse en décision éclairée. Faible : information cohérente et vérifiée. Modéré : zones d'incertitude. Élevé : incohérences significatives.</p>
+      </div>
+    </div>
+
+    <!-- S3 -->
+    <div class="guide-section">
+      <span class="gs-num">03</span>
+      <h2 data-fr-html="Grille d'analyse <em>opérationnelle</em>" data-en-html="Operational <em>analysis grid</em>">Grille d'analyse <em>opérationnelle</em></h2>
+      <p data-fr="Cette grille permet de visualiser rapidement les zones critiques à surveiller avant une décision. À utiliser systématiquement avant tout engagement important." data-en="This grid allows you to quickly visualize critical areas to monitor before a decision. Use it systematically before any important commitment.">Cette grille permet de visualiser rapidement les zones critiques à surveiller avant une décision.</p>
+      <table class="op-grid">
+        <thead><tr>
+          <th data-fr="Élément analysé" data-en="Analyzed element">Élément analysé</th>
+          <th data-fr="Statut" data-en="Status">Statut</th>
+          <th data-fr="Fiabilité" data-en="Reliability">Fiabilité</th>
+          <th data-fr="Niveau de risque" data-en="Risk level">Niveau de risque</th>
+        </tr></thead>
+        <tbody>
+          <tr><td data-fr="Identité / Profil" data-en="Identity / Profile">Identité / Profil</td><td data-fr="Confirmée / Incertaine" data-en="Confirmed / Uncertain">Confirmée / Incertaine</td><td data-fr="Élevée / Moyenne / Faible" data-en="High / Medium / Low">Élevée / Moyenne / Faible</td><td><span class="badge-low" data-fr="Faible" data-en="Low">Faible</span> / <span class="badge-mid" data-fr="Modéré" data-en="Moderate">Modéré</span> / <span class="badge-high" data-fr="Élevé" data-en="High">Élevé</span></td></tr>
+          <tr><td data-fr="Activité déclarée" data-en="Declared activity">Activité déclarée</td><td data-fr="Vérifiable / Partielle" data-en="Verifiable / Partial">Vérifiable / Partielle</td><td data-fr="Élevée / Moyenne / Faible" data-en="High / Medium / Low">Élevée / Moyenne / Faible</td><td><span class="badge-low" data-fr="Faible" data-en="Low">Faible</span> / <span class="badge-mid" data-fr="Modéré" data-en="Moderate">Modéré</span> / <span class="badge-high" data-fr="Élevé" data-en="High">Élevé</span></td></tr>
+          <tr><td data-fr="Historique numérique" data-en="Digital history">Historique numérique</td><td data-fr="Cohérent / Lacunaire" data-en="Consistent / Incomplete">Cohérent / Lacunaire</td><td data-fr="Élevée / Moyenne / Faible" data-en="High / Medium / Low">Élevée / Moyenne / Faible</td><td><span class="badge-low" data-fr="Faible" data-en="Low">Faible</span> / <span class="badge-mid" data-fr="Modéré" data-en="Moderate">Modéré</span> / <span class="badge-high" data-fr="Élevé" data-en="High">Élevé</span></td></tr>
+          <tr><td data-fr="Réputation publique" data-en="Public reputation">Réputation publique</td><td data-fr="Positive / Neutre / Négative" data-en="Positive / Neutral / Negative">Positive / Neutre / Négative</td><td data-fr="Élevée / Moyenne / Faible" data-en="High / Medium / Low">Élevée / Moyenne / Faible</td><td><span class="badge-low" data-fr="Faible" data-en="Low">Faible</span> / <span class="badge-mid" data-fr="Modéré" data-en="Moderate">Modéré</span> / <span class="badge-high" data-fr="Élevé" data-en="High">Élevé</span></td></tr>
+          <tr><td data-fr="Documents fournis" data-en="Documents provided">Documents fournis</td><td data-fr="Authentifiés / Non vérifiés" data-en="Authenticated / Unverified">Authentifiés / Non vérifiés</td><td data-fr="Élevée / Moyenne / Faible" data-en="High / Medium / Low">Élevée / Moyenne / Faible</td><td><span class="badge-low" data-fr="Faible" data-en="Low">Faible</span> / <span class="badge-mid" data-fr="Modéré" data-en="Moderate">Modéré</span> / <span class="badge-high" data-fr="Élevé" data-en="High">Élevé</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- S4 -->
+    <div class="guide-section">
+      <span class="gs-num">04</span>
+      <h2 data-fr-html="Cas <em>pratiques</em>" data-en-html="Practical <em>cases</em>">Cas <em>pratiques</em></h2>
+      <p data-fr="Ces deux cas illustrent comment une apparence rassurante peut dissimuler des signaux d'alerte significatifs — invisibles sans méthode structurée." data-en="These two cases illustrate how a reassuring appearance can conceal significant warning signals — invisible without a structured method.">Ces deux cas illustrent comment une apparence rassurante peut dissimuler des signaux d'alerte significatifs.</p>
+      <div class="case-grid">
+        <div class="case-card">
+          <span class="case-num" data-fr="Cas 01 — Profil crédible" data-en="Case 01 — Credible profile">Cas 01 — Profil crédible</span>
+          <div class="case-title" data-fr="Le partenaire impeccable" data-en="The impeccable partner">Le partenaire impeccable</div>
+          <div class="case-row"><span class="case-row-label" data-fr="Apparence" data-en="Appearance">Apparence</span><span class="case-row-text" data-fr="Profil professionnel cohérent, activité visible et régulière, références solides" data-en="Consistent professional profile, visible and regular activity, solid references">Profil professionnel cohérent, activité visible et régulière, références solides</span></div>
+          <div class="case-row"><span class="case-row-label" data-fr="Analyse" data-en="Analysis">Analyse</span><span class="case-row-text" data-fr="Incohérences dans les dates déclarées, absence de traces historiques vérifiables avant 2020" data-en="Inconsistencies in declared dates, absence of verifiable historical traces before 2020">Incohérences dans les dates déclarées, absence de traces historiques vérifiables avant 2020</span></div>
+          <div class="case-conclusion"><span class="badge-mid" data-fr="Risque modéré" data-en="Moderate risk">Risque modéré</span> — <span data-fr="vérification approfondie nécessaire avant engagement." data-en="thorough verification required before engagement.">vérification approfondie nécessaire avant engagement.</span></div>
+        </div>
+        <div class="case-card">
+          <span class="case-num" data-fr="Cas 02 — Document officiel" data-en="Case 02 — Official document">Cas 02 — Document officiel</span>
+          <div class="case-title" data-fr="Le document trop parfait" data-en="The too-perfect document">Le document trop parfait</div>
+          <div class="case-row"><span class="case-row-label" data-fr="Apparence" data-en="Appearance">Apparence</span><span class="case-row-text" data-fr="Structure officielle, présentation correcte et soignée, en-têtes authentiques" data-en="Official structure, correct and neat presentation, authentic headers">Structure officielle, présentation correcte et soignée, en-têtes authentiques</span></div>
+          <div class="case-row"><span class="case-row-label" data-fr="Analyse" data-en="Analysis">Analyse</span><span class="case-row-text" data-fr="Métadonnées incohérentes avec la date déclarée, contenu non aligné avec d'autres sources primaires" data-en="Metadata inconsistent with declared date, content not aligned with other primary sources">Métadonnées incohérentes avec la date déclarée, contenu non aligné avec d'autres sources primaires</span></div>
+          <div class="case-conclusion"><span class="badge-high" data-fr="Risque élevé" data-en="High risk">Risque élevé</span> — <span data-fr="document potentiellement modifié. Investigation recommandée." data-en="potentially altered document. Investigation recommended.">document potentiellement modifié. Investigation recommandée.</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- S5 -->
+    <div class="guide-section">
+      <span class="gs-num">05</span>
+      <h2 data-fr-html="Erreurs <em>avancées à éviter</em>" data-en-html="Advanced <em>errors to avoid</em>">Erreurs <em>avancées à éviter</em></h2>
+      <p data-fr="Ces trois erreurs sont les plus fréquentes dans l'analyse d'information. Elles ne sont pas techniques — elles sont comportementales. Elles ne s'apprennent pas dans les manuels." data-en="These three errors are the most frequent in information analysis. They are not technical — they are behavioral. They are not learned from manuals.">Ces trois erreurs sont les plus fréquentes. Elles ne sont pas techniques — elles sont comportementales.</p>
+      <div class="bias-list">
+        <div class="bias-item">
+          <div class="bias-name" data-fr="Biais de confirmation" data-en="Confirmation bias">Biais de confirmation</div>
+          <div class="bias-desc" data-fr="Chercher uniquement ce qui confirme une hypothèse préexistante. Les signaux contraires sont ignorés — souvent inconsciemment. Résultat : les risques les plus critiques restent invisibles." data-en="Seeking only what confirms a pre-existing hypothesis. Contrary signals are ignored — often unconsciously. Result: the most critical risks remain invisible.">Chercher uniquement ce qui confirme une hypothèse préexistante. Les signaux contraires sont ignorés — souvent inconsciemment. Résultat : les risques les plus critiques restent invisibles.</div>
+        </div>
+        <div class="bias-item">
+          <div class="bias-name" data-fr="Surconfiance" data-en="Overconfidence">Surconfiance</div>
+          <div class="bias-desc" data-fr="Penser avoir « assez d'information » après une recherche superficielle. Les zones non couvertes restent invisibles. Ce qu'on ne cherche pas, on ne le trouve pas — et on ne sait pas qu'il manque." data-en="Thinking you have 'enough information' after a superficial search. Uncovered areas remain invisible. What you don't search for, you don't find — and you don't know it's missing.">Penser avoir « assez d'information » après une recherche superficielle. Les zones non couvertes restent invisibles et non identifiées.</div>
+        </div>
+        <div class="bias-item">
+          <div class="bias-name" data-fr="Lecture partielle" data-en="Partial reading">Lecture partielle</div>
+          <div class="bias-desc" data-fr="Ignorer les zones non couvertes par l'analyse. Ce qui n'est pas analysé n'est pas absent — il est simplement non visible. L'absence d'information est elle-même une information." data-en="Ignoring areas not covered by the analysis. What is not analyzed is not absent — it is simply invisible. The absence of information is itself information.">Ignorer les zones non couvertes par l'analyse. Ce qui n'est pas analysé n'est pas absent — il est simplement non visible. L'absence d'information est une information.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- S6 -->
+    <div class="guide-section">
+      <span class="gs-num">06</span>
+      <h2 data-fr-html="Quand faire appel à une <em>analyse professionnelle</em>" data-en-html="When to call on a <em>professional analysis</em>">Quand faire appel à une <em>analyse professionnelle</em></h2>
+      <p data-fr="Cette méthode vous permet d'effectuer une analyse de premier niveau. Certaines situations nécessitent un niveau d'analyse supérieur — plus large, plus structuré, plus expert." data-en="This method allows you to perform a first-level analysis. Some situations require a higher level of analysis — broader, more structured, more expert.">Cette méthode vous permet d'effectuer une analyse de premier niveau. Certaines situations nécessitent un niveau d'analyse supérieur.</p>
+      <div class="analysis-grid">
+        <div class="analysis-card">
+          <span class="ac-title" data-fr="Situations concernées" data-en="Relevant situations">Situations concernées</span>
+          <p class="ac-content" data-fr="Décisions financières importantes · Vérification de partenaires · Analyse de risques réputationnels · Investigation de signaux faibles · Due diligence avant engagement contractuel" data-en="Important financial decisions · Partner verification · Reputational risk analysis · Weak signal investigation · Due diligence before contractual commitment">Décisions financières importantes · Vérification de partenaires · Analyse de risques réputationnels · Investigation de signaux faibles · Due diligence avant engagement contractuel</p>
+        </div>
+        <div class="analysis-card">
+          <span class="ac-title" data-fr="Ce qu'apporte l'analyse professionnelle" data-en="What professional analysis provides">Ce qu'apporte l'analyse professionnelle</span>
+          <p class="ac-content" data-fr="Recoupement plus large des sources · Structuration avancée de l'information · Lecture experte des incohérences · Score de risque normalisé (0–100) · Niveau d'alerte hiérarchisé · Recommandations opérationnelles" data-en="Broader source cross-referencing · Advanced information structuring · Expert reading of inconsistencies · Normalized risk score (0–100) · Hierarchical alert level · Operational recommendations">Recoupement plus large · Structuration avancée · Lecture experte des incohérences · Score de risque normalisé (0–100) · Recommandations opérationnelles</p>
+        </div>
+      </div>
+      <div class="highlight-box" data-fr="« Une information non structurée crée du risque. Une information vérifiée, organisée et analysée réduit l'incertitude. La qualité d'une décision dépend directement de la qualité de l'analyse qui la précède. »" data-en="« Unstructured information creates risk. Verified, organized and analyzed information reduces uncertainty. The quality of a decision depends directly on the quality of the analysis that precedes it. »">« Une information non structurée crée du risque. Une information vérifiée, organisée et analysée réduit l'incertitude. La qualité d'une décision dépend directement de la qualité de l'analyse qui la précède. »</div>
+    </div>
+
+    <!-- CTA -->
+    <div class="guide-cta">
+      <h3 data-fr-html="Vous avez la méthode.<br><em>Nous avons l'analyse.</em>" data-en-html="You have the method.<br><em>We have the analysis.</em>">Vous avez la méthode.<br><em>Nous avons l'analyse.</em></h3>
+      <p data-fr="Ce guide vous donne les fondamentaux. Pour une analyse complète, structurée et livrée en 48–72 heures sur votre situation réelle, SANGOUR3i intervient directement." data-en="This guide gives you the fundamentals. For a complete, structured analysis delivered within 48–72 hours on your real situation, SANGOUR3i intervenes directly.">Ce guide vous donne les fondamentaux. Pour une analyse complète sur votre situation réelle, SANGOUR3i intervient directement en 48–72 heures.</p>
+      <a href="index.html#contact" class="cta-btn" data-fr="Commander une analyse →" data-en="Order an analysis →">Commander une analyse →</a>
+    </div>
+
+  </div><!-- /.guide-body -->
+</div><!-- /#guide-section -->
+
+<footer>
+  <span class="footer-logo">SANGOUR3i</span>
+  <span class="footer-copy" data-fr="© 2026 SANGOUR3i · Intelligence Digitale Stratégique" data-en="© 2026 SANGOUR3i · Strategic Digital Intelligence">© 2026 SANGOUR3i · Intelligence Digitale Stratégique</span>
+</footer>
+
+<script>
+// ── QUIZ DATA ──
+const answers = { q1:1, q2:2, q3:1, q4:1, q5:2 };
+const userAnswers = {};
+let score = 0;
+let currentQ = 1;
+
+function selectOption(el, qId, optionIndex) {
+  const card = document.getElementById(qId);
+  if (card.dataset.answered) return;
+
+  const options = card.querySelectorAll('.option');
+  options.forEach(o => o.classList.remove('selected'));
+  el.classList.add('selected');
+
+  const correct = answers[qId];
+  const isCorrect = optionIndex === correct;
+
+  setTimeout(() => {
+    options.forEach((o, i) => {
+      if (i === correct) o.classList.add('correct');
+      else if (i === optionIndex && !isCorrect) o.classList.add('wrong');
+    });
+
+    const feedback = document.getElementById('f' + qId.replace('q',''));
+    if (feedback) {
+      feedback.classList.add('visible');
+    }
+
+    const btn = card.querySelector('.btn-next');
+    if (btn) btn.classList.add('visible');
+
+    if (isCorrect) score++;
+    userAnswers[qId] = optionIndex;
+    card.dataset.answered = 'true';
+
+    // Update progress
+    const answered = Object.keys(userAnswers).length;
+    document.getElementById('qpFill').style.width = (answered/5*100) + '%';
+    document.getElementById('qpCount').textContent = answered + ' / 5';
+  }, 300);
+}
+
+function nextQuestion(num) {
+  const current = document.querySelector('.question-card.active');
+  if (current) current.classList.remove('active');
+  const next = document.getElementById('q' + num);
+  if (next) {
+    next.classList.add('active');
+    next.scrollIntoView({ behavior:'smooth', block:'start' });
+    currentQ = num;
+  }
+}
+
+function showResult() {
+  document.getElementById('quiz-section').style.display = 'none';
+  const resultSection = document.getElementById('result-section');
+  resultSection.style.display = 'block';
+
+  const passed = score >= 4;
+  const lang = currentLang;
+
+  document.getElementById('resultScore').textContent = score + '/5';
+
+  if (passed) {
+    document.getElementById('resultTitle').innerHTML = lang === 'en'
+      ? 'Excellent. <em>Access granted.</em>'
+      : 'Excellent. <em>Accès accordé.</em>';
+    document.getElementById('resultDesc').textContent = lang === 'en'
+      ? 'You have demonstrated a solid understanding of information analysis fundamentals. The premium guide is now accessible.'
+      : 'Vous avez démontré une compréhension solide des fondamentaux de l\'analyse d\'information. Le guide premium est maintenant accessible.';
+    document.getElementById('unlock-content').style.display = 'block';
+  } else {
+    document.getElementById('resultTitle').innerHTML = lang === 'en'
+      ? 'Not quite. <em>Try again.</em>'
+      : 'Pas tout à fait. <em>Réessayez.</em>';
+    document.getElementById('resultDesc').textContent = lang === 'en'
+      ? 'You scored ' + score + '/5. A score of 4/5 is required to access the premium guide. Review the concepts and try again.'
+      : 'Vous avez obtenu ' + score + '/5. Un score de 4/5 est requis pour accéder au guide premium. Révisez les concepts et réessayez.';
+    document.getElementById('retry-content').style.display = 'block';
+  }
+
+  resultSection.scrollIntoView({ behavior:'smooth' });
+}
+
+function showGuide() {
+  document.getElementById('result-section').style.display = 'none';
+  const guide = document.getElementById('guide-section');
+  guide.style.display = 'block';
+  guide.scrollIntoView({ behavior:'smooth' });
+}
+
+function resetQuiz() {
+  score = 0;
+  currentQ = 1;
+  Object.keys(userAnswers).forEach(k => delete userAnswers[k]);
+
+  document.querySelectorAll('.question-card').forEach((c,i) => {
+    c.classList.remove('active');
+    delete c.dataset.answered;
+    c.querySelectorAll('.option').forEach(o => o.classList.remove('selected','correct','wrong'));
+    c.querySelectorAll('.q-feedback').forEach(f => f.classList.remove('visible'));
+    c.querySelectorAll('.btn-next').forEach(b => b.classList.remove('visible'));
+  });
+
+  document.getElementById('q1').classList.add('active');
+  document.getElementById('qpFill').style.width = '0%';
+  document.getElementById('qpCount').textContent = '0 / 5';
+  document.getElementById('unlock-content').style.display = 'none';
+  document.getElementById('retry-content').style.display = 'none';
+  document.getElementById('result-section').style.display = 'none';
+  document.getElementById('quiz-section').style.display = 'block';
+  window.scrollTo({ top:0, behavior:'smooth' });
+}
+
+// ── I18N ──
+let currentLang = 'fr';
+function setLang(lang) {
+  currentLang = lang;
+  document.querySelectorAll('[data-fr]').forEach(el => {
+    const val = lang === 'en' ? el.getAttribute('data-en') : el.getAttribute('data-fr');
+    if (val !== null) el.textContent = val;
+  });
+  document.querySelectorAll('[data-fr-html]').forEach(el => {
+    const val = lang === 'en' ? el.getAttribute('data-en-html') : el.getAttribute('data-fr-html');
+    if (val !== null) el.innerHTML = val;
+  });
+  document.documentElement.lang = lang;
+  document.getElementById('lang-toggle').textContent = lang === 'en' ? 'FR' : 'EN';
+  document.title = lang === 'en' ? 'SANGOUR3i — Premium Guide Access' : 'SANGOUR3i — Accès Guide Premium';
+  try { localStorage.setItem('sangour3i_lang', lang); } catch(e) {}
+}
+document.getElementById('lang-toggle').addEventListener('click', () => {
+  setLang(currentLang === 'fr' ? 'en' : 'fr');
+});
+(function(){
+  try {
+    const saved = localStorage.getItem('sangour3i_lang');
+    const browser = navigator.language && navigator.language.startsWith('en') ? 'en' : 'fr';
+    setLang(saved || browser);
+  } catch(e) { setLang('fr'); }
+})();
+</script>
+</body>
+</html>

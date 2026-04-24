@@ -137,6 +137,7 @@ footer{position:relative;z-index:1;padding:2rem 4rem;border-top:1px solid var(--
   <a href="index.html" class="nav-logo">SANGOUR3i</a>
   <div class="nav-right">
     <button id="lang-toggle">EN</button>
+    <button class="btn-dl" onclick="window.print()" data-fr="Télécharger PDF ↓" data-en="Download PDF ↓">Télécharger PDF ↓</button>
   </div>
 </nav>
 
@@ -382,38 +383,27 @@ footer{position:relative;z-index:1;padding:2rem 4rem;border-top:1px solid var(--
 
 <script>
 let currentLang = 'fr';
-
 function setLang(lang) {
   currentLang = lang;
-
-  // Texte simple
   document.querySelectorAll('[data-fr]').forEach(el => {
-    const val = lang === 'en' ? el.getAttribute('data-en') : el.getAttribute('data-fr');
-    if (val !== null) el.textContent = val;
+    const val = el.dataset[lang];
+    if (val !== undefined) el.textContent = val;
   });
-
-  // HTML (gras, italique, etc.)
   document.querySelectorAll('[data-fr-html]').forEach(el => {
-    const val = lang === 'en' ? el.getAttribute('data-en-html') : el.getAttribute('data-fr-html');
-    if (val !== null) el.innerHTML = val;
+    const val = lang === 'en' ? el.dataset.enHtml : el.dataset.frHtml;
+    if (val !== undefined) el.innerHTML = val;
   });
-
   document.documentElement.lang = lang;
-  const btn = document.getElementById('lang-toggle');
-  if (btn) btn.textContent = lang === 'en' ? 'FR' : 'EN';
+  document.getElementById('lang-toggle').textContent = lang === 'en' ? 'FR' : 'EN';
   document.title = lang === 'en' ? 'SANGOUR3i — Sample OSINT Report' : 'SANGOUR3i — Exemple de Rapport OSINT';
-
-  try { localStorage.setItem('sangour3i_lang', lang); } catch(e) {}
+  try { localStorage.setItem('lang', lang); } catch(e) {}
 }
-
 document.getElementById('lang-toggle').addEventListener('click', () => {
   setLang(currentLang === 'fr' ? 'en' : 'fr');
 });
-
-// Init — clé séparée pour éviter conflit avec le site principal
 (function(){
   try {
-    const saved = localStorage.getItem('sangour3i_lang');
+    const saved = localStorage.getItem('lang');
     const browser = navigator.language && navigator.language.startsWith('en') ? 'en' : 'fr';
     setLang(saved || browser);
   } catch(e) { setLang('fr'); }
